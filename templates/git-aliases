@@ -1,0 +1,16 @@
+[alias]
+    hash = ls-tree HEAD core
+
+    sub = submodule update
+
+    ls = log --pretty=format:'%C(auto)%h %<(70,trunc)%s [%<(12,trunc)%Cblue%an%Creset]'
+
+    la = log --pretty=format:'%C(auto)%h %s%n [%Cblue%an, %Cgreen%ad%Creset]%C(auto)%d' --date=short
+
+    lf = log --pretty=format:'%C(yellow)%h %Creset%<(85,trunc)%s%n [%Cblue%an, %Cgreen%ad%Creset]%C(auto)%d %C(yellow)' --decorate --numstat --date=short
+
+    lsm = log --merges --pretty=format:'%C(auto)%h %<(70,trunc)%s [%<(12,trunc)%Cblue%an%Creset]'
+
+    lsc = rev-list --count --merges --ancestry-path
+
+

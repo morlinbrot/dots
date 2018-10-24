@@ -2,7 +2,7 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH=/home/ryneke/.oh-my-zsh
+export ZSH=$HOME/.oh-my-zsh
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
@@ -59,20 +59,15 @@ alias npmg='npm list -g --depth=0'
 alias npmlist='npm list --depth=0'
 alias dossh='~/ssh.sh'
 alias sup='sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y'
-
-alias cdcfm='cd ~/prx/hanseaticsoft/cfm-cloud/CloudFleetManager/ReactApps'
-alias cdhs='cd ~/prx/hanseaticsoft'
-alias cdrust='cd ~/prx/rust-tut'
-
 alias gitstat='git log --left-right --graph --cherry-pick --oneline HEAD...origin/master'
 
-alias rc="gvim ~/.zshrc"
-alias src='source ~/.zshrc'
+alias cdcfm='cd ~/prx/hanseaticsoft/cfm-cloud/CloudFleetManager/ReactApps'
+alias cdhs='cd ~/prx/hanseaticsoft/cfm-react'
 
 # Purge config files of already removed packages (handle with care)
 alias thepurge='dpkg -l | grep '^rc' | awk '{print $2}' | sudo xargs dpkg --purge'
 
-export NVM_DIR="/home/ryneke/.nvm"
+export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
 # JS Standard Style for linting
@@ -86,3 +81,6 @@ export PATH="(npm config --global get prefix):$PATH"
 
 # Deactivate 'auto cd' functionality to be able to use ex. 'grunt'
 unsetopt AUTO_CD
+
+# Activate useful key bindings and fuzzy completion for fzf.
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
