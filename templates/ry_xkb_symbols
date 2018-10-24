@@ -1,0 +1,93 @@
+// ++++ rynekes Görman Coding Layout ++++
+// Standard German layout, with keys often used in programming re-mapped to
+// more comfortable bindings, plus vim-style arrow keys.
+
+// Base taken from de(default)
+
+default
+xkb_symbols "basic" {
+
+    include "latin(type4)"
+
+    name[Group1]="rynekes GermanCoding";
+
+    key.type[Group1] = "THREE_LEVEL";
+    key <AE02>  { [         2,   quotedbl,  twosuperior,    oneeighth ] };
+
+    // ++++
+    // Change order of useless section key
+    key <AE03> { [               3,          dollar,   threesuperior,        NoSymbol,   threesuperior,          sterling,           U02BF,        NoSymbol ] };
+    key <AE04> { [               4,       ampersand,          emdash,        NoSymbol,      onequarter,            0x20AC,           U02BE,        NoSymbol ] };
+    key <AE06> { [               6,         section,    questiondown,        NoSymbol,   threequarters,         downarrow,           U02C0,        NoSymbol ] };
+    // Make grave (backtick) key live, map dead_acute to AltGr
+    key <AE12> { [      dead_acute,           grave,      dead_grave,        NoSymbol,    dead_cedilla,       dead_ogonek,         notsign,        NoSymbol ] };
+    // ++++
+
+    key <AE11> {type[Group1]="FOUR_LEVEL_PLUS_LOCK",  symbols[Group1]=
+                  [ssharp, question, backslash, questiondown, 0x1001E9E ]};
+// The unicode capital letter sharp s U+1E9E is transformed to "SS"
+// to match the rules for capitalizing sharp s in german.
+// If the capital sharp s is needed, delete the line
+// starting with <U1E9C> from /usr/share/X11/locale/iso8859-15/Compose.
+// If both doubled S and capital sharp s are needed, use  0x1001E9E
+// for capital sharp s and some free unicode codepoint like 0x1001E9C
+// for doubled S. Don`t forget to change this in the Compose file, too.
+
+
+    key <AD03>  { [         e,          E,     EuroSign,     EuroSign ] };
+    
+    // ++++
+    // Put ® on Mod3
+    key <AD04> { [               r,               R,      registered,        NoSymbol,       paragraph,        NoSymbol, dead_circumflex,        NoSymbol ] };
+    key <AD06>  { [              z,               Z,       leftarrow,          yen ] };
+    
+    // Curly braces at more comfortable position Mod3 + u / i
+    key <AD07> { [               u,               U,       braceleft,        NoSymbol,           U0223,           U0222,      dead_caron,        NoSymbol ] };
+    key <AD08> { [               i,               I,      braceright,        NoSymbol,        idotless,           U214D, dead_abovecomma,        NoSymbol ] };
+    
+    // "HTML-braces" at more comfortable position Mod3 + o / p
+    key <AD09> { [               o,               O,            less,        NoSymbol,          oslash,          Oslash,       dead_horn,        NoSymbol ] };
+    key <AD10> { [               p,               P,         greater,        NoSymbol,           thorn,           THORN,       dead_hook,        NoSymbol ] };
+    // +++
+    
+    key <AD11>  { [udiaeresis, Udiaeresis, dead_diaeresis, dead_abovering ] };
+    key <AD12>  { [      plus,   asterisk,   asciitilde,  macron ]  };
+
+
+    key <AC02>  { [              s,               S,           U017F,           U1E9E    ] };
+
+    // ++++
+    // Vim-style arrow keys
+    key <AC06> { [               h,               H,            Left,        NoSymbol,        NoSymbol,        NoSymbol,        NoSymbol,        NoSymbol ] };
+    key <AC07> { [               j,               J,            Down,        NoSymbol,        NoSymbol,        NoSymbol,        NoSymbol,        NoSymbol ] };
+    key <AC08> { [               k,               K,              Up,        NoSymbol,        NoSymbol,        NoSymbol,        NoSymbol,        NoSymbol ] };
+    key <AC09> { [               l,               L,           Right,        NoSymbol,        NoSymbol,        NoSymbol,        NoSymbol,        NoSymbol ] };
+    // ++++
+
+    key <AC10>  { [odiaeresis, Odiaeresis, dead_doubleacute, dead_belowdot ] };
+    key <AC11>  { [adiaeresis, Adiaeresis, dead_circumflex, dead_caron ] };
+    key <TLDE>  { [dead_circumflex, degree, U2032,    U2033 ] };
+
+    key <BKSL>  { [numbersign, apostrophe, rightsinglequotemark,   dead_breve ] };
+    key <AB01>  { [         y,          Y,       guillemotright,    U203A   ] };
+    key <AB02>  { [         x,          X,        guillemotleft,    U2039   ] };
+
+    // ++++
+    // Put © on AltGr
+    key <AB03> { [               c,               C,       copyright,        NoSymbol,            cent,       copyright,  Greek_horizbar,        NoSymbol ] };
+    // ++++
+
+    key <AB04>  { [         v,          V,   doublelowquotemark, singlelowquotemark ]   };
+    key <AB05>  { [         b,          B,  leftdoublequotemark, leftsinglequotemark ] };
+    key <AB06>  { [         n,          N, rightdoublequotemark, rightsinglequotemark ] };
+    key <AB08>  { [     comma,  semicolon,       periodcentered,     multiply   ] };
+    key <AB09>  { [    period,      colon,                U2026,     division   ] };
+    key <AB10>  { [     minus, underscore,               endash,     emdash ] };
+    key <LSGT>  { [     less,     greater,                  bar,     NoSymbol   ] };
+
+    include "kpdl(comma)"
+
+    include "level3(ralt_switch)"
+
+    // Shift_L
+};

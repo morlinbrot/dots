@@ -47,6 +47,9 @@ call plug#end()
 " KEY BINDINGS
 " Double <leader> to open last opened file.
 nnoremap <leader><leader> <c-^>
+" Ctrl+j as Esc.
+inoremap <C-j> <Esc>
+vnoremap <C-j> <Esc>
 " Paste from system clipboard.
 nmap <leader> "*p
 " Shortcut resetting last search highlight.
@@ -69,6 +72,9 @@ set number
 :set guifont=Monospace\ 13 
 " Highlight search terms
 :set hlsearch
+" Permanent undo.
+set undodir=~/.vim/undo
+set undofile
 
 " Set cli colors
 silent! colorscheme dracula
