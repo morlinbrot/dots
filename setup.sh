@@ -7,7 +7,7 @@ cp ./templates/.vimrc ~/.vimrc
 # Create a proxy init.vim at the default location.
 mkdir -p ~/.config/nvim && cp ./templates/init.vim ~/.config/nvim/init.vim
 # Install all plugins
-vim +PlugInstall +qall
+nvim +PlugInstall +qall
 
 # ZSH
 cp ./templates/.zshrc ~/.zshrc

@@ -1,29 +1,33 @@
-" For vim, place a .vimrc file containing
-"     runtime ./vimrc
-" in your home folder.
+" Create a $HOME/.vimrc, containing
+"    runtime ./path/to/this/.vimrc
 "
-" For nvim, place an init.vim file containing
+" and/or
+"
+" Create a $HOME/.configs/nvim/.init.vim, containing
 "    set runtimepath^=~/.vim runtimepath+=~/.vim/after
 "    let &packpath = &runtimepath
 "    source ~/configs/.vimrc
 "    source ~/configs/.nvimrc
-" under $HOME/.configs/nvim.
+" to use this file as a central rc for both vim and neovim.
 
-" A lot of useful stuff may be found here:
+" A lot of inspiration came from:
 " https://github.com/jonhoo/configs/blob/master/.vimrc
+
 let mapleader = "\<Space>"
 
 " VIM-PLUG
-" To install all plugins, run :PlugInstall +qall
-" Specify a directory for plugins 
+" To install all plugins, run :PlugInstall
+" To update plugins, run :PlugUpdate
+" To update vim-plug iself, run :PlugUpgrade
 call plug#begin('~/.vim/plugged')
 
-" NERDTree on demand
-Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
-" Rust plugin
+" Rust. 
 Plug 'rust-lang/rust.vim'
+
+" Provides a file explorer sidebar
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 " Dracula color scheme
-Plug 'dracula/dracula-theme'
+Plug 'dracula/vim', {'as': 'dracula'}
 " Displays a line that shows what mode you're in.
 Plug 'itchyny/lightline.vim'
 " Adds a gutter to the editor, displaying errors etc.
@@ -31,38 +35,40 @@ Plug 'w0rp/ale'
 " Use autocompletion
 Plug 'ncm2/ncm2'
 
-" Fuzzy finder
-" Moves the CL to the nearest git repo root folder.
+" FZF FUZZY FINDER
+" Moves the CL to the nearest git repo root folder, useful for...
 Plug 'airblade/vim-rooter'
+" ...using a fuzzy finder to quickly find files in the same dir.
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
-" Initialize plugin system
 call plug#end()
 
 " KEY BINDINGS
-" Double <leader> to open last opened file
+" Double <leader> to open last opened file.
 nnoremap <leader><leader> <c-^>
-" Use fzf to open files
-map <leader>o :Files<CR>
-" Paste from system clipboard
+" Paste from system clipboard.
 nmap <leader> "*p
-" Toggle NERDTree with Ctrl+N
+" Shortcut resetting last search highlight.
+nmap <leader>hl :noh<CR>
+" Use fzf to open files.
+map <leader>o :Files<CR>
+" Toggle NERDTree with Ctrl+N.
 map <F9> :NERDTreeToggle<CR>
-" Map tab switching to Ctrl+Tab
-:map <C-Tab> gt 
+" Map tab switching to Ctrl+Tab.
+map <C-Tab> gt 
 
-" Show line numbers
-set number
 
-" Font size
-:set guifont=Monospace\ 13 
-
+" GENERAL SETTINGS
 " Tab settings
 :set tabstop=4 softtabstop=0 expandtab shiftwidth=4 smarttab 
 
+" Show line numbers
+set number
+" Font size
+:set guifont=Monospace\ 13 
 " Highlight search terms
 :set hlsearch
 
 " Set cli colors
-colorscheme dracula
+silent! colorscheme dracula
