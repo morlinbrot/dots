@@ -12,5 +12,5 @@ nvim +PlugInstall +qall
 # ZSH
 cp ./templates/.zshrc ~/.zshrc
 
-# Append git aliases to the default .gitconfig
-cat ./templates/git-aliases >> ~/.gitconfig
+# Set some useful git aliases
+git config --global include.path ~/configs/templates/git_aliases

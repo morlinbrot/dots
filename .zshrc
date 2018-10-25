@@ -84,3 +84,9 @@ unsetopt AUTO_CD
 
 # Activate useful key bindings and fuzzy completion for fzf.
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# Fix Tilix 'Configuration issue', as per
+# https://gnunn1.github.io/tilix-web/manual/vteconfig/
+if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
+        source /etc/profile.d/vte.sh
+fi
