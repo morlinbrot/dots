@@ -54,13 +54,16 @@ vnoremap <C-j> <Esc>
 nmap <leader> "*p
 " Shortcut resetting last search highlight.
 nmap <leader>hl :noh<CR>
-" Use fzf to open files.
-map <leader>o :Files<CR>
+" FZF
+map <leader>f :Files<CR>
+map <leader>o :Buffer<CR>
 " Toggle NERDTree with Ctrl+N.
 map <F9> :NERDTreeToggle<CR>
 " Map tab switching to Ctrl+Tab.
 map <C-Tab> gt 
-
+" Move lines in visual mode with <Shift-j> and <Shift-k>
+vnoremap J :m '>+1<CR>gv=gv
+vnoremap K :m '>-2<CR>gv=gv
 
 " GENERAL SETTINGS
 " Tab settings
