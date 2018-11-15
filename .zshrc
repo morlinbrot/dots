@@ -33,9 +33,39 @@ alias sup='sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y'
 # Purge config files of already removed packages (handle with care)
 alias thepurge='dpkg -l | grep '^rc' | awk '{print $2}' | sudo xargs dpkg --purge'
 
-# Specific/dependent aliases
+# Specific/dependent aliases.
 alias cdcfm='cd ~/prx/hanseaticsoft/cfm-cloud/CloudFleetManager/ReactApps'
 alias cdhs='cd ~/prx/hanseaticsoft/cfm-react'
+
+# Git aliases.
+alias gcl='git clone'
+alias gp='git pull'
+alias gprb='git pull --rebase'
+alias gco='git checkout'
+alias gcom='git checkout master'
+alias gcod='git checkout dev'
+alias gs='git status'
+alias gd='git diff'
+alias grh='git reset --hard'
+alias gst='git stash -u'
+alias gstp='git stash pop'
+
+alias gm='git merge'
+alias gcp='git cherry-pick'
+alias gcpc='git cherry-pick --continue'
+alias gcpa='git cherry-pick --abort'
+
+alias grb='git rebase'
+alias grbc='git rebase --continue'
+alias grba='git rebase --abort'
+
+alias ga='git add .'
+alias gc='git commit'
+alias gca='git commit -a'
+alias gcaa='git commit --amend'
+
+alias gpp='git push'
+
 
 # ++++ # ++++ #
 #  SSH

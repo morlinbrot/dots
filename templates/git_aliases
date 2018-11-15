@@ -13,5 +13,5 @@
 
     lsc = rev-list --count --merges --ancestry-path
 
-    tree = git log --left-right --graph --cherry-pick --oneline HEAD...origin/master
+    tree = log --left-right --graph --cherry-pick --oneline HEAD...origin/master
 
