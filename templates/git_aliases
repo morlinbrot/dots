@@ -14,4 +14,3 @@
     lsc = rev-list --count --merges --ancestry-path
 
     tree = log --left-right --graph --cherry-pick --oneline HEAD...origin/master
-
