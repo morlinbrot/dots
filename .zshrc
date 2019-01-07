@@ -30,6 +30,8 @@ alias npmg='npm list -g --depth=0'
 alias npmlist='npm list --depth=0'
 alias dossh='~/ssh.sh'
 alias sup='sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y'
+# Set sound to more than 100%
+alias loud='pactl set-sink-volume 0 150%'
 # Purge config files of already removed packages (handle with care)
 alias thepurge='dpkg -l | grep '^rc' | awk '{print $2}' | sudo xargs dpkg --purge'
 
