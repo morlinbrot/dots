@@ -69,6 +69,10 @@ alias gcaa='git commit --amend'
 
 alias gpp='git push'
 
+# Favourite 'git log' git aliases.
+alias gls='git ls'
+alias gla='git la'
+alias glf='git lf'
 
 # ++++ # ++++ #
 #  SSH
