@@ -15,6 +15,7 @@ HYPHEN_INSENSITIVE="true"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 plugins=(
   git
+  z
 )
 
 # Include oh-my-zsh config.
