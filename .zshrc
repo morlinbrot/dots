@@ -76,6 +76,8 @@ alias gls='git ls'
 alias gla='git la'
 alias glf='git lf'
 
+alias x='exa'
+alias xl='exa -l'
 # ++++ # ++++ #
 #  SSH
 # ++++  ++++ #
