@@ -18,6 +18,13 @@ let mapleader = "\<Space>"
 " # ++++ # ++++ #
 "  PLUGINS
 " # ++++ # ++++ #
+" Before executing any of the vim-plug commands, we make sure that they exist.
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
 " To install all plugins, run :PlugInstall
 " To update plugins, run :PlugUpdate
 " To update vim-plug iself, run :PlugUpgrade
