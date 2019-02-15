@@ -51,7 +51,7 @@ alias gs='git status'
 alias gd='git diff'
 alias grs='git reset'
 alias grsh='git reset --hard'
-alias gst='git stash -u'
+alias gst='git stash'
 alias gstp='git stash pop'
 
 alias gm='git merge'
