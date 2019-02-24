@@ -117,8 +117,8 @@ nmap <leader> "*p
 " Shortcut resetting last search highlight.
 nmap <leader>hl :noh<CR>
 " FZF
-map <leader>f :Files<CR>
-map <leader>o :Buffer<CR>
+map <leader>o :Files<CR>
+map <leader>b :Buffer<CR>
 " Toggle NERDTree with Ctrl+N.
 map <F9> :NERDTreeToggle<CR>
 " Map tab switching to Ctrl+Tab.
