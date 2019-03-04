@@ -76,8 +76,16 @@ alias gls='git ls'
 alias gla='git la'
 alias glf='git lf'
 
+# Handy exa shorts.
 alias x='exa'
 alias xl='exa -l'
+
+# Rust!
+alias cb='cargo build'
+alias cr='cargo run'
+alias ct='cargo test'
+
+
 # ++++ # ++++ #
 #  SSH
 # ++++  ++++ #
