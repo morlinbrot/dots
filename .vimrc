@@ -55,8 +55,6 @@ Plug 'dracula/vim', {'as': 'dracula'}
 Plug 'itchyny/lightline.vim'
 " Adds a gutter to the editor, displaying errors etc.
 Plug 'w0rp/ale'
-" Use autocompletion
-Plug 'ncm2/ncm2'
 
 " FZF FUZZY FINDER
 " Moves the CL to the nearest git repo root folder, useful for...
@@ -76,7 +74,7 @@ set hidden
 " Automatically start language servers.
 let g:LanguageClient_autoStart = 1
 let g:LanguageClient_serverCommands = {
-    \ 'rust': ['~/.cargo/bin/rustup', 'run', 'nightly', 'rls'],
+    \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
     \ 'typescript': ['javascript-typescript-stdio'],
     \ }
 " Automatically activate ncm2 in all buffers.
