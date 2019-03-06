@@ -45,6 +45,9 @@ Plug 'ncm2/ncm2-bufword'
 Plug 'ncm2/ncm2-tmux'
 Plug 'ncm2/ncm2-path'
 
+" Syntax checker, dependency of RustFmt
+Plug 'vim-syntastic/syntastic'
+
 " Autocomplete matching pairs while typing.
 Plug 'jiangmiao/auto-pairs'
 " Provides a file explorer sidebar
@@ -63,6 +66,7 @@ Plug 'airblade/vim-rooter'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
+
 call plug#end()
 
 
@@ -79,6 +83,9 @@ let g:LanguageClient_serverCommands = {
     \ }
 " Automatically activate ncm2 in all buffers.
 autocmd BufEnter  *  call ncm2#enable_for_buffer()
+
+" Automatically format Rust files on save.
+let g:rustfmt_autosave = 1
 
 nnoremap <F5> :call LanguageClient_contextMenu()<CR>
 " Or map each action separately

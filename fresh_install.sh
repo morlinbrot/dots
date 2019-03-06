@@ -27,7 +27,7 @@ ln -s /etc/profile.d/vte-2.91.sh /etc/profile.d/vte.sh
 # RUST
 curl https://sh.rustup.rs -sSf | sh
 # Set up RLS for usage by vim plugins.
-rustup component add rls rust-analysis rust-src
+rustup component add rls rust-analysis rust-src rustfmt
 
 # NEOVIM
 # Plugin dependencies.
