@@ -38,6 +38,7 @@ alias thepurge='dpkg -l | grep '^rc' | awk '{print $2}' | sudo xargs dpkg --purg
 
 # Specific/dependent aliases.
 alias cdcfm='cd ~/prx/hanseaticsoft/cfm-cloud/CloudFleetManager/ReactApps'
+alias cdalt='cd ~/prx/hanseaticsoft/cfm-cloud-ALT/CloudFleetManager/ReactApps'
 alias cdhs='cd ~/prx/hanseaticsoft/cfm-cloud/ui/react-hs'
 
 # Git aliases.
