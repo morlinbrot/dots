@@ -15,7 +15,7 @@ sudo apt update
 sudo apt install 
 
 # Install everything after updating the sources.
-sudo apt install curl git neovim zsh tilix python-dev python-pip python3-dev python3-pip syncthing syncthing-gtk
+sudo apt install curl git neovim zsh tilix tmux python-dev python-pip python3-dev python3-pip syncthing syncthing-gtk
 
 
 # Install oh-my-zsh
