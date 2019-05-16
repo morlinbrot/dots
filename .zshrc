@@ -86,11 +86,12 @@ alias cb='cargo build'
 alias cr='cargo run'
 alias ct='cargo test'
 
-
-# ++++ # ++++ #
 #  SSH
-# ++++  ++++ #
 export SSH_KEY_PATH="~/.ssh/rsa_id"
+
+# FZF
+# Use ripgrep for :Files
+export FZF_DEFAULT_COMMAND='rg --files --hidden --follow -g "!.git/*" -g "!node_modules/*" -g "!target/*"'
 
 # ++++  ++++ #
 #  RANDOMS
@@ -125,3 +126,4 @@ unsetopt AUTO_CD
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # export MANPATH="/usr/local/man:$MANPATH"
+
