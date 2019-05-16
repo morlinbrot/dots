@@ -12,6 +12,10 @@ nvim +PlugInstall +UpdateRemotePlugins +qall
 # ZSH
 cp ./templates/.zshrc ~/.zshrc
 
+# VS Code settings
+cp ./templates/vs-code/keybindings.json ~/.config/Code/User/keybindings.json
+cp ./templates/vs-code/settings.json ~/.config/Code/User/settings.json
+
 # Include our git aliases.
 git config --global include.path ~/configs/templates/git_aliases
 # Set some other stuff for git.
