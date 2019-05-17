@@ -79,7 +79,7 @@ alias glf='git lf'
 
 # Handy exa shorts.
 alias xl='exa -l'
-alias xla='exa -a'
+alias xla='exa -la'
 
 # Rust!
 alias cb='cargo build'
