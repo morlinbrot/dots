@@ -31,10 +31,13 @@ alias npmg='npm list -g --depth=0'
 alias npmlist='npm list --depth=0'
 alias dossh='~/ssh.sh'
 alias sup='sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y'
+alias pac='sudo pacman -Syu'
 # Set sound to more than 100%
 alias loud='pactl set-sink-volume 0 150%'
 # Purge config files of already removed packages (handle with care)
 alias thepurge='dpkg -l | grep '^rc' | awk '{print $2}' | sudo xargs dpkg --purge'
+# Clear swap
+alias swap='sudo swapoff -a && sudo swapon -a'
 
 # Specific/dependent aliases.
 alias cdcfm='cd ~/prx/hanseaticsoft/cfm-cloud/CloudFleetManager/ReactApps'
