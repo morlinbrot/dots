@@ -10,6 +10,9 @@ curl https://sh.rustup.rs -sSf | sh
 rustup component add rls rust-analysis rust-src rustfmt
 bin/rust.sh
 
+# NVM
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
+
 # NEOVIM
 # Plugin dependencies.
 pip3 install pynvim

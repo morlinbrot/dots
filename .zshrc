@@ -106,7 +106,7 @@ export FZF_DEFAULT_COMMAND='rg --files --hidden --follow -g "!.git/*" -g "!node_
 export PATH="/opt:$PATH"
 
 # NVM
-export NVM_DIR="$HOME/.nvm"
+#export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 # Global npm packages (as per the current active nvm node version)
 export PATH="(npm config --global get prefix):$PATH"
@@ -114,7 +114,7 @@ export PATH="(npm config --global get prefix):$PATH"
 # Fix 'Configuration issue', as per
 # https://gnunn1.github.io/tilix-web/manual/vteconfig/
 if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
-        source /etc/profile.d/vte.sh
+    source /etc/profile.d/vte.sh
 fi
 
 # ++++  ++++ #
