@@ -9,3 +9,5 @@ cargo install cargo-outdated
 cargo install cargo-tree
 # A modern ls replacement written in Rust
 cargo install exa
+# Install wasm-pack
+curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh 
