@@ -1,5 +1,6 @@
 # Install oh-my-zsh
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+# This exits uncleanly when done
+#sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
 # Create symlink to Tilix's configuration issue fix
 ln -s /etc/profile.d/vte-2.91.sh /etc/profile.d/vte.sh
@@ -14,6 +15,6 @@ bin/rust.sh
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
 
 # NEOVIM
-# Plugin dependencies.
-pip3 install pynvim
-pip install pynvim
+# Must be installed beforehand
+#pip3 install pynvim
+#pip install pynvim

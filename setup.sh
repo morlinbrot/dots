@@ -28,7 +28,6 @@ fi
 # VS Code
 CODE_DIR=~/.config/Code/User/
 if [ ! -d "$CODE_DIR" ]; then
-    echo "$CODE_DIR"
     mkdir -p ~/.config/Code/User
 fi
 if [ -d "$CODE_DIR" ] && [[ ! -e "$CODE_DIR/keybindings.json" || ! -e "$CODE_DIR/settings.json" ]]; then
