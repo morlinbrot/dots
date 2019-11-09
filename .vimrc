@@ -124,8 +124,9 @@ nmap <leader>hl :noh<CR>
 " FZF
 map <leader>o :Files<CR>
 map <leader>b :Buffer<CR>
-" Toggle NERDTree with Ctrl+N.
-map <F9> :NERDTreeToggle<CR>
+" Toggle NERDTree with F8.
+map <F8> :NERDTreeToggle<CR>
+map <leader>8 :NERDTreeToggle<CR>
 " Map tab switching to Ctrl+Tab.
 map <C-Tab> gt 
 " Insert blank lines without entering insert mode
