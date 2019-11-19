@@ -10,6 +10,8 @@ cp ./templates/.vimrc ~/.vimrc
 mkdir -p ~/.config/nvim && cp ./templates/init.vim ~/.config/nvim/init.vim
 # Install all plugins.
 nvim +PlugInstall +UpdateRemotePlugins +qall
+# Remove unlisted plugins.
+nvim *PlugClean
 
 # ZSH
 cp ./templates/.zshrc ~/.zshrc
