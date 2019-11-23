@@ -106,15 +106,15 @@ nnoremap <leader><leader> <c-^>
 :vnoremap <A-j> :m '>+1<CR>gv=gv
 :vnoremap <A-k> :m '<-2<CR>gv=gv
 " Resize windows.
-:map - <C-w>-
-:map + <C-w>+
-:map < <C-w><
-:map > <C-w>>
+:map <A--> <C-w>-
+:map <A-+> <C-w>+
+:map <A-<> <C-w><
+:map <A->> <C-w>>
 " Jump between windows.
-:map <C-h> <C-w>h
-:map <C-j> <C-w>j
-:map <C-k> <C-w>k
-:map <C-l> <C-w>l
+:map <A-h> <C-w>h
+:map <A-j> <C-w>j
+:map <A-k> <C-w>k
+:map <A-l> <C-w>l
 " Shortcut resetting last search highlight.
 nmap <leader>hl :noh<CR>
 " FZF
