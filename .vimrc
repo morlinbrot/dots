@@ -41,8 +41,6 @@ Plug 'autozimu/LanguageClient-neovim', {
 Plug 'vim-syntastic/syntastic'
 " Autocomplete matching pairs while typing.
 Plug 'jiangmiao/auto-pairs'
-" Provides a file explorer sidebar
-Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 " Dracula color scheme
 Plug 'dracula/vim', {'as': 'dracula'}
 " Displays a line that shows what mode you're in.
@@ -57,7 +55,7 @@ call plug#end()
 
 
 " # ++++ # ++++ #
-"  LANGUAGE SERVER 
+" LANGUAGE SERVER 
 " # ++++ # ++++ #
 " Required for operations modifying multiple buffers like rename.
 set hidden
@@ -76,24 +74,12 @@ nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
 " Automatically format Rust files on save.
 let g:rustfmt_autosave = 1 
 
-" Autocompletion
-set completeopt=noinsert,menuone,noselect
-
 " tab to select and don't hijack my enter key
 "inoremap <expr><Tab> (pumvisible()?(empty(v:completed_item)?"\<C-n>":"\<C-y>"):"\<Tab>")
 "inoremap <expr><CR> (pumvisible()?(empty(v:completed_item)?"\<CR>\<CR>":"\<C-y>"):"\<CR>")
 
-" syntastic recommended settings
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-
 " # ++++ # ++++ #
-"  KEY BINDINGS
+" KEY BINDINGS
 " # ++++ # ++++ #
 let mapleader = "\<Space>"
 " Double <leader> to open last opened file.
@@ -120,15 +106,32 @@ nmap <leader>hl :noh<CR>
 " FZF
 map <leader>o :Files<CR>
 map <leader>b :Buffer<CR>
-" Toggle NERDTree with F8.
-map <F8> :NERDTreeToggle<CR>
-map <leader>8 :NERDTreeToggle<CR>
 " Map tab switching to Ctrl+Tab.
 map <C-Tab> gt 
 " Insert blank lines without entering insert mode
 nmap <C-O> O<Esc>j
 nmap <C-o> o<Esc>k
+" Open netrw with F8 or <leader>8
+map <F8> :Vex<CR>
+map <leader>8 :Vex<CR>
 
+" # ++++ # ++++ #
+" PLUGIN CONFIGS
+" # ++++ # ++++ #
+" netrw configuration
+let g:netrw_liststyle = 3
+let g:netrw_banner = 0
+let g:netrw_browse_split = 4
+let g:netrw_winsize = 20
+let g:netrw_preview = 1
+" syntastic recommended settings
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
 
 " # ++++ # ++++ #
 "  GENERAL SETTINGS
@@ -146,7 +149,7 @@ set hlsearch
 " Permanent undo.
 set undodir=~/.vim/undo
 set undofile
-
+" Autocompletion
+set completeopt=noinsert,menuone,noselect
 " Set cli colors
 silent! colorscheme dracula
-
