@@ -20,6 +20,12 @@ if empty(glob('~/.vim/autoload/plug.vim'))
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
+" Watch for changes to all variations of .vimrc files and auto-reload.
+augroup myvimrc
+    au!
+    au BufWritePost .vimrc,_vimrc,vimrc,.gvimrc,_gvimrc,gvimrc so $MYVIMRC | if has('gui_running') | so $MYGVIMRC | endif
+augroup END
+
 " To install all plugins, run :PlugInstall
 " To update plugins, run :PlugUpdate
 " To update vim-plug iself, run :PlugUpgrade
@@ -92,9 +98,23 @@ let g:syntastic_check_on_wq = 0
 let mapleader = "\<Space>"
 " Double <leader> to open last opened file.
 nnoremap <leader><leader> <c-^>
-" Ctrl+j as Esc.
-inoremap <C-j> <Esc>
-vnoremap <C-j> <Esc>
+" Move lines up and down with Alt+k and Alt+j.
+:nnoremap <A-j> :m .+1<CR>==
+:nnoremap <A-k> :m .-2<CR>==
+:inoremap <A-j> <Esc>:m .+1<CR>==
+:inoremap <A-k> <Esc>:m .-2<CR>==
+:vnoremap <A-j> :m '>+1<CR>gv=gv
+:vnoremap <A-k> :m '<-2<CR>gv=gv
+" Resize windows.
+:map - <C-w>-
+:map + <C-w>+
+:map < <C-w><
+:map > <C-w>>
+" Jump between windows.
+:map <C-h> <C-w>h
+:map <C-j> <C-w>j
+:map <C-k> <C-w>k
+:map <C-l> <C-w>l
 " Shortcut resetting last search highlight.
 nmap <leader>hl :noh<CR>
 " FZF
@@ -129,3 +149,4 @@ set undofile
 
 " Set cli colors
 silent! colorscheme dracula
+
