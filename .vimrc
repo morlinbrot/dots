@@ -37,6 +37,10 @@ Plug 'autozimu/LanguageClient-neovim', {
     \ 'branch': 'next',
     \ 'do': 'bash install.sh',
     \ }
+" Autocompletion
+Plug 'ncm2/ncm2'
+Plug 'roxma/nvim-yarp'
+Plug 'ncm2/ncm2-bufword'
 " Spell checker, dependency of RustFmt
 Plug 'vim-syntastic/syntastic'
 " Autocomplete matching pairs while typing.
@@ -138,6 +142,9 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+" ncm2
+autocmd BufEnter * call ncm2#enable_for_buffer()
+set completeopt=noinsert,menuone,noselect
 
 " # ++++ # ++++ #
 "  GENERAL SETTINGS
@@ -155,7 +162,5 @@ set hlsearch
 " Permanent undo.
 set undodir=~/.vim/undo
 set undofile
-" Autocompletion
-set completeopt=noinsert,menuone,noselect
 " Set cli colors
 silent! colorscheme dracula
