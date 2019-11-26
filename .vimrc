@@ -68,8 +68,7 @@ let g:LanguageClient_autoStart = 1
 let g:LanguageClient_serverCommands = {
     \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
     \ 'typescript': ['javascript-typescript-stdio'],
-    \ 'cpp': ['cquery', '--log-file=/tmp/cq.log'],
-    \ 'c': ['cquery', '--log-file=/tmp/cq.log'],
+    \ 'cpp': ['clangd'],
     \ }
 let g:LanguageClient_settingsPath = '~/.config/nvim/settings.json'
 set completefunc=LanguageClient#complete
@@ -83,10 +82,6 @@ nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
 " # ++++ RUST ++++ #
 " Automatically format Rust files on save.
 let g:rustfmt_autosave = 1 
-
-" tab to select and don't hijack my enter key
-"inoremap <expr><Tab> (pumvisible()?(empty(v:completed_item)?"\<C-n>":"\<C-y>"):"\<Tab>")
-"inoremap <expr><CR> (pumvisible()?(empty(v:completed_item)?"\<CR>\<CR>":"\<C-y>"):"\<CR>")
 
 " # ++++ # ++++ #
 " KEY BINDINGS
@@ -145,6 +140,10 @@ let g:syntastic_check_on_wq = 0
 " ncm2
 autocmd BufEnter * call ncm2#enable_for_buffer()
 set completeopt=noinsert,menuone,noselect
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+inoremap <expr><CR> (pumvisible()?(empty(v:completed_item)?"\<CR>\<CR>":"\<C-y>"):"\<CR>")
+
 
 " # ++++ # ++++ #
 "  GENERAL SETTINGS
