@@ -102,8 +102,9 @@ export FZF_DEFAULT_COMMAND='rg --files --hidden --follow -g "!.git/*" -g "!node_
 # ++++  ++++ #
 #  RANDOMS
 # ++++  ++++ #
-# EXERCISM.io
 export PATH="/opt:$PATH"
+# Source ghc and friends (Haskell)
+. ~/.ghcup/env
 
 # NVM
 export NVM_DIR="$HOME/.nvm"
