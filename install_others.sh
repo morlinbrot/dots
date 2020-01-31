@@ -11,6 +11,10 @@ curl https://sh.rustup.rs -sSf | sh
 rustup component add rls rust-analysis rust-src rustfmt
 bin/rust.sh
 
+# rust-analyzer
+git clone https://github.com/rust-analyzer/rust-analyzer && cd rust-analyzer
+cargo xtask install
+
 # NVM
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
 

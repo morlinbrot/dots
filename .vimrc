@@ -1,4 +1,4 @@
-" Create a $HOME/.vimrc, containing
+
 "    runtime ./path/to/this/.vimrc
 "
 " and/or
@@ -54,6 +54,9 @@ Plug 'airblade/vim-rooter'
 " ...using a fuzzy finder to quickly find files in the same dir.
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+" Interactive fuzzy finder
+Plug 'liuchengxu/vim-clap'
+Plug 'liuchengxu/vim-clap', { 'do': function('clap#helper#build_all') }
 
 call plug#end()
 
@@ -66,7 +69,7 @@ set hidden
 " Automatically start language servers.
 let g:LanguageClient_autoStart = 1
 let g:LanguageClient_serverCommands = {
-    \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
+    \ 'rust': ['ra_lsp_server'],
     \ 'typescript': ['javascript-typescript-stdio'],
     \ 'cpp': ['clangd'],
     \ }
