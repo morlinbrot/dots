@@ -10,9 +10,7 @@
 "    source ~/configs/.nvimrc
 " to use this file as a central rc for both vim and neovim.
 
-" # ++++ # ++++ #
-"  PLUGINS
-" # ++++ # ++++ #
+" ++++ PLUGINS
 " Before executing any of the vim-plug commands, we make sure that they exist.
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
@@ -45,8 +43,6 @@ Plug 'ncm2/ncm2-bufword'
 Plug 'vim-syntastic/syntastic'
 " Autocomplete matching pairs while typing.
 "Plug 'jiangmiao/auto-pairs'
-" Dracula color scheme
-Plug 'dracula/vim', {'as': 'dracula'}
 " Displays a line that shows what mode you're in.
 Plug 'itchyny/lightline.vim'
 " Moves the CL to the nearest git repo root folder, useful for...
@@ -58,12 +54,19 @@ Plug 'junegunn/fzf.vim'
 Plug 'liuchengxu/vim-clap'
 Plug 'liuchengxu/vim-clap', { 'do': function('clap#helper#build_all') }
 
+" ++++ COLORS
+" Dracula color scheme
+Plug 'dracula/vim', {'as': 'dracula'}
+" Xcode color scheme
+"Plug 'arzg/vim-colors-xcode'
+
 call plug#end()
 
+" Set cli colors
+colorscheme dracula
 
-" # ++++ # ++++ #
-" LANGUAGE SERVER 
-" # ++++ # ++++ #
+
+" ++++ LANGUAGE SERVER 
 " Required for operations modifying multiple buffers like rename.
 set hidden
 " Automatically start language servers.
@@ -82,13 +85,11 @@ nnoremap <silent> gr :call LanguageClient#textDocument_references()<CR>
 nnoremap <silent> gs :call LanguageClient#textDocument_documentSymbol()<CR>
 nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
 
-" # ++++ RUST ++++ #
+" ++++ RUST
 " Automatically format Rust files on save.
 let g:rustfmt_autosave = 1 
 
-" # ++++ # ++++ #
-" KEY BINDINGS
-" # ++++ # ++++ #
+" ++++ KEY BINDINGS
 let mapleader = "\<Space>"
 " Double <leader> to open last opened file.
 nnoremap <leader><leader> <c-^>
@@ -123,9 +124,7 @@ nmap <C-o> o<Esc>k
 map <F8> :Vex<CR>
 map <leader>8 :Vex<CR>
 
-" # ++++ # ++++ #
-" PLUGIN CONFIGS
-" # ++++ # ++++ #
+" ++++ PLUGIN CONFIGS
 " netrw configuration
 let g:netrw_liststyle = 3
 let g:netrw_banner = 0
@@ -154,9 +153,7 @@ inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 inoremap <expr><CR> (pumvisible()?(empty(v:completed_item)?"\<CR>\<CR>":"\<C-y>"):"\<CR>")
 
 
-" # ++++ # ++++ #
-"  GENERAL SETTINGS
-" # ++++ # ++++ #
+" ++++ GENERAL SETTINGS
 " Tab settings
 set tabstop=4 softtabstop=0 expandtab shiftwidth=4 smarttab 
 " Show 'hybrid' line numbers (both abs and rel).
@@ -171,5 +168,3 @@ set hlsearch
 " Permanent undo.
 set undodir=~/.vim/undo
 set undofile
-" Set cli colors
-silent! colorscheme dracula
