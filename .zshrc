@@ -1,6 +1,9 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
+# Include rustup autocompletions.
+fpath+=~/.zfunc
+
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
 
@@ -34,8 +37,6 @@ alias sup='sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y'
 alias pac='sudo pacman -Syu'
 # Set sound to more than 100%
 alias loud='pactl set-sink-volume 0 150%'
-# Purge config files of already removed packages (handle with care)
-alias thepurge='dpkg -l | grep '^rc' | awk '{print $2}' | sudo xargs dpkg --purge'
 # Clear swap
 alias swap='sudo swapoff -a && sudo swapon -a'
 
@@ -86,10 +87,12 @@ alias xla='exa -la'
 
 # Rust!
 alias cb='cargo build'
+alias cc='cargo check'
 alias cr='cargo run'
 alias ct='cargo test'
 
 # What kind of pleb would write out 'nvim' all the time!?
+alias nv='nvim'
 alias n='nvim'
 
 #  SSH

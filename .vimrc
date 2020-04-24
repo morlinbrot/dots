@@ -44,7 +44,7 @@ Plug 'ncm2/ncm2-bufword'
 " Spell checker, dependency of RustFmt
 Plug 'vim-syntastic/syntastic'
 " Autocomplete matching pairs while typing.
-Plug 'jiangmiao/auto-pairs'
+"Plug 'jiangmiao/auto-pairs'
 " Dracula color scheme
 Plug 'dracula/vim', {'as': 'dracula'}
 " Displays a line that shows what mode you're in.
@@ -132,14 +132,20 @@ let g:netrw_banner = 0
 let g:netrw_browse_split = 4
 let g:netrw_winsize = 20
 let g:netrw_preview = 1
-" syntastic recommended settings
+" syntastic (Error pane in the bottom).
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
+let g:syntastic_auto_loc_list = 2
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+" Reduce the size of the pane if <10 errors.
+function! SyntasticCheckHook(errors)
+    if !empty(a:errors)
+        let g:syntastic_loc_list_height = min([len(a:errors), 10])
+    endif
+endfunction
 " ncm2
 autocmd BufEnter * call ncm2#enable_for_buffer()
 set completeopt=noinsert,menuone,noselect
@@ -153,8 +159,9 @@ inoremap <expr><CR> (pumvisible()?(empty(v:completed_item)?"\<CR>\<CR>":"\<C-y>"
 " # ++++ # ++++ #
 " Tab settings
 set tabstop=4 softtabstop=0 expandtab shiftwidth=4 smarttab 
-" Show line numbers
+" Show 'hybrid' line numbers (both abs and rel).
 set number
+set relativenumber
 " Always show gutter (where errors are being displayed)
 set signcolumn=yes
 " Font size
