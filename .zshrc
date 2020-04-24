@@ -124,16 +124,6 @@ fi
 # ++++  ++++ #
 #  TRASH ?
 # ++++  ++++ #
-# JS Standard Style for linting
-#export PATH=$PATH:/home/ryneke/.nvm/v6.10.0/bin/standard
-# AirBnB Style
-#export PATH=$PATH:/home/ryneke/.nvm/v6.10.0/bin/eslint
-
-# Deactivate 'auto cd' functionality to be able to use ex. 'grunt'
-unsetopt AUTO_CD
-
 # Activate useful key bindings and fuzzy completion for fzf.
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-# export MANPATH="/usr/local/man:$MANPATH"
 

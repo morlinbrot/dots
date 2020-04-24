@@ -13,7 +13,6 @@ nvim +PlugClean +PlugInstall +UpdateRemotePlugins +qall
 
 # ZSH
 cp ./templates/.zshrc ~/.zshrc
-source ~/.zshrc
 
 # Include git aliases.
 git config --global include.path ~/configs/templates/git_aliases
