@@ -29,18 +29,6 @@ augroup END
 " To update vim-plug iself, run :PlugUpgrade
 call plug#begin('~/.vim/plugged')
 
-Plug 'rust-lang/rust.vim'
-" LanguageClient
-Plug 'autozimu/LanguageClient-neovim', {
-    \ 'branch': 'next',
-    \ 'do': 'bash install.sh',
-    \ }
-" Autocompletion
-Plug 'ncm2/ncm2'
-Plug 'roxma/nvim-yarp'
-Plug 'ncm2/ncm2-bufword'
-" Spell checker, dependency of RustFmt
-Plug 'vim-syntastic/syntastic'
 " Autocomplete matching pairs while typing.
 "Plug 'jiangmiao/auto-pairs'
 " Displays a line that shows what mode you're in.
@@ -124,6 +112,12 @@ nmap <C-o> o<Esc>k
 map <F8> :Vex<CR>
 map <leader>8 :Vex<CR>
 
+" <Tab> and <S-Tab> to navigate autocompletion list.
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+" <CR> to confirm completion. 
+inoremap <expr><CR> (pumvisible()?(empty(v:completed_item)?"\<CR>\<CR>":"\<C-y>"):"\<CR>")
+
 " ++++ PLUGIN CONFIGS
 " netrw configuration
 let g:netrw_liststyle = 3
@@ -131,27 +125,6 @@ let g:netrw_banner = 0
 let g:netrw_browse_split = 4
 let g:netrw_winsize = 20
 let g:netrw_preview = 1
-" syntastic (Error pane in the bottom).
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 2
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-" Reduce the size of the pane if <10 errors.
-function! SyntasticCheckHook(errors)
-    if !empty(a:errors)
-        let g:syntastic_loc_list_height = min([len(a:errors), 10])
-    endif
-endfunction
-" ncm2
-autocmd BufEnter * call ncm2#enable_for_buffer()
-set completeopt=noinsert,menuone,noselect
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-inoremap <expr><CR> (pumvisible()?(empty(v:completed_item)?"\<CR>\<CR>":"\<C-y>"):"\<CR>")
-
 
 " ++++ GENERAL SETTINGS
 " Tab settings
