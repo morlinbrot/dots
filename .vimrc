@@ -1,13 +1,8 @@
-
+" ++++ USAGE
+" Create a $HOME/.config/nvim/.init.vim, containing
+"
 "    runtime ./path/to/this/.vimrc
 "
-" and/or
-"
-" Create a $HOME/.configs/nvim/.init.vim, containing
-"    set runtimepath^=~/.vim runtimepath+=~/.vim/after
-"    let &packpath = &runtimepath
-"    source ~/configs/.vimrc
-"    source ~/configs/.nvimrc
 " to use this file as a central rc for both vim and neovim.
 
 " ++++ PLUGINS
