@@ -93,7 +93,7 @@ alias ct='cargo test'
 
 # What kind of pleb would write out 'nvim' all the time!?
 alias nv='nvim'
-alias n='nvim'
+alias v='nvim'
 
 #  SSH
 export SSH_KEY_PATH="~/.ssh/rsa_id"
