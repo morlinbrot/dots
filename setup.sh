@@ -7,5 +7,3 @@ mkdir -p ~/prx
 . ./setup.nvim.sh
 . ./setup.git.sh
 
-
-

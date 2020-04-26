@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
 # Taken from: https://github.com/neoclide/coc.nvim/wiki/Install-coc.nvim
-
 set -o nounset    # error when referencing undefined variable
 set -o errexit    # exit when command fails
 
@@ -26,5 +25,7 @@ if [ ! -f package.json ]
 then
   echo '{"dependencies":{}}'> package.json
 fi
+
 # Change extension names to the extensions you need
 npm install coc-snippets coc-rust-analyzer --global-style --ignore-scripts --no-bin-links --no-package-lock --only=prod
+
