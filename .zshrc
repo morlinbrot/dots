@@ -84,6 +84,7 @@ alias glf='git lf'
 # Handy exa shorts.
 alias xl='exa -l'
 alias xla='exa -la'
+alias xlt='exa -lTL2'
 
 # Rust!
 alias cb='cargo build'
