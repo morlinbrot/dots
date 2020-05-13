@@ -2,4 +2,4 @@
 set runtimepath^=~/.vim runtimepath+=~/.vim/after
 let &packpath = &runtimepath
 " Use this repo's .vimrc file.
-source ~/dotfiles/.vimrc
+source ~/dots/.vimrc
