@@ -15,7 +15,7 @@ endif
 " Watch for changes to all variations of .vimrc files and auto-reload.
 augroup myvimrc
     au!
-    au BufWritePost .vimrc,_vimrc,vimrc,.gvimrc,_gvimrc,gvimrc so $MYVIMRC | if has('gui_running') | so $MYGVIMRC | endif
+    au BufWritePost .vimrc,_vimrc,vimrc,.gvimrc,_gvimrc,gvimrc ++nested so $MYVIMRC | if has('gui_running') | so $MYGVIMRC | endif
 augroup END
 
 " ++++ PLUGINS
@@ -23,41 +23,39 @@ augroup END
 " To update plugins, run :PlugUpdate
 " To update vim-plug iself, run :PlugUpgrade
 call plug#begin('~/.vim/plugged')
-Plug 'itchyny/lightline.vim'        " Displays a line that shows what mode you're in.
-Plug 'airblade/vim-rooter'          " Moves the CL to the nearest git repo root folder, useful for...
+Plug 'itchyny/lightline.vim'            " Displays a line that shows what mode you're in.
+Plug 'machakann/vim-highlightedyank'    " Highlight what you're yanking
+Plug 'airblade/vim-rooter'              " Moves the CL to the closest git repo root folder
 " ...using a fuzzy finder to quickly find files in the same dir.
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-Plug 'dracula/vim', {'as': 'dracula'}
+Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'arcticicestudio/nord-vim'
 Plug 'tomasr/molokai'
 call plug#end()
 
 colorscheme dracula
-set background=dark
+let g:lightline = { 'colorscheme': 'dracula' }
 
-" ++++ LANGUAGE SERVER 
-" Required for operations modifying multiple buffers like rename.
-set hidden
-" Automatically start language servers.
-"let g:LanguageClient_autoStart = 1
-"let g:LanguageClient_serverCommands = {
-"    \ 'rust': ['ra_lsp_server'],
-"    \ 'typescript': ['javascript-typescript-stdio'],
-"    \ 'cpp': ['clangd'],
-"    \ }
-"let g:LanguageClient_settingsPath = '~/.config/nvim/settings.json'
-"set completefunc=LanguageClient#complete
-"nnoremap <F5> :call LanguageClient_contextMenu()<CR>
-"nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
-"nnoremap <silent> gh :call LanguageClient#textDocument_hover()<CR>
-"nnoremap <silent> gr :call LanguageClient#textDocument_references()<CR>
-"nnoremap <silent> gs :call LanguageClient#textDocument_documentSymbol()<CR>
-"nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
 
-" ++++ RUST
-" Automatically format Rust files on save.
-"let g:rustfmt_autosave = 1 
+" ++++ GENERAL SETTINGS
+set hidden                  " Enable multiple buffers being opened in the background
+set tabstop=4
+set softtabstop=0
+set expandtab
+set shiftwidth=4
+set smarttab 
+set number                  " Show line number on current line
+set relativenumber          " Show relative line numbers
+set signcolumn=yes          " Always show gutter (where errors are being displayed)
+set hlsearch                " Highlight search terms
+set undofile                " Permanent undo.
+set undodir=~/.vim/undo
+set nowrap                  " Don't wrap long lines
+set timeoutlen=400          " Time to complete any key sequence
+set clipboard=unnamedplus   " Simplfiy clipboard to p/P instead of "+p/P
+set smartcase               " Auto enable case sensitivity when query contains uppercase
+set cursorline              " Highlight current line
 
 " ++++ KEY BINDINGS
 let mapleader = "\<Space>"
@@ -84,8 +82,12 @@ map <A-l> <C-w>l
 nmap <leader>hl :noh<CR>
 " FZF
 map <leader>o :Files<CR>
+map <leader>O :Files ~/<CR>
+map <leader>p :Files ~/prx<CR>
 map <leader>b :Buffer<CR>
 map <leader>rg :Rg<CR>
+" Always show the preview window.
+let g:fzf_preview_window = 'right:60%' 
 
 " Map tab switching to Ctrl+Tab.
 map <C-Tab> gt 
@@ -107,6 +109,8 @@ inoremap <expr><CR> (pumvisible()?(empty(v:completed_item)?"\<CR>\<CR>":"\<C-y>"
 " Double tap to Esc.
 inoremap ii <Esc>
 inoremap jk <Esc>
+inoremap <C-j> <Esc>
+vnoremap <C-j> <Esc>
 
 " netrw configuration
 let g:netrw_liststyle = 3
@@ -115,18 +119,15 @@ let g:netrw_browse_split = 4
 let g:netrw_winsize = 20
 let g:netrw_preview = 1
 
-set tabstop=4
-set softtabstop=0
-set expandtab
-set shiftwidth=4
-set smarttab 
-set number                  " Show line number on current line
-set relativenumber          " Show relative line numbers
-set signcolumn=yes          " Always show gutter (where errors are being displayed)
-set hlsearch                " Highlight search terms
-set undofile                " Permanent undo.
-set undodir=~/.vim/undo
-set nowrap                  " Don't wrap long lines
-set timeoutlen=400          " Time to complete any key sequence
-set clipboard=unnamedplus   " Simplfiy clipboard to p/P instead of "+p/P
+" COC.NVIM
+" Use K to show documentation in preview window.
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
 
