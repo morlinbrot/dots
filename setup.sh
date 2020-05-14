@@ -9,4 +9,5 @@ mkdir -p ~/prx
 . ./setup.zsh.sh
 . ./setup.nvim.sh
 . ./setup.git.sh
+. ./setup.alacritty.sh
 
