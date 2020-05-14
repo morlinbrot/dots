@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # NVIM
 # Create a proxy .vimrc at the default location.

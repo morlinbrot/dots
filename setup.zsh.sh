@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Install oh-my-zsh
 if [ ! -x "$(command -v zsh)" ]; then

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # VS Code
 CODE_DIR=~/.config/Code/User/

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # RUST
 if [ ! -x "$(command -v rustup)" ]; then

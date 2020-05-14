@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Set up a symlink for Tilix's configuration issue fix.
 # https://gnunn1.github.io/tilix-web/manual/vteconfig/

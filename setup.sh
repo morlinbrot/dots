@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Re-map Caps Lock to Ctrl
 setxkbmap -option caps:ctlr_modifier
