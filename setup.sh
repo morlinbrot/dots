@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Re-map Caps Lock to Ctrl
-setxkbmap -option caps:ctlr_modifier
+setxkbmap -option caps:ctrl_modifier
 
 # Create prx folder (some aliases will point to certain locations in here)
 mkdir -p ~/prx
@@ -10,4 +10,7 @@ mkdir -p ~/prx
 . ./setup.nvim.sh
 . ./setup.git.sh
 . ./setup.alacritty.sh
+. ./setup.tmux.sh
+. ./setup.fish.sh
+. ./setup.bat.sh
 
