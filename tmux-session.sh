@@ -5,4 +5,6 @@
 tmux new-session \; \
     rename-window tty \; \
     new-window \; \
+    rename-window dots \; \
+    new-window \; \
     rename-window vim
