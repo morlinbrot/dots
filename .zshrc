@@ -119,12 +119,6 @@ export NVM_DIR="$HOME/.nvm"
 # Global npm packages (as per the current active nvm node version)
 export PATH="(npm config --global get prefix):$PATH"
 
-# Fix 'Configuration issue', as per
-# https://gnunn1.github.io/tilix-web/manual/vteconfig/
-if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
-    source /etc/profile.d/vte.sh
-fi
-
 # ++++  ++++ #
 #  TRASH ?
 # ++++  ++++ #
