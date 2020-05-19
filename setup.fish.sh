@@ -3,6 +3,7 @@
 # Check if omf dir already exists
 if [ ! -d $HOME/.local/share/omf ]; then
     curl -L https://get.oh-my.fish | fish
+    omf install bass spacefish z
 fi
 
 mkdir -p $HOME/.config/fish
