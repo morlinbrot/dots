@@ -29,6 +29,7 @@ Plug 'airblade/vim-rooter'              " Moves the CL to the closest git repo r
 " ...using a fuzzy finder to quickly find files in the same dir.
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'arcticicestudio/nord-vim'
 Plug 'tomasr/molokai'
@@ -92,8 +93,8 @@ let g:fzf_preview_window = 'right:60%'
 " Map tab switching to Ctrl+Tab.
 map <C-Tab> gt 
 " Insert blank lines without entering insert mode
-nmap <C-O> O<Esc>j
-nmap <C-o> o<Esc>k
+nmap <M-O> O<Esc>j
+nmap <M-o> o<Esc>k
 " Open netrw with F8 or <leader>8
 map <F8> :Vex<CR>
 map <leader>8 :Vex<CR>
@@ -130,4 +131,10 @@ function! s:show_documentation()
     call CocAction('doHover')
   endif
 endfunction
+
+" Highlight the symbol and its references when holding the cursor.
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" Symbol renaming.
+nmap <F2> <Plug>(coc-rename)
 
