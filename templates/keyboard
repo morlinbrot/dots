@@ -1,0 +1,11 @@
+# Copy this file to /etc/default/keyboard with sudo privileges.
+# KEYBOARD CONFIGURATION FILE
+
+# Consult the keyboard(5) manual page.
+
+XKBMODEL="pc105"
+XKBLAYOUT="de"
+XKBVARIANT=""
+XKBOPTIONS="caps:ctrl_modifier"
+
+BACKSPACE="guess"
