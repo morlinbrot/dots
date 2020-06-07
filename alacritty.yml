@@ -310,7 +310,7 @@ shell:
   args:
     - --login
     - --init-command
-    - "tmux at"
+    - "bass ~/dots/tmux-session.sh"
 
 # Startup directory
 #
