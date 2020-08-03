@@ -33,6 +33,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'arcticicestudio/nord-vim'
 Plug 'tomasr/molokai'
+Plug 'editorconfig/editorconfig-vim'
 call plug#end()
 
 colorscheme dracula
@@ -94,7 +95,7 @@ let g:fzf_preview_window = 'right:60%'
 map <C-Tab> gt 
 " Insert blank lines without entering insert mode
 nmap <M-O> O<Esc>j
-nmap <M-o> o<Esc>k
+nmap <C-o> o<Esc>k
 " Open netrw with F8 or <leader>8
 map <F8> :Vex<CR>
 map <leader>8 :Vex<CR>
