@@ -24,6 +24,7 @@ augroup END
 " To update vim-plug iself, run :PlugUpgrade
 call plug#begin('~/.vim/plugged')
 Plug 'tmux-plugins/vim-tmux-focus-events' " Activate focus events in emulators like tmux.
+Plug 'rust-lang/rust.vim'               " Rust plugin to enable auto formatting etc.
 Plug 'itchyny/lightline.vim'            " Displays a line that shows what mode you're in.
 Plug 'machakann/vim-highlightedyank'    " Highlight what you're yanking
 Plug 'airblade/vim-rooter'              " Moves the CL to the closest git repo root folder
@@ -42,6 +43,9 @@ Plug 'dracula/vim', { 'as': 'dracula' }
 "Plug 'bignimbus/pop-punk.vim'
 "Plug 'tomasr/molokai'
 call plug#end()
+
+" Run rustfmt on save.
+let g:rustfmt_autosave = 1
 
 colorscheme dracula
 let g:lightline = { 'colorscheme': 'dracula' }
