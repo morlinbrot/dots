@@ -23,6 +23,7 @@ augroup END
 " To update plugins, run :PlugUpdate
 " To update vim-plug iself, run :PlugUpgrade
 call plug#begin('~/.vim/plugged')
+Plug 'tmux-plugins/vim-tmux-focus-events' " Activate focus events in emulators like tmux.
 Plug 'itchyny/lightline.vim'            " Displays a line that shows what mode you're in.
 Plug 'machakann/vim-highlightedyank'    " Highlight what you're yanking
 Plug 'airblade/vim-rooter'              " Moves the CL to the closest git repo root folder
@@ -64,6 +65,7 @@ set clipboard=unnamedplus   " Simplfiy clipboard to p/P instead of "+p/P
 set ignorecase              " Needs to be enabled for 'smartcase' to work
 set smartcase               " Auto enable case sensitivity when query contains uppercase
 set cursorline              " Highlight current line
+set autoread                " Automatically refresh file buffers
 
 " ++++ KEY BINDINGS
 let mapleader = "\<Space>"
@@ -193,19 +195,15 @@ let g:netrw_browse_split = 4
 let g:netrw_winsize = 20
 let g:netrw_preview = 1
 
-" COC.NVIM --> Trying out nvim 0.5's LSP + rust analyzer
-" Use K to show documentation in preview window.
-"nnoremap <silent> K :call <SID>show_documentation()<CR>
-"
-"function! s:show_documentation()
-"  if (index(['vim','help'], &filetype) >= 0)
-"    execute 'h '.expand('<cword>')
-"  else
-"    call CocAction('doHover')
-"  endif
-"endfunction
-" Highlight the symbol and its references when holding the cursor.
-"autocmd CursorHold * silent call CocActionAsync('highlight')
-" Symbol renaming.
-"nmap <F2> <Plug>(coc-rename)
+" Triger `autoread` when files changes on disk
+" Needs ':set autoload' in .vimrc and 'set -g focus-events on' in .tmux.conf
+" in .tmux.conf
+" https://unix.stackexchange.com/questions/149209/refresh-changed-content-of-file-opened-in-vim/383044#383044
+" https://vi.stackexchange.com/questions/13692/prevent-focusgained-autocmd-running-in-command-line-editing-mode
+autocmd FocusGained,BufEnter,CursorHold,CursorHoldI *
+    \ if mode() !~ '\v(c|r.?|!|t)' && getcmdwintype() == '' | checktime | endif
+" Notification after file change
+" https://vi.stackexchange.com/questions/13091/autocmd-event-for-autoread
+autocmd FileChangedShellPost *
+    \ echohl WarningMsg | echo "File changed on disk. Buffer reloaded." | echohl None
 
