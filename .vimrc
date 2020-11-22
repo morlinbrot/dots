@@ -105,9 +105,6 @@ let g:fzf_preview_window = 'right:60%'
 
 " Map tab switching to Ctrl+Tab.
 map <C-Tab> gt 
-" Insert blank lines without entering insert mode
-nmap <M-O> O<Esc>j
-nmap <C-o> o<Esc>k
 " Open netrw with F8 or <leader>8
 map <F8> :Vex<CR>
 map <leader>8 :Vex<CR>
