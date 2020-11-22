@@ -92,6 +92,9 @@ map <A-h> <C-w>h
 map <A-j> <C-w>j
 map <A-k> <C-w>k
 map <A-l> <C-w>l
+" Keymap for constant twitchy saving after each change.
+map <leader>w :w<CR>
+map <leader>wq :wq<CR>
 " Shortcut resetting last search highlight.
 nmap <leader>hl :noh<CR>
 " FZF
