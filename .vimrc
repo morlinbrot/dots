@@ -27,12 +27,13 @@ Plug 'tmux-plugins/vim-tmux-focus-events' " Activate focus events in emulators l
 Plug 'rust-lang/rust.vim'               " Rust plugin to enable auto formatting etc.
 Plug 'itchyny/lightline.vim'            " Displays a line that shows what mode you're in.
 Plug 'machakann/vim-highlightedyank'    " Highlight what you're yanking
+Plug 'tpope/vim-commentary'             " Comment and un-comment with 'gc'
 Plug 'airblade/vim-rooter'              " Moves the CL to the closest git repo root folder
 " ...using a fuzzy finder to quickly find files in the same dir.
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+Plug 'neovim/nvim-lspconfig'            
 " Nvim LSP goodness
-Plug 'neovim/nvim-lspconfig'
 Plug 'tjdevries/lsp_extensions.nvim'
 Plug 'nvim-lua/completion-nvim'
 Plug 'nvim-lua/diagnostic-nvim'
@@ -129,7 +130,7 @@ set shortmess+=c
 lua <<EOF
 
 -- nvim_lsp object
-local nvim_lsp = require'nvim_lsp'
+local nvim_lsp = require'lspconfig'
 
 -- function to attach completion and diagnostics
 -- when setting up lsp
