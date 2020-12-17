@@ -23,33 +23,43 @@ augroup END
 " To update plugins, run :PlugUpdate
 " To update vim-plug iself, run :PlugUpgrade
 call plug#begin('~/.vim/plugged')
-Plug 'tmux-plugins/vim-tmux-focus-events' " Activate focus events in emulators like tmux.
 Plug 'rust-lang/rust.vim'               " Rust plugin to enable auto formatting etc.
+Plug 'artur-shaik/vim-javacomplete2'       " Java suport.
+Plug 'tmux-plugins/vim-tmux-focus-events' " Activate focus events in emulators like tmux.
 Plug 'itchyny/lightline.vim'            " Displays a line that shows what mode you're in.
 Plug 'machakann/vim-highlightedyank'    " Highlight what you're yanking
 Plug 'tpope/vim-commentary'             " Comment and un-comment with 'gc'
+Plug 'editorconfig/editorconfig-vim'
+
 Plug 'airblade/vim-rooter'              " Moves the CL to the closest git repo root folder
 " ...using a fuzzy finder to quickly find files in the same dir.
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-Plug 'neovim/nvim-lspconfig'            
+
 " Nvim LSP goodness
+Plug 'neovim/nvim-lspconfig'            
 Plug 'tjdevries/lsp_extensions.nvim'
 Plug 'nvim-lua/completion-nvim'
 Plug 'nvim-lua/diagnostic-nvim'
-Plug 'editorconfig/editorconfig-vim'
+
 " Themes
 Plug 'dracula/vim', { 'as': 'dracula' }
+"Plug 'humanoid-colors/vim-humanoid-colorscheme', { 'branch': 'main' }
 "Plug 'arcticicestudio/nord-vim'
 "Plug 'bignimbus/pop-punk.vim'
 "Plug 'tomasr/molokai'
 call plug#end()
 
+colorscheme dracula
+let g:lightline = { 'colorscheme': 'dracula' }
+
+" ++++ LANGUAGES
 " Run rustfmt on save.
 let g:rustfmt_autosave = 1
 
-colorscheme dracula
-let g:lightline = { 'colorscheme': 'dracula' }
+" Required for vim-javacomplete2.
+autocmd FileType java setlocal omnifunc=javacomplete#Complete
+
 
 " ++++ GENERAL SETTINGS
 set hidden                  " Enable multiple buffers being opened in the background
@@ -96,6 +106,7 @@ map <A-l> <C-w>l
 " Keymap for constant twitchy saving after each change.
 map <leader>w :w<CR>
 map <leader>wq :wq<CR>
+map <leader>q :q<CR>
 " Shortcut resetting last search highlight.
 nmap <leader>hl :noh<CR>
 " FZF
@@ -131,13 +142,6 @@ lua <<EOF
 
 -- nvim_lsp object
 local nvim_lsp = require'lspconfig'
-
--- function to attach completion and diagnostics
--- when setting up lsp
-local on_attach = function(client)
-    require'completion'.on_attach(client)
-    require'diagnostic'.on_attach(client)
-end
 
 -- Enable rust_analyzer
 nvim_lsp.rust_analyzer.setup({ on_attach=on_attach })
@@ -176,20 +180,18 @@ let g:diagnostic_insert_delay = 1
 " 300ms of no cursor movement to trigger CursorHold
 set updatetime=300
 " Show diagnostic popup on cursor hold
-autocmd CursorHold * lua vim.lsp.util.show_line_diagnostics()
+autocmd CursorHold * lua vim.lsp.diagnostic.show_line_diagnostics()
 
 " Goto previous/next diagnostic warning/error
-nnoremap <silent> g[ <cmd>PrevDiagnosticCycle<cr>
-nnoremap <silent> g] <cmd>NextDiagnosticCycle<cr>
+nnoremap <silent> g[ <cmd>vim.lsp.diagnostic.goto_prev()<cr>
+nnoremap <silent> g] <cmd>vim.lsp.diagnostic.goto_next()<cr>
 
 " Enable type inlay hints
 autocmd CursorMoved,InsertLeave,BufEnter,BufWinEnter,TabEnter,BufWritePost *
 \ lua require'lsp_extensions'.inlay_hints{ prefix = '', highlight = "Comment" }
 " ++++ END LSP CONFIG
 
-" Double tap to Esc.
-inoremap ii <Esc>
-inoremap jk <Esc>
+" Ergonomic Esc alternative.
 inoremap <C-j> <Esc>
 vnoremap <C-j> <Esc>
 
@@ -202,7 +204,6 @@ let g:netrw_preview = 1
 
 " Triger `autoread` when files changes on disk
 " Needs ':set autoload' in .vimrc and 'set -g focus-events on' in .tmux.conf
-" in .tmux.conf
 " https://unix.stackexchange.com/questions/149209/refresh-changed-content-of-file-opened-in-vim/383044#383044
 " https://vi.stackexchange.com/questions/13692/prevent-focusgained-autocmd-running-in-command-line-editing-mode
 autocmd FocusGained,BufEnter,CursorHold,CursorHoldI *
