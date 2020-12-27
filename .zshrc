@@ -29,7 +29,7 @@ source $ZSH/oh-my-zsh.sh
 # ++++ # ++++ #
 # For a full list of active aliases, run `alias`.
 alias prx='cd ~/prx'
-alias py='python'
+alias py='python3'
 alias npmg='npm list -g --depth=0'
 alias npmlist='npm list --depth=0'
 alias dossh='~/ssh.sh'
