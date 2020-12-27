@@ -24,12 +24,13 @@ augroup END
 " To update vim-plug iself, run :PlugUpgrade
 call plug#begin('~/.vim/plugged')
 Plug 'rust-lang/rust.vim'               " Rust plugin to enable auto formatting etc.
-Plug 'artur-shaik/vim-javacomplete2'       " Java suport.
+Plug 'artur-shaik/vim-javacomplete2'    " Java suport.
 Plug 'tmux-plugins/vim-tmux-focus-events' " Activate focus events in emulators like tmux.
 Plug 'itchyny/lightline.vim'            " Displays a line that shows what mode you're in.
 Plug 'machakann/vim-highlightedyank'    " Highlight what you're yanking
 Plug 'tpope/vim-commentary'             " Comment and un-comment with 'gc'
 Plug 'editorconfig/editorconfig-vim'
+Plug 'chrisbra/Colorizer'
 
 Plug 'airblade/vim-rooter'              " Moves the CL to the closest git repo root folder
 " ...using a fuzzy finder to quickly find files in the same dir.
@@ -43,15 +44,19 @@ Plug 'nvim-lua/completion-nvim'
 Plug 'nvim-lua/diagnostic-nvim'
 
 " Themes
-Plug 'dracula/vim', { 'as': 'dracula' }
+"Plug 'dracula/vim', { 'as': 'dracula' }
+"Plug 'wadackel/vim-dogrun'
+"Plug 'joshdick/onedark.vim'
 "Plug 'humanoid-colors/vim-humanoid-colorscheme', { 'branch': 'main' }
 "Plug 'arcticicestudio/nord-vim'
 "Plug 'bignimbus/pop-punk.vim'
 "Plug 'tomasr/molokai'
+Plug 'synul/githubsy.vim', { 'branch': 'main' }
+
 call plug#end()
 
-colorscheme dracula
-let g:lightline = { 'colorscheme': 'dracula' }
+colorscheme githubsy
+let g:lightline = { 'colorscheme': 'dogrun' }
 
 " ++++ LANGUAGES
 " Run rustfmt on save.
@@ -59,7 +64,6 @@ let g:rustfmt_autosave = 1
 
 " Required for vim-javacomplete2.
 autocmd FileType java setlocal omnifunc=javacomplete#Complete
-
 
 " ++++ GENERAL SETTINGS
 set hidden                  " Enable multiple buffers being opened in the background
@@ -81,6 +85,9 @@ set ignorecase              " Needs to be enabled for 'smartcase' to work
 set smartcase               " Auto enable case sensitivity when query contains uppercase
 set cursorline              " Highlight current line
 set autoread                " Automatically refresh file buffers
+set splitbelow              " Split new windows below
+set splitright              " Vertically split new windows to the right
+set mouse=a                 " Enable mouse support in all mode
 
 " ++++ KEY BINDINGS
 let mapleader = "\<Space>"
@@ -125,6 +132,9 @@ map <F8> :Vex<CR>
 map <leader>8 :Vex<CR>
 " Source .vimrc
 map <leader>s :source ~/.vimrc<CR>
+
+" Toggle color highlight
+nnoremap <leader>cc :ColorToggle<CR>
 
 " Tab completion setup stolen from Jon Gjengset
 " <Tab> and <S-Tab> to navigate autocompletion list.
@@ -213,3 +223,11 @@ autocmd FocusGained,BufEnter,CursorHold,CursorHoldI *
 autocmd FileChangedShellPost *
     \ echohl WarningMsg | echo "File changed on disk. Buffer reloaded." | echohl None
 
+" Handy function to show the highlight group of the item under the cursor.
+nnoremap <leader>ss :call <SID>SynStack()<CR>
+function! <SID>SynStack()
+  if !exists("*synstack")
+    return
+  endif
+  echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
+endfunc
