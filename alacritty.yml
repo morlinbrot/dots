@@ -495,15 +495,19 @@ shell:
 # at once.
 key_bindings:
   # (Windows, Linux, and BSD only)
-  #- { key: V,        mods: Control|Shift, action: Paste            }
-  #- { key: C,        mods: Control|Shift, action: Copy             }
+  - { key: V,        mods: Control|Shift, action: Paste            }
+  - { key: C,        mods: Control|Shift, action: Copy             }
   #- { key: Insert,   mods: Shift,         action: PasteSelection   }
   #- { key: Key0,     mods: Control,       action: ResetFontSize    }
   #- { key: Equals,   mods: Control,       action: IncreaseFontSize }
   #- { key: Add,      mods: Control,       action: IncreaseFontSize }
   #- { key: Subtract, mods: Control,       action: DecreaseFontSize }
   #- { key: Minus,    mods: Control,       action: DecreaseFontSize }
-    - { key: N,         mods: Control|Shift, action: SpawnNewInstance }
+  - { key: N,        mods: Control|Shift, action: SpawnNewInstance }
+  # Disable legacy interpretation of <c-j> as <Return>, preventing its
+  # use as <Esc> in editors that use raw mode (e.g. Kakoune).
+  - { key: J, 	 	 mods: Control,        chars: "\x1b[106;5u"    }
+
 
   # (Windows only)
   #- { key: Return,   mods: Alt,           action: ToggleFullscreen }
