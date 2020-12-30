@@ -45,13 +45,13 @@ Plug 'nvim-lua/diagnostic-nvim'
 
 " Themes
 "Plug 'dracula/vim', { 'as': 'dracula' }
-"Plug 'wadackel/vim-dogrun'
+Plug 'wadackel/vim-dogrun'
 "Plug 'joshdick/onedark.vim'
 "Plug 'humanoid-colors/vim-humanoid-colorscheme', { 'branch': 'main' }
 "Plug 'arcticicestudio/nord-vim'
 "Plug 'bignimbus/pop-punk.vim'
 "Plug 'tomasr/molokai'
-Plug 'synul/githubsy.vim', { 'branch': 'main' }
+"Plug 'synul/githubsy.vim', { 'branch': 'main' }
 
 call plug#end()
 
@@ -80,7 +80,7 @@ set undofile                " Permanent undo.
 set undodir=~/.vim/undo
 set nowrap                  " Don't wrap long lines
 set timeoutlen=400          " Time to complete any key sequence
-set clipboard=unnamedplus   " Simplfiy clipboard to p/P instead of "+p/P
+set clipboard=unnamedplus   " Simplify clipboard to p/P instead of "+p/P
 set ignorecase              " Needs to be enabled for 'smartcase' to work
 set smartcase               " Auto enable case sensitivity when query contains uppercase
 set cursorline              " Highlight current line
@@ -155,6 +155,20 @@ local nvim_lsp = require'lspconfig'
 
 -- Enable rust_analyzer
 nvim_lsp.rust_analyzer.setup({ on_attach=on_attach })
+
+-- See https://users.rust-lang.org/t/how-to-disable-rust-analyzer-proc-macro-warnings-in-neovim/53150/6
+local lsp = require'lspconfig'
+lsp.rust_analyzer.setup {
+    settings = {
+        ["rust-analyzer"] = {
+            diagnostics = {
+                enable = true,
+                disabled = {"unresolved-proc-macro"},
+                enableExperimental = true,
+            }
+        }
+    }
+}
 
 EOF
 
