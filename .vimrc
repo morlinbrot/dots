@@ -122,9 +122,11 @@ map <leader>O :Files ~/<CR>
 map <leader>p :Files ~/prx<CR>
 map <leader>b :Buffer<CR>
 map <leader>rg :Rg<CR>
-" Always show the preview window.
-let g:fzf_preview_window = 'right:60%' 
-
+" Delete without yanking (dumps into the black hole register).
+nnoremap <leader>d "_d
+vnoremap <leader>d "_d
+" Overwrite annoying 'yank when putting' behaviour.
+vnoremap p "_dP
 " Map tab switching to Ctrl+Tab.
 map <C-Tab> gt 
 " Open netrw with F8 or <leader>8
@@ -132,9 +134,11 @@ map <F8> :Vex<CR>
 map <leader>8 :Vex<CR>
 " Source .vimrc
 map <leader>s :source ~/.vimrc<CR>
-
 " Toggle color highlight
 nnoremap <leader>cc :ColorToggle<CR>
+
+" Always show the preview window.
+let g:fzf_preview_window = 'right:60%' 
 
 " Tab completion setup stolen from Jon Gjengset
 " <Tab> and <S-Tab> to navigate autocompletion list.
