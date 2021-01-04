@@ -56,7 +56,6 @@ Plug 'wadackel/vim-dogrun'
 call plug#end()
 
 colorscheme githubsy
-let g:lightline = { 'colorscheme': 'dogrun' }
 
 " ++++ LANGUAGES
 " Run rustfmt on save.
@@ -136,6 +135,8 @@ map <leader>8 :Vex<CR>
 map <leader>s :source ~/.vimrc<CR>
 " Toggle color highlight
 nnoremap <leader>cc :ColorToggle<CR>
+" Don't jump to next occurrence when using 'super star'
+nnoremap * *<c-o>
 
 " Always show the preview window.
 let g:fzf_preview_window = 'right:60%' 
@@ -249,3 +250,22 @@ function! <SID>SynStack()
   endif
   echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
 endfunc
+
+
+let g:lightline = {
+    \ 'colorscheme': 'dogrun',
+    \ 'component_function': {
+    \   'filename': 'LightlineFilename',
+    \ }
+\ }
+
+" Prepend filename with path to project root.
+" See https://github.com/itchyny/lightline.vim/issues/293#issuecomment-373710096
+function! LightlineFilename()
+  let root = fnamemodify(get(b:, 'git_dir'), ':h')
+  let path = expand('%:p')
+  if path[:len(root)-1] ==# root
+    return path[len(root)+1:]
+  endif
+  return expand('%')
+endfunction
