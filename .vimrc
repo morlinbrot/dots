@@ -30,6 +30,7 @@ Plug 'tpope/vim-commentary'             " Comment and un-comment with 'gc'.
 Plug 'editorconfig/editorconfig-vim'    " Support for .editorconfig files.
 Plug 'chrisbra/Colorizer'               " Colorise color strings, see <leader>cc keymap below.
 Plug 'MaxMEllon/vim-jsx-pretty'         " {j|t}sx support.
+Plug 'alvan/vim-closetag'               " Auto-closing for xml tags.
 Plug 'airblade/vim-rooter'              " Moves the CL to the closest git repo root folder.
 " ...using a fuzzy finder to quickly find files in the same dir.
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -258,3 +259,19 @@ function! LightlineFilename()
   endif
   return expand('%')
 endfunction
+
+" ++++ VIM-CLOSETAG CONFIG
+" Activate for following filetypes.
+let g:closetag_filenames = '*.html,*.xhtml,*.xml,*.jsx,*.tsx'
+" Make non-closing tags self-closing in these filetypes.
+let g:closetag_xhtml_filenames = '*.xhtml,*.jsx,*.tsx'
+" Disables auto-close if not in a 'valid' region (based on filetype)
+let g:closetag_regions = {
+    \ 'typescript.tsx': 'jsxRegion,tsxRegion',
+    \ 'javascript.jsx': 'jsxRegion',
+    \ }
+" Make auto-closing case sensitive, e.g. <Link></Link> vs <link />
+let g:closetag_emptyTags_caseSensitive = 1
+
+let g:closetag_shortcut = '>'
+
