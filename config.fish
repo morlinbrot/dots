@@ -1,9 +1,21 @@
 # NOTES
+# Most important difference to other shells: Environment variables.
+# https://fishshell.com/docs/current/cmds/set.html
+# https://stackoverflow.com/questions/25632846/how-to-set-environment-variables-in-fish-shell
 #
 # Add something to $PATH via command line (universal variable + export):
 # set -Ux fish_user_paths /my/custom/path/bin $fish_user_paths
+# 
+# Kept here FOR REFERENCE: (Env vars do not need to be set in a config file on each startup
+# but just once via the appropriate commands.)
+#
+# Fzf default command, used in nvim, too.
+# set -Ux FZF_DEFAULT_COMMAND 'rg --files --hidden --follow -g "!.git/*" -g "!node_modules/*" -g "!target/*"'
+#
+# Global npm packages (as per the current active nvm node version)
+# set -Ux fish_user_paths $fish_user_paths "(npm config --global get prefix)"
 
-# spacefish prompt
+# Spacefish prompt
 set SPACEFISH_PROMPT_ORDER time user dir host node docker ruby golang php rust haskell julia git aws conda pyenv kubecontext exec_time line_sep battery jobs exit_code char
 set SPACEFISH_DIR_COLOR 8be9fd
 set SPACEFISH_RUST_COLOR 808080
@@ -13,14 +25,8 @@ set SPACEFISH_GIT_BRANCH_COLOR bd93f9
 # Don't show a greeting message
 set fish_greeting
 
-# NVM
-function nvm 
-    bass source ~/.nvm/nvm.sh --no-use ';' nvm $argv
-end
-# Global npm packages (as per the current active nvm node version)
-set PATH "(npm config --global get prefix):$PATH"
-
-set -gx FZF_DEFAULT_COMMAND rg --files --hidden --follow -g "!.git/*" -g "!node_modules/*" -g "!target/*"
+# Setup NVM
+load_nvm
 
 alias prx="cd ~/prx"
 alias py="python3"
@@ -89,4 +95,5 @@ alias ct="cargo test"
 # What kind of pleb would write out "nvim" all the time!?
 alias nv="nvim"
 alias v="nvim"
+alias k="kak"
 
