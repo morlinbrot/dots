@@ -23,16 +23,14 @@ augroup END
 " To update plugins, run :PlugUpdate
 " To update vim-plug iself, run :PlugUpgrade
 call plug#begin('~/.vim/plugged')
-Plug 'rust-lang/rust.vim'               " Rust plugin to enable auto formatting etc.
-Plug 'artur-shaik/vim-javacomplete2'    " Java suport.
 Plug 'tmux-plugins/vim-tmux-focus-events' " Activate focus events in emulators like tmux.
 Plug 'itchyny/lightline.vim'            " Displays a line that shows what mode you're in.
-Plug 'machakann/vim-highlightedyank'    " Highlight what you're yanking
-Plug 'tpope/vim-commentary'             " Comment and un-comment with 'gc'
-Plug 'editorconfig/editorconfig-vim'
-Plug 'chrisbra/Colorizer'
-
-Plug 'airblade/vim-rooter'              " Moves the CL to the closest git repo root folder
+Plug 'machakann/vim-highlightedyank'    " Highlight what you're yanking.
+Plug 'tpope/vim-commentary'             " Comment and un-comment with 'gc'.
+Plug 'editorconfig/editorconfig-vim'    " Support for .editorconfig files.
+Plug 'chrisbra/Colorizer'               " Colorise color strings, see <leader>cc keymap below.
+Plug 'MaxMEllon/vim-jsx-pretty'         " {j|t}sx support.
+Plug 'airblade/vim-rooter'              " Moves the CL to the closest git repo root folder.
 " ...using a fuzzy finder to quickly find files in the same dir.
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
@@ -43,14 +41,15 @@ Plug 'tjdevries/lsp_extensions.nvim'
 Plug 'nvim-lua/completion-nvim'
 Plug 'nvim-lua/diagnostic-nvim'
 
+" LANGUAGE PLUGINS
+Plug 'rust-lang/rust.vim'               " Rust plugin to enable auto formatting etc.
+
 " Themes
 "Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'wadackel/vim-dogrun'
 "Plug 'joshdick/onedark.vim'
 "Plug 'humanoid-colors/vim-humanoid-colorscheme', { 'branch': 'main' }
 "Plug 'arcticicestudio/nord-vim'
-"Plug 'bignimbus/pop-punk.vim'
-"Plug 'tomasr/molokai'
 "Plug 'synul/githubsy.vim', { 'branch': 'main' }
 
 call plug#end()
@@ -60,9 +59,6 @@ colorscheme githubsy
 " ++++ LANGUAGES
 " Run rustfmt on save.
 let g:rustfmt_autosave = 1
-
-" Required for vim-javacomplete2.
-autocmd FileType java setlocal omnifunc=javacomplete#Complete
 
 " ++++ GENERAL SETTINGS
 set hidden                  " Enable multiple buffers being opened in the background
@@ -141,29 +137,32 @@ nnoremap * *<c-o>
 " Always show the preview window.
 let g:fzf_preview_window = 'right:60%' 
 
-" Tab completion setup stolen from Jon Gjengset
-" <Tab> and <S-Tab> to navigate autocompletion list.
-"inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-"inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-"" <CR> to confirm completion. 
-"inoremap <expr><CR> (pumvisible()?(empty(v:completed_item)?"\<CR>\<CR>":"\<C-y>"):"\<CR>")
-
-" ++++ LSP CONFIG
-" Following https://sharksforarms.dev/posts/neovim-rust/
+" ++++ TAB COMPLETION
+" https://github.com/nvim-lua/completion-nvim
+" Use completion-nvim in every buffer
+autocmd BufEnter * lua require'completion'.on_attach()
+" Use <Tab> and <S-Tab> to navigate through popup menu
+inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+" Set completeopt to have a better completion experience
 set completeopt=menuone,noinsert,noselect
+" Avoid showing message extra message when using completion
 set shortmess+=c
 
+" ++++ LSP CONFIG
 lua <<EOF
-
--- nvim_lsp object
+-- Create a nvim_lsp handle for convenience
 local nvim_lsp = require'lspconfig'
 
--- Enable rust_analyzer
-nvim_lsp.rust_analyzer.setup({ on_attach=on_attach })
+-- Use a loop to conveniently both setup defined servers 
+-- and map buffer local keybindings when the language server attaches
+local servers = { "rust_analyzer", "tsserver" }
+for _, lsp in ipairs(servers) do
+  nvim_lsp[lsp].setup {}
+end
 
--- See https://users.rust-lang.org/t/how-to-disable-rust-analyzer-proc-macro-warnings-in-neovim/53150/6
-local lsp = require'lspconfig'
-lsp.rust_analyzer.setup {
+-- https://users.rust-lang.org/t/how-to-disable-rust-analyzer-proc-macro-warnings-in-neovim/53150/6
+nvim_lsp.rust_analyzer.setup {
     settings = {
         ["rust-analyzer"] = {
             diagnostics = {
@@ -176,16 +175,6 @@ lsp.rust_analyzer.setup {
 }
 
 EOF
-
-inoremap <silent><expr> <TAB>
-    \ pumvisible() ? "\<C-n>" :
-    \ <SID>check_back_space() ? "\<TAB>" :
-    \ completion#trigger_completion()
-
-function! s:check_back_space() abort
-    let col = col('.') - 1
-    return !col || getline('.')[col - 1] =~ '\s'
-endfunction
 
 " Code navigation shortcuts
 nnoremap <silent> gd    <cmd>lua vim.lsp.buf.definition()<CR>
