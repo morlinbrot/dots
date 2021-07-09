@@ -7,5 +7,5 @@ if [ ! -d $HOME/.local/share/omf ]; then
 fi
 
 mkdir -p $HOME/.config/fish
-cp fish.config $HOME/.config/fish/config.fish
+cp config.fish $HOME/.config/fish/config.fish
 

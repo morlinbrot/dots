@@ -36,7 +36,7 @@ alias dossh='~/ssh.sh'
 alias sup='sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y'
 alias pac='sudo pacman -Syu'
 # Set sound to more than 100%
-alias loud='pactl set-sink-volume 0 150%'
+alias loud='pactl set-sink-volume 1 150%'
 # Clear swap
 alias swap='sudo swapoff -a && sudo swapon -a'
 
@@ -96,6 +96,7 @@ alias ct='cargo test'
 alias nv='nvim'
 alias v='nvim'
 alias k='kak'
+alias wiki='nvim -c VimwikiIndex'
 
 #  SSH
 export SSH_KEY_PATH="~/.ssh/rsa_id"
