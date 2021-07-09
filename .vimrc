@@ -7,9 +7,9 @@
 
 " Before executing any of the vim-plug commands, we make sure that they exist.
 if empty(glob('~/.vim/autoload/plug.vim'))
-  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+    silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+                \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
 " Watch for changes to all variations of .vimrc files and auto-reload.
@@ -35,15 +35,18 @@ Plug 'airblade/vim-rooter'              " Moves the CL to the closest git repo r
 " ...using a fuzzy finder to quickly find files in the same dir.
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-
+Plug 'sbdchd/neoformat'                 " Auto-formatting for various languages.
+Plug 'vimwiki/vimwiki'
+Plug 'vimwiki/vimwiki'
 " Nvim LSP goodness
-Plug 'neovim/nvim-lspconfig'            
+Plug 'neovim/nvim-lspconfig'
 Plug 'tjdevries/lsp_extensions.nvim'
 Plug 'nvim-lua/completion-nvim'
 Plug 'nvim-lua/diagnostic-nvim'
 
 " LANGUAGE PLUGINS
 Plug 'rust-lang/rust.vim'               " Rust plugin to enable auto formatting etc.
+Plug 'vim-python/python-syntax'
 
 " Themes
 "Plug 'dracula/vim', { 'as': 'dracula' }
@@ -61,34 +64,42 @@ colorscheme githubsy
 " Run rustfmt on save.
 let g:rustfmt_autosave = 1
 
+" Enable highlighting for Python.
+let g:python_highlight_all = 1
+
 " ++++ GENERAL SETTINGS
-set hidden                  " Enable multiple buffers being opened in the background
+set hidden                  " Allow multiple buffers to be open without saving.
 set tabstop=4
 set softtabstop=0
 set expandtab
 set shiftwidth=4
-set smarttab 
-set number                  " Show line number on current line
-set relativenumber          " Show relative line numbers
-set signcolumn=yes          " Always show gutter (where errors are being displayed)
-set hlsearch                " Highlight search terms
+set smarttab
+set number                  " Show line number on current line.
+set relativenumber          " Show relative line numbers.
+set signcolumn=yes          " Always show gutter (where errors are being displayed).
+set hlsearch                " Highlight search terms.
 set undofile                " Permanent undo.
 set undodir=~/.vim/undo
-set nowrap                  " Don't wrap long lines
-set timeoutlen=400          " Time to complete any key sequence
-set clipboard=unnamedplus   " Simplify clipboard to p/P instead of "+p/P
-set ignorecase              " Needs to be enabled for 'smartcase' to work
-set smartcase               " Auto enable case sensitivity when query contains uppercase
-set cursorline              " Highlight current line
-set autoread                " Automatically refresh file buffers
-set splitbelow              " Split new windows below
-set splitright              " Vertically split new windows to the right
-set mouse=a                 " Enable mouse support in all mode
+set nowrap                  " Don't wrap long lines.
+set timeoutlen=400          " Time to complete any key sequence.
+set clipboard=unnamedplus   " Simplify clipboard to p/P instead of "+p/P.
+set ignorecase              " Needs to be enabled for 'smartcase' to work.
+set smartcase               " Auto enable case sensitivity when query contains uppercase.
+set cursorline              " Highlight current line.
+set autoread                " Automatically refresh file buffers.
+set splitbelow              " Split new windows below.
+set splitright              " Vertically split new windows to the right.
+set mouse=a                 " Enable mouse support in all mode.
+set scrolloff=4             " Keep some space around the cursor when hitting the edges.
+set colorcolumn=80,120      " Show a vertical line at the breakpoints.
 
 " ++++ KEY BINDINGS
 let mapleader = "\<Space>"
 " Double <leader> to open last opened buffer.
 nnoremap <leader><leader> <c-^>
+" Ergonomic Esc alternative.
+inoremap <C-j> <Esc>
+vnoremap <C-j> <Esc>
 " Move lines up and down with Alt+k and Alt+j.
 nnoremap <A-j> :m .+1<CR>==
 nnoremap <A-k> :m .-2<CR>==
@@ -124,42 +135,41 @@ vnoremap <leader>d "_d
 " Overwrite annoying 'yank when putting' behaviour.
 vnoremap p "_dP
 " Map tab switching to Ctrl+Tab.
-map <C-Tab> gt 
-" Open netrw with F8 or <leader>8
+map <C-Tab> gt
+" Open netrw with F8 or <leader>8.
 map <F8> :Vex<CR>
 map <leader>8 :Vex<CR>
-" Source .vimrc
+" Source vimrc.
 map <leader>s :source ~/.vimrc<CR>
-" Toggle color highlight
+" Toggle color highlight.
 nnoremap <leader>cc :ColorToggle<CR>
-" Don't jump to next occurrence when using 'super star'
+" Don't jump to next occurrence when using 'super star'.
 nnoremap * *<c-o>
 
 " Always show the preview window.
-let g:fzf_preview_window = 'right:60%' 
+let g:fzf_preview_window = 'right:60%'
 
 " ++++ TAB COMPLETION
 " https://github.com/nvim-lua/completion-nvim
 " Use completion-nvim in every buffer
 autocmd BufEnter * lua require'completion'.on_attach()
-" Use <Tab> and <S-Tab> to navigate through popup menu
+" Use <Tab> and <S-Tab> to navigate through popup menu.
 inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-" Set completeopt to have a better completion experience
+" Set completeopt to have a better completion experience.
 set completeopt=menuone,noinsert,noselect
-" Avoid showing message extra message when using completion
+" Avoid showing message extra message when using completion.
 set shortmess+=c
 
+" TODO: Move all of this to a init.lua file.
 " ++++ LSP CONFIG
 lua <<EOF
--- Create a nvim_lsp handle for convenience
+
 local nvim_lsp = require'lspconfig'
 
--- Use a loop to conveniently both setup defined servers 
--- and map buffer local keybindings when the language server attaches
-local servers = { "rust_analyzer", "tsserver" }
+local servers = { "rust_analyzer", "tsserver", "pyright" }
 for _, lsp in ipairs(servers) do
-  nvim_lsp[lsp].setup {}
+    nvim_lsp[lsp].setup {}
 end
 
 -- https://users.rust-lang.org/t/how-to-disable-rust-analyzer-proc-macro-warnings-in-neovim/53150/6
@@ -175,12 +185,36 @@ nvim_lsp.rust_analyzer.setup {
     }
 }
 
+local pid = vim.fn.getpid()
+-- On linux/darwin if using a release build, otherwise under scripts/OmniSharp(.Core)(.cmd)
+local omnisharp_bin = "/opt/omnisharp/run"
+-- on Windows
+-- local omnisharp_bin = "/path/to/omnisharp/OmniSharp.exe"
+nvim_lsp.omnisharp.setup {
+    cmd = { omnisharp_bin, "--languageserver" , "--hostPID", tostring(pid) };
+}
+
+local configs = require 'lspconfig/configs'
+local util = require 'lspconfig/util'
+local server_name = 'omnisharp'
+
+configs[server_name] = {
+  default_config = {
+    filetypes = {"cs", "vb"};
+    root_dir = util.root_pattern("*.csproj", "*.sln");
+    init_options = {
+    };
+  };
+  -- on_new_config = function(new_config) end;
+  -- on_attach = function(client, bufnr) end;
+}
+
 EOF
 
 " Code navigation shortcuts
 nnoremap <silent> gd    <cmd>lua vim.lsp.buf.definition()<CR>
 nnoremap <silent> <c-]> <cmd>lua vim.lsp.buf.implementation()<CR>
-nnoremap <silent> K     <cmd>lua vim.lsp.buf.hover()<CR>
+nnoremap <silent> <a-cr> <cmd>lua vim.lsp.buf.hover()<CR>
 nnoremap <silent> <c-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
 nnoremap <silent> 1gD   <cmd>lua vim.lsp.buf.type_definition()<CR>
 nnoremap <silent> gr    <cmd>lua vim.lsp.buf.references()<CR>
@@ -207,12 +241,9 @@ nnoremap <silent> g] <cmd>vim.lsp.diagnostic.goto_next()<cr>
 
 " Enable type inlay hints
 autocmd CursorMoved,InsertLeave,BufEnter,BufWinEnter,TabEnter,BufWritePost *
-\ lua require'lsp_extensions'.inlay_hints{ prefix = '', highlight = "Comment" }
+    \ lua require'lsp_extensions'.inlay_hints{ prefix = '', highlight = "Comment" }
 " ++++ END LSP CONFIG
 
-" Ergonomic Esc alternative.
-inoremap <C-j> <Esc>
-vnoremap <C-j> <Esc>
 
 " netrw configuration
 let g:netrw_liststyle = 3
@@ -221,7 +252,7 @@ let g:netrw_browse_split = 4
 let g:netrw_winsize = 20
 let g:netrw_preview = 1
 
-" Triger `autoread` when files changes on disk
+" Trigger `autoread` when files change on disk.
 " Needs ':set autoload' in .vimrc and 'set -g focus-events on' in .tmux.conf
 " https://unix.stackexchange.com/questions/149209/refresh-changed-content-of-file-opened-in-vim/383044#383044
 " https://vi.stackexchange.com/questions/13692/prevent-focusgained-autocmd-running-in-command-line-editing-mode
@@ -235,36 +266,36 @@ autocmd FileChangedShellPost *
 " Handy function to show the highlight group of the item under the cursor.
 nnoremap <leader>ss :call <SID>SynStack()<CR>
 function! <SID>SynStack()
-  if !exists("*synstack")
-    return
-  endif
-  echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
+    if !exists("*synstack")
+        return
+    endif
+    echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
 endfunc
 
-
+" ++++ LIGHTLINE CONFIG
 let g:lightline = {
     \ 'colorscheme': 'dogrun',
     \ 'component_function': {
     \   'filename': 'LightlineFilename',
     \ }
-\ }
+    \ }
 
 " Prepend filename with path to project root.
 " See https://github.com/itchyny/lightline.vim/issues/293#issuecomment-373710096
 function! LightlineFilename()
-  let root = fnamemodify(get(b:, 'git_dir'), ':h')
-  let path = expand('%:p')
-  if path[:len(root)-1] ==# root
-    return path[len(root)+1:]
-  endif
-  return expand('%')
+    let root = fnamemodify(get(b:, 'git_dir'), ':h')
+    let path = expand('%:p')
+    if path[:len(root)-1] ==# root
+        return path[len(root)+1:]
+    endif
+    return expand('%')
 endfunction
 
 " ++++ VIM-CLOSETAG CONFIG
 " Activate for following filetypes.
-let g:closetag_filenames = '*.html,*.xhtml,*.xml,*.jsx,*.tsx'
+let g:closetag_filenames = '*.html,*.xml,*.jsx,*.tsx'
 " Make non-closing tags self-closing in these filetypes.
-let g:closetag_xhtml_filenames = '*.xhtml,*.jsx,*.tsx'
+let g:closetag_xhtml_filenames = '*.html,*.jsx,*.tsx'
 " Disables auto-close if not in a 'valid' region (based on filetype)
 let g:closetag_regions = {
     \ 'typescript.tsx': 'jsxRegion,tsxRegion',
@@ -272,6 +303,24 @@ let g:closetag_regions = {
     \ }
 " Make auto-closing case sensitive, e.g. <Link></Link> vs <link />
 let g:closetag_emptyTags_caseSensitive = 1
-
+"
 let g:closetag_shortcut = '>'
 
+" ++++ AUTO-FORMATTING
+" Auto-format on save.
+augroup fmt
+  autocmd!
+  autocmd BufWritePre * undojoin | Neoformat
+augroup END
+
+" Always run all formatters found.
+let g:neoformat_run_all_formatters = 1
+let g:neoformat_enabled_typescript = ['prettier', 'eslint', 'prettier-eslint']
+let g:neoformat_enabled_typescriptreact = ['prettier', 'eslint', 'prettier-eslint']
+
+" VimWiki
+" Use Markdown syntax.
+let g:vimwiki_list = [{'path': '~/vimwiki/',
+    \ 'syntax': 'markdown', 'ext': '.md'}]
+" Do not treat any .md file as wiki file.
+let g:vimwiki_global_ext = 0
