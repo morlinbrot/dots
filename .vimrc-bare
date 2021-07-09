@@ -1,0 +1,88 @@
+" A "bare metal" .vimrc without any installation of plugins for greater
+" portability.
+call plug#begin('~/.vim/plugged')
+"Plug 'artur-shaik/vim-javacomplete2'
+Plug 'dracula/vim', { 'as': 'dracula' }
+call plug#end()
+
+syntax enable
+colorscheme dracula
+
+" ++++ JAVA COMPLETE SETTINGS
+"autocmd FileType java setlocal omnifunc=javacomplete#Complete
+
+" ++++ GENERAL SETTINGS
+set hidden                  " Enable multiple buffers being opened in the background
+set tabstop=4
+set softtabstop=0
+set expandtab
+set shiftwidth=4
+set smarttab 
+set number                  " Show line number on current line
+set relativenumber          " Show relative line numbers
+"set signcolumn=yes          " Always show gutter (where errors are being displayed)
+set hlsearch                " Highlight search terms
+set undofile                " Permanent undo.
+set undodir=~/.vim/undo
+set nowrap                  " Don't wrap long lines
+set timeoutlen=400          " Time to complete any key sequence
+set clipboard=unnamedplus   " Simplfiy clipboard to p/P instead of "+p/P
+set smartcase               " Auto enable case sensitivity when query contains uppercase
+set cursorline              " Highlight current line
+set autoread                " Automatically refresh file buffers
+
+" ++++ KEY BINDINGS
+let mapleader = "\<Space>"
+" Double <leader> to open last opened buffer.
+nnoremap <leader><leader> <c-^>
+" Move lines up and down with Alt+k and Alt+j.
+nnoremap <A-j> :m .+1<CR>==
+nnoremap <A-k> :m .-2<CR>==
+inoremap <A-j> <Esc>:m .+1<CR>==
+inoremap <A-k> <Esc>:m .-2<CR>==
+vnoremap <A-j> :m '>+1<CR>gv=gv
+vnoremap <A-k> :m '<-2<CR>gv=gv
+" Resize windows.
+map <A--> <C-w>-
+map <A-+> <C-w>+
+map <A-<> <C-w><
+map <A->> <C-w>>
+" Jump between windows.
+map <A-h> <C-w>h
+map <A-j> <C-w>j
+map <A-k> <C-w>k
+map <A-l> <C-w>l
+" Keymap for constant twitchy saving after each change.
+map <leader>w :w<CR>
+map <leader>wq :wq<CR>
+map <leader>q :q<CR>
+" Shortcut resetting last search highlight.
+nmap <leader>hl :noh<CR>
+
+" Map tab switching to Ctrl+Tab.
+map <C-Tab> gt 
+" Insert blank lines without entering insert mode
+nmap <M-O> O<Esc>j
+nmap <M-o> o<Esc>k
+" Open netrw with F8 or <leader>8
+map <F8> :Vex<CR>
+map <leader>8 :Vex<CR>
+" Source .vimrc
+map <leader>s :source ~/.vimrc<CR>
+
+" <Tab> and <S-Tab> to navigate autocompletion list.
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+" <CR> to confirm completion. 
+inoremap <expr><CR> (pumvisible()?(empty(v:completed_item)?"\<CR>\<CR>":"\<C-y>"):"\<CR>")
+
+" Ergonomic Esc alternative.
+inoremap <C-j> <Esc>
+vnoremap <C-j> <Esc>
+
+" netrw configuration
+let g:netrw_liststyle = 3
+let g:netrw_banner = 0
+let g:netrw_browse_split = 4
+let g:netrw_winsize = 20
+let g:netrw_preview = 1
