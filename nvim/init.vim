@@ -1,10 +1,3 @@
-" ++++ USAGE
-" Create a $HOME/.config/nvim/.init.vim, containing
-"
-"    runtime ./path/to/this/.vimrc
-"
-" to use this file as a central rc for both vim and neovim.
-
 " Before executing any of the vim-plug commands, we make sure that they exist.
 if empty(glob('~/.vim/autoload/plug.vim'))
     silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
@@ -19,17 +12,13 @@ augroup myvimrc
 augroup END
 
 " ++++ PLUGINS
-" To install all plugins, run :PlugInstall
-" To update plugins, run :PlugUpdate
-" To update vim-plug iself, run :PlugUpgrade
+" Adds :PlugInstall, :PlugUpdate, :PlugUpgrade, :PlugClean commands.
 call plug#begin('~/.vim/plugged')
 Plug 'tmux-plugins/vim-tmux-focus-events' " Activate focus events in emulators like tmux.
 Plug 'itchyny/lightline.vim'            " Displays a line that shows what mode you're in.
-Plug 'machakann/vim-highlightedyank'    " Highlight what you're yanking.
 Plug 'tpope/vim-commentary'             " Comment and un-comment with 'gc'.
 Plug 'editorconfig/editorconfig-vim'    " Support for .editorconfig files.
 Plug 'chrisbra/Colorizer'               " Colorise color strings, see <leader>cc keymap below.
-Plug 'MaxMEllon/vim-jsx-pretty'         " {j|t}sx support.
 Plug 'alvan/vim-closetag'               " Auto-closing for xml tags.
 Plug 'airblade/vim-rooter'              " Moves the CL to the closest git repo root folder.
 " ...using a fuzzy finder to quickly find files in the same dir.
@@ -37,18 +26,14 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'sbdchd/neoformat'                 " Auto-formatting for various languages.
 Plug 'vimwiki/vimwiki'
-Plug 'vimwiki/vimwiki'
 " Nvim LSP goodness
 Plug 'neovim/nvim-lspconfig'
 Plug 'kabouzeid/nvim-lspinstall', { 'branch': 'main' }        " Add a :LspInstall command.
 Plug 'tjdevries/lsp_extensions.nvim'
 
-Plug 'nvim-lua/completion-nvim'
-Plug 'nvim-lua/diagnostic-nvim'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " Treesitter, update parsers on update.
 
-" LANGUAGE PLUGINS
-Plug 'rust-lang/rust.vim'               " Rust plugin to enable auto formatting etc.
-Plug 'vim-python/python-syntax'
+Plug 'nvim-lua/completion-nvim'
 
 " Themes
 "Plug 'dracula/vim', { 'as': 'dracula' }
@@ -62,12 +47,13 @@ call plug#end()
 
 colorscheme githubsy
 
-" ++++ LANGUAGES
-" Run rustfmt on save.
-let g:rustfmt_autosave = 1
+lua <<EOF
+require'config'
+require'lsp'
+require'netrw'
+require'treesitter'
+EOF
 
-" Enable highlighting for Python.
-let g:python_highlight_all = 1
 
 " ++++ GENERAL SETTINGS
 set hidden                  " Allow multiple buffers to be open without saving.
@@ -163,54 +149,11 @@ set completeopt=menuone,noinsert,noselect
 " Avoid showing message extra message when using completion.
 set shortmess+=c
 
-" ++++ LSP CONFIG
-lua <<EOF
-require'nvim.lua.lsp'
-EOF
-" When testing is done, use require instead of dofile.
-" command! Scratch lua require'nvim.lua.tools'.makeScratch()
-command! Scratch lua dofile('nvim/lua/tools.lua').makeScratch()
-
-" Code navigation shortcuts
-nnoremap <silent> gd    <cmd>lua vim.lsp.buf.definition()<CR>
-nnoremap <silent> <c-]> <cmd>lua vim.lsp.buf.implementation()<CR>
-nnoremap <silent> <a-cr> <cmd>lua vim.lsp.buf.hover()<CR>
-nnoremap <silent> <c-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
-nnoremap <silent> 1gD   <cmd>lua vim.lsp.buf.type_definition()<CR>
-nnoremap <silent> gr    <cmd>lua vim.lsp.buf.references()<CR>
-nnoremap <silent> g0    <cmd>lua vim.lsp.buf.document_symbol()<CR>
-nnoremap <silent> gW    <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
-nnoremap <silent> gD    <cmd>lua vim.lsp.buf.declaration()<CR>
-nnoremap <silent> ga    <cmd>lua vim.lsp.buf.code_action()<CR>
-
-" Visualize diagnostics
-let g:diagnostic_enable_virtual_text = 1
-let g:diagnostic_trimmed_virtual_text = '40'
-" Don't show diagnostics while in insert mode
-let g:diagnostic_insert_delay = 1
-
-" Set updatetime for CursorHold
-" 300ms of no cursor movement to trigger CursorHold
-set updatetime=300
-" Show diagnostic popup on cursor hold
-autocmd CursorHold * lua vim.lsp.diagnostic.show_line_diagnostics()
-
-" Goto previous/next diagnostic warning/error
-nnoremap <silent> g[ <cmd>vim.lsp.diagnostic.goto_prev()<cr>
-nnoremap <silent> g] <cmd>vim.lsp.diagnostic.goto_next()<cr>
 
 " Enable type inlay hints
 autocmd CursorMoved,InsertLeave,BufEnter,BufWinEnter,TabEnter,BufWritePost *
     \ lua require'lsp_extensions'.inlay_hints{ prefix = '', highlight = "Comment" }
-" ++++ END LSP CONFIG
 
-
-" netrw configuration
-let g:netrw_liststyle = 3
-let g:netrw_banner = 0
-let g:netrw_browse_split = 4
-let g:netrw_winsize = 20
-let g:netrw_preview = 1
 
 " Trigger `autoread` when files change on disk.
 " Needs ':set autoload' in .vimrc and 'set -g focus-events on' in .tmux.conf
@@ -270,7 +213,7 @@ let g:closetag_shortcut = '>'
 " Auto-format on save.
 augroup fmt
   autocmd!
-  autocmd BufWritePre * undojoin | Neoformat
+  au BufWritePre * try | undojoin | Neoformat | catch /^Vim\%((\a\+)\)\=:E790/ | finally | silent Neoformat | endtry
 augroup END
 
 " Always run all formatters found.

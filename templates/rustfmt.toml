@@ -1,0 +1,3 @@
+# Needs to be explicitly set when running rustfmt throught nvim's neoformat plugin.
+# Copy to ~/.config/rustfmt/rustfmt.toml
+edition = "2018"

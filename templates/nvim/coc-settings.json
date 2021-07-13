@@ -1,4 +1,0 @@
-{
-    "coc.preferences.formatOnSaveFiletypes": ["rust"],
-    "coc.preferences.diagnostic.locationlist": false
-}
