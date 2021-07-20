@@ -1,11 +1,9 @@
-
-lua require('plugins')
-
-" Before executing any of the vim-plug commands, we make sure that they exist.
-if empty(glob('~/.vim/autoload/plug.vim'))
-    silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-                \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+" Before executing any of the vim-plug commands, we make sure that they exist as suggested here:
+" https://github.com/junegunn/vim-plug/wiki/tips#automatic-installation
+let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
+if empty(glob(data_dir . '/autoload/plug.vim'))
+  silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
 " Watch for changes to all variations of .vimrc files and auto-reload.
@@ -14,53 +12,23 @@ augroup myvimrc
     au BufWritePost .vimrc,_vimrc,vimrc,.gvimrc,_gvimrc,gvimrc ++nested so $MYVIMRC | if has('gui_running') | so $MYGVIMRC | endif
 augroup END
 
-
 " ++++ PLUGINS
-" Adds :PlugInstall, :PlugUpdate, :PlugUpgrade, :PlugClean commands.
-call plug#begin('~/.vim/plugged')
-Plug 'tmux-plugins/vim-tmux-focus-events' " Activate focus events in emulators like tmux.
-Plug 'itchyny/lightline.vim'            " Displays a line that shows what mode you're in.
-Plug 'tpope/vim-commentary'             " Comment and un-comment with 'gc'.
-Plug 'editorconfig/editorconfig-vim'    " Support for .editorconfig files.
-Plug 'chrisbra/Colorizer'               " Colorise color strings, see <leader>cc keymap below.
-Plug 'alvan/vim-closetag'               " Auto-closing for xml tags.
-Plug 'airblade/vim-rooter'              " Moves the CL to the closest git repo root folder.
-" ...using a fuzzy finder to quickly find files in the same dir.
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
-Plug 'sbdchd/neoformat'                 " Auto-formatting for various languages.
-Plug 'vimwiki/vimwiki'
-" Nvim LSP goodness
-Plug 'neovim/nvim-lspconfig'
-Plug 'kabouzeid/nvim-lspinstall', { 'branch': 'main' }        " Add a :LspInstall command.
-Plug 'tjdevries/lsp_extensions.nvim'
-
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " Treesitter, update parsers on update.
-Plug 'nvim-treesitter/playground'
-
-Plug 'nvim-lua/completion-nvim'
-
-" Themes
-"Plug 'dracula/vim', { 'as': 'dracula' }
-Plug 'wadackel/vim-dogrun'
-"Plug 'joshdick/onedark.vim'
-"Plug 'humanoid-colors/vim-humanoid-colorscheme', { 'branch': 'main' }
-"Plug 'arcticicestudio/nord-vim'
-Plug 'synul/githubsy.vim', { 'branch': 'main' }
-
-call plug#end()
 
 colorscheme githubsy
 
+" ++++ LUA CONFIG
+
 lua <<EOF
+-- Transfer init.vim to this piece by piece. Rename to init.lua eventually.
 require'config'
-require'lsp'
+
+require'plugins'require'lsp'
 require'netrw'
-require'treesitter'
 EOF
 
+" Add a :Scratch command, creating a scratch buffer.
+command! Scratch lua require'tools'.makeScratch()
 
-" ++++ GENERAL SETTINGS
 set hidden                  " Allow multiple buffers to be open without saving.
 set tabstop=4
 set softtabstop=0
@@ -82,7 +50,7 @@ set cursorline              " Highlight current line.
 set autoread                " Automatically refresh file buffers.
 set splitbelow              " Split new windows below.
 set splitright              " Vertically split new windows to the right.
-set mouse=a                 " Enable mouse support in all mode.
+set mouse=a                 " Enable mouse support in all modes.
 set scrolloff=4             " Keep some space around the cursor when hitting the edges.
 set colorcolumn=80,120      " Show a vertical line at the breakpoints.
 
@@ -92,7 +60,6 @@ let mapleader = "\<Space>"
 nnoremap <leader><leader> <c-^>
 " Ergonomic Esc alternative.
 inoremap <C-j> <Esc>
-vnoremap <C-j> <Esc>
 " Move lines up and down with Alt+k and Alt+j.
 nnoremap <A-j> :m .+1<CR>==
 nnoremap <A-k> :m .-2<CR>==
@@ -118,9 +85,7 @@ map <leader>q :q<CR>
 nmap <leader>hl :noh<CR>
 " FZF
 map <leader>o :Files<CR>
-map <leader>O :Files ~/<CR>
 map <leader>b :Buffer<CR>
-map <leader>l :Lines<CR>
 map <leader>rg :Rg<CR>
 " Delete without yanking (dumps into the black hole register).
 nnoremap <leader>d "_d
@@ -134,7 +99,7 @@ map <F8> :Vex<CR>
 map <leader>8 :Vex<CR>
 " Source vimrc.
 map <leader>s :source ~/.config/nvim/init.vim<CR>
-" Toggle color highlight.
+" Toggle highlighting of color codes (red, #000, white).
 nnoremap <leader>cc :ColorToggle<CR>
 " Don't jump to next occurrence when using 'super star'.
 nnoremap * *<c-o>
@@ -151,13 +116,17 @@ inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 " Set completeopt to have a better completion experience.
 set completeopt=menuone,noinsert,noselect
-" Avoid showing message extra message when using completion.
+" Avoid showing extra message when using completion.
 set shortmess+=c
 
+" Goto previous/next diagnostic warning/error
+nnoremap <silent> g[ <cmd>vim.lsp.diagnostic.goto_prev()<cr>
+nnoremap <silent> g] <cmd>vim.lsp.diagnostic.goto_next()<cr>
 
 " Enable type inlay hints
 autocmd CursorMoved,InsertLeave,BufEnter,BufWinEnter,TabEnter,BufWritePost *
     \ lua require'lsp_extensions'.inlay_hints{ prefix = '', highlight = "Comment" }
+" ++++ END LSP CONFIG
 
 
 " Trigger `autoread` when files change on disk.
@@ -171,15 +140,14 @@ autocmd FocusGained,BufEnter,CursorHold,CursorHoldI *
 autocmd FileChangedShellPost *
     \ echohl WarningMsg | echo "File changed on disk. Buffer reloaded." | echohl None
 
-nnoremap <leader>ss :TSHighlightCapturesUnderCursor<CR>
-
-" ++++ LIGHTLINE CONFIG
-let g:lightline = {
-    \ 'colorscheme': 'dogrun',
-    \ 'component_function': {
-    \   'filename': 'LightlineFilename',
-    \ }
-    \ }
+" Handy function to show the highlight group of the item under the cursor.
+nnoremap <leader>ss :call <SID>SynStack()<CR>
+function! <SID>SynStack()
+    if !exists("*synstack")
+        return
+    endif
+    echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
+endfunc
 
 " Prepend filename with path to project root.
 " See https://github.com/itchyny/lightline.vim/issues/293#issuecomment-373710096
@@ -204,7 +172,6 @@ let g:closetag_regions = {
     \ }
 " Make auto-closing case sensitive, e.g. <Link></Link> vs <link />
 let g:closetag_emptyTags_caseSensitive = 1
-"
 let g:closetag_shortcut = '>'
 
 " ++++ AUTO-FORMATTING
