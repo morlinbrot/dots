@@ -310,7 +310,7 @@ shell:
   args:
     - --login
     - --init-command
-    - "bass ~/dots/tmux-session.sh"
+    - "cd ~/dots && zellij"
 
 # Startup directory
 #

@@ -17,8 +17,10 @@ HYPHEN_INSENSITIVE="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 plugins=(
+  dirhistory
   git
   z
+  zsh-autosuggestions
 )
 
 # Include oh-my-zsh config.
@@ -35,6 +37,7 @@ alias npmlist='npm list --depth=0'
 alias dossh='~/ssh.sh'
 alias sup='sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y'
 alias pac='sudo pacman -Syu'
+alias tf='terraform'
 # Set sound to more than 100%
 alias loud='pactl set-sink-volume 1 150%'
 # Clear swap
@@ -97,6 +100,7 @@ alias nv='nvim'
 alias v='nvim'
 alias k='kak'
 alias wiki='nvim -c VimwikiIndex'
+alias config='nvim $MYVIMRC'
 
 #  SSH
 export SSH_KEY_PATH="~/.ssh/rsa_id"
@@ -121,9 +125,11 @@ export NVM_DIR="$HOME/.nvm"
 # Global npm packages (as per the current active nvm node version)
 export PATH="(npm config --global get prefix):$PATH"
 
+# STARSHIP cross-shell prompt
+eval "$(starship init zsh)"
+
 # ++++  ++++ #
 #  TRASH ?
 # ++++  ++++ #
 # Activate useful key bindings and fuzzy completion for fzf.
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
