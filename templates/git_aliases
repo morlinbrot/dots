@@ -3,7 +3,7 @@
 
     sub = submodule update
 
-    ls = log --pretty=format:'%C(auto)%h %<(68,trunc)%s [%<(11,trunc)%Cblue%an%Creset]'
+    ls = log --pretty=format:'%C(auto)%h %<(65,trunc)%s [%<(11,trunc)%Cblue%an%Creset]'
 
     la = log --pretty=format:'%C(auto)%h %s%n [%Cblue%an, %Cgreen%ad%Creset]%C(auto)%d' --date=short
 

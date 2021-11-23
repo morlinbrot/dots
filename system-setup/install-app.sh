@@ -22,4 +22,4 @@ else
 fi
 
 # xargs will pipe the contents of the file into the supplied command as arguments.
-eval "cat app_names.txt | xargs sudo $install_cmd"
+eval "cat app-names.txt | xargs sudo $install_cmd"

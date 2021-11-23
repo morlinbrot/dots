@@ -100,7 +100,7 @@ alias nv='nvim'
 alias v='nvim'
 alias k='kak'
 alias wiki='nvim -c VimwikiIndex'
-alias config='nvim $MYVIMRC'
+alias config='nvim $HOME/.config/nvim/init.vim'
 
 #  SSH
 export SSH_KEY_PATH="~/.ssh/rsa_id"

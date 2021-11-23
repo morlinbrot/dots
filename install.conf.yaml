@@ -6,14 +6,19 @@
 - clean: ['~']
 
 - link:
+    ~/.config/alacritty: alacritty
+    ~/.config/bat/config: bat.conf
+    # ~/.config/fish: fish
+    ~/.config/nvim: nvim
+    ~/.config/Code/User: vscode
     ~/.tmux.conf: .tmux.conf
     ~/.zshrc: .zshrc
-    ~/.config/alacritty: alacritty
-    ~/.config/nvim: nvim
 
-#- create:
-    # - ~/downloads
-    # - ~/.vim/undo-history
+- create:
+    - ~/prx
 
 - shell:
   - [git submodule update --init --recursive, Installing submodules]
+  - git config --global include.path ~/dots/templates/git_aliases
+  - git config --global core.editor "nvim"
+  - git config --global core.pager ""
