@@ -22,3 +22,4 @@
   - git config --global include.path ~/dots/templates/git_aliases
   - git config --global core.editor "nvim"
   - git config --global core.pager ""
+  - setxkbmap -option caps:ctrl_modifier # Re-map Caps Lock to Ctrl
