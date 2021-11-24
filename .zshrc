@@ -128,6 +128,9 @@ export PATH="(npm config --global get prefix):$PATH"
 # STARSHIP cross-shell prompt
 eval "$(starship init zsh)"
 
+# auto-suggestions
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=244"
+
 # ++++  ++++ #
 #  TRASH ?
 # ++++  ++++ #
