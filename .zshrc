@@ -19,6 +19,7 @@ HYPHEN_INSENSITIVE="true"
 plugins=(
   dirhistory
   git
+  jsontools
   z
   zsh-autosuggestions
 )
