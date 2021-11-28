@@ -1,19 +1,19 @@
 -- With inspiration from
 -- https://github.com/nvim-lua/kickstart.nvim/blob/master/init.lua
-local lspconfig = require'lspconfig'
-local lspinstall = require'lspinstall'
-
-lspinstall.setup()
 
 -- -- -- -- -- -- -- --
 -- Setup nvim-cmp.
 -- -- -- -- -- -- -- --
 local cmp = require'cmp'
 local luasnip = require'luasnip'
+local lspkind = require'lspkind'
 
 vim.o.completeopt = 'menuone,noselect'
 
 cmp.setup({
+    formatting = {
+        format = lspkind.cmp_format({with_text = true, maxwidth = 50}),
+    },
     snippet = {
         -- REQUIRED - you must specify a snippet engine
         expand = function(args)
@@ -113,27 +113,23 @@ local on_attach = function(_, bufnr)
     buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
 end
 
-local function setup_servers()
-    local servers = lspinstall.installed_servers()
-    for _, server in pairs(servers) do
-        local settings = {}
-        if server == 'lua' then
-            settings = lua_settings
-        end
-        if server == 'rust' then
-            settings = rust_settings
-        end
-        lspconfig[server].setup({
-            capabilities = capabilities,
-            on_attach = on_attach,
-            settings = settings,
-        })
+local lsp_installer = require("nvim-lsp-installer")
+
+-- Register a handler that will be called for all installed servers.
+-- Alternatively, you may also register handlers on specific server instances instead (see example below).
+lsp_installer.on_server_ready(function(server)
+    local opts = {}
+
+    if server.name == 'sumneko_lua' then
+        opts.settings = lua_settings
     end
-end
+    if server.name == 'rust_analyzer' then
+        opts.settings = rust_settings
+    end
 
-setup_servers()
+    opts.capabilities = capabilities
+    opts.on_attach = on_attach
 
-lspinstall.post_install_hook = function()
-    setup_servers()
-    vim.cmd('bufdo e')
-end
+    server:setup(opts)
+end)
+

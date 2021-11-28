@@ -88,8 +88,13 @@ map <leader>cs :source ~/.config/nvim/init.vim<CR>
 nnoremap <leader>cc :ColorToggle<CR>
 " Don't jump to next occurrence when using 'super star'.
 nnoremap * *<c-o>
-
+" Show the capture groups of item under the cursor.
 nnoremap <leader>ss :TSHighlightCapturesUnderCursor<CR>
+
+" Format-on-save functionality.
+autocmd BufWritePre *.rs,*.lua lua vim.lsp.buf.formatting_sync(nil, 200)
+" Show inline hints provided by lsp_extensions.
+autocmd BufEnter,BufWinEnter,TabEnter *.rs :lua require'lsp_extensions'.inlay_hints{}
 
 " ++++ LIGHTLINE CONFIG
 let g:lightline = {
