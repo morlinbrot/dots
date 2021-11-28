@@ -11,7 +11,8 @@
     # ~/.config/fish: fish
     ~/.config/nvim: nvim
     ~/.config/Code/User: vscode
-    ~/.tmux.conf: .tmux.conf
+    ~/.config/rustfmt/rustfmt.toml: rustfmt.toml
+    # ~/.tmux.conf: .tmux.conf
     ~/.zshrc: .zshrc
 
 - create:
