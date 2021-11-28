@@ -45,6 +45,5 @@
     "breadcrumbs.enabled": true,
     "files.useExperimentalFileWatcher": true,
     "gitlens.views.fileHistory.enabled": true,
-    "gitlens.views.lineHistory.enabled": true,
-    "search.location": "sidebar"
+    "gitlens.views.lineHistory.enabled": true
 }
