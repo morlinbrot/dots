@@ -35,7 +35,7 @@ nmap('g[', '<cmd>vim.lsp.diagnostic.goto_prev()<cr>')
 nmap('g}', '<cmd>vim.lsp.diagnostic.goto_next()<cr>')
 
 
-g.colorscheme = 'githubsy'
+cmd('silent! colorscheme githubsy')
 
 g.lightline = {
     colorscheme = 'dogrun',

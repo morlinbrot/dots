@@ -32,6 +32,8 @@ set mouse=a                 " Enable mouse support in all mode.
 set scrolloff=4             " Keep some space around the cursor when hitting the edges.
 set colorcolumn=80,120      " Show a vertical line at the breakpoints.
 set noswapfile              " Swap files are an annoyance mostly.
+set list
+set listchars=trail:·       " Show trailing whitespace.
 
 " +++ KEY BINDINGS
 let mapleader = "\<Space>"

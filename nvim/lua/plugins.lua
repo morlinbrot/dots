@@ -13,8 +13,6 @@ cmd([[
   augroup end
 ]])
 
-cmd('silent! colorscheme githubsy')
-
 return require('packer').startup(function(use)
     use 'wbthomason/packer.nvim'            -- Packer can manage itself.
 
@@ -39,6 +37,7 @@ return require('packer').startup(function(use)
     }
 
     use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }  -- Treesitter, update parsers on update.
+    use 'nvim-treesitter/nvim-treesitter-textobjects' -- Additional text objects for treesitter.
     use 'nvim-treesitter/playground'        -- Show the Treesitter tree with :TSPlaygroundToggle.
 
     use 'tmux-plugins/vim-tmux-focus-events'-- Activate focus events in emulators like tmux.
@@ -55,7 +54,7 @@ return require('packer').startup(function(use)
 
     -- Themes
     --use { 'dracula/vim',  as = 'dracula' }
-    --"use 'joshdick/onedark.vim'
+    use 'nvim-treesitter/nvim-treesitter-textobjects'    --"use 'joshdick/onedark.vim'
     --"use { 'humanoid-colors/vim-humanoid-colorscheme', 'branch': 'main' }
     --"use 'arcticicestudio/nord-vim'
     use 'wadackel/vim-dogrun'               -- Needed for lightline.
