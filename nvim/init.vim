@@ -7,7 +7,7 @@ require'treesitter'
 EOF
 
 " ++++ GENERAL SETTINGS
-set hidden                  " Allow multiple buffers to be open without saving.
+set hidden                  " Still here for backwards compatibility.
 set tabstop=4
 set softtabstop=0
 set expandtab
