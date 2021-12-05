@@ -13,6 +13,8 @@ ZSH_THEME="avit"
 # sensitive completion must be off. _ and - will be interchangeable.
 HYPHEN_INSENSITIVE="true"
 
+export HISTCONTROL=ignoreboth
+
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
@@ -38,7 +40,6 @@ alias npmlist='npm list --depth=0'
 alias dossh='~/ssh.sh'
 alias sup='sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y'
 alias pac='sudo pacman -Syu'
-alias tf='terraform'
 # Set sound to more than 100%
 alias loud='pactl set-sink-volume 1 150%'
 # Clear swap
@@ -103,12 +104,19 @@ alias k='kak'
 alias wiki='nvim -c VimwikiIndex'
 alias config='nvim $HOME/.config/nvim/init.vim'
 
+# terraform
+alias tf='terraform'
+alias tfi='terraform init'
+alias tfp='terraform plan'
+alias tfa='terraform apply'
+alias tfd='terraform destroy'
+
 #  SSH
 export SSH_KEY_PATH="~/.ssh/rsa_id"
 
 # FZF
 # Use ripgrep for :Files
-export FZF_DEFAULT_COMMAND='rg --files --hidden --follow -g "!.git/*" -g "!node_modules/*" -g "!target/*"'
+export FZF_DEFAULT_COMMAND='rg --files --hidden --follow -g "!**/.git/*" -g "!**/node_modules/*" -g "!**/target/*" -g "!dotbot/*" -g "!**/.terraform/*"'
 
 # ++++  ++++ #
 #  RANDOMS
