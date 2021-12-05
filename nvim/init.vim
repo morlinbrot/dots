@@ -49,6 +49,8 @@ inoremap <A-j> <Esc>:m .+1<CR>==
 inoremap <A-k> <Esc>:m .-2<CR>==
 vnoremap <A-j> :m '>+1<CR>gv=gv
 vnoremap <A-k> :m '<-2<CR>gv=gv
+" Disable godforsaken Ex mode
+map Q <Nop>
 " Resize windows.
 map <A--> <C-w>-
 map <A-+> <C-w>+
@@ -59,6 +61,14 @@ map <A-h> <C-w>h
 map <A-j> <C-w>j
 map <A-k> <C-w>k
 map <A-l> <C-w>l
+
+" Quick config editing.
+" Should use $XDG_CONFIG_HOME but that does not get set right now...
+" *C*onfig *O*pen
+nnoremap <leader>co :e $HOME/.config/nvim/init.vim<CR>
+" *So*urce config.
+map <leader>so :so ~/.config/nvim/init.vim<CR>
+
 " Keymap for constant twitchy saving after each change.
 map <leader>w :w<CR>
 map <leader>wq :wq<CR>
@@ -81,11 +91,6 @@ map <C-Tab> gt
 " Open netrw with F8 or <leader>8.
 map <F8> :Vex<CR>
 map <leader>8 :Vex<CR>
-" Open init.vim quickly.
-" Should use $XDG_CONFIG_HOME but that does not get set right now...
-nnoremap <leader>co :e $HOME/.config/nvim/init.vim<CR>
-" Source vimrc.
-map <leader>cs :source ~/.config/nvim/init.vim<CR>
 " Toggle color highlight.
 nnoremap <leader>cc :ColorToggle<CR>
 " Don't jump to next occurrence when using 'super star'.
@@ -124,3 +129,5 @@ let g:vimwiki_list = [{'path': '~/vimwiki/',
 " Do not treat any .md file as wiki file.
 let g:vimwiki_global_ext = 0
 
+" Terraform auto save.
+let g:terraform_fmt_on_save = 1

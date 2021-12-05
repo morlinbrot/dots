@@ -80,7 +80,7 @@ local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 
 -- -- -- -- -- -- -- --
--- Setup lsp.
+-- Language specific settings
 -- -- -- -- -- -- -- --
 -- https://users.rust-lang.org/t/how-to-disable-rust-analyzer-proc-macro-warnings-in-neovim/53150/6
 local rust_settings = {
@@ -108,12 +108,15 @@ local lua_settings = {
     }
 }
 
+-- -- -- -- -- -- -- --
+-- lsp_installer
+-- -- -- -- -- -- -- --
+local lsp_installer = require("nvim-lsp-installer")
+
 local on_attach = function(_, bufnr)
     local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
     buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
 end
-
-local lsp_installer = require("nvim-lsp-installer")
 
 -- Register a handler that will be called for all installed servers.
 -- Alternatively, you may also register handlers on specific server instances instead (see example below).
@@ -130,6 +133,7 @@ lsp_installer.on_server_ready(function(server)
     opts.capabilities = capabilities
     opts.on_attach = on_attach
 
+    -- Does the same as lsp_config's on_attach loop.
     server:setup(opts)
 end)
 

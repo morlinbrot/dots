@@ -16,12 +16,13 @@ cmd([[
 return require('packer').startup(function(use)
     use 'wbthomason/packer.nvim'            -- Packer can manage itself.
 
-    -- Adds :LspInstall command.
+    --
+    -- LSP Goodness
+    --
     use {
-        'williamboman/nvim-lsp-installer',
+        'williamboman/nvim-lsp-installer',  -- Adds :LspInstall command.
         requires = 'neovim/nvim-lspconfig'
     }
-    use 'tjdevries/lsp_extensions.nvim'
 
     use {
         'hrsh7th/nvim-cmp',
@@ -35,6 +36,10 @@ return require('packer').startup(function(use)
             'saadparwaiz1/cmp_luasnip',
         }
     }
+
+    use 'tjdevries/lsp_extensions.nvim'
+    use 'jose-elias-alvarez/null-ls.nvim'   -- Inject non-LSP sources into the nvim's LSP interface.
+    use 'hashivim/vim-terraform'            -- Needed for TF format on save. TODO: Replace with up to date alternative?
 
     use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }  -- Treesitter, update parsers on update.
     use 'nvim-treesitter/nvim-treesitter-textobjects' -- Additional text objects for treesitter.
@@ -54,7 +59,6 @@ return require('packer').startup(function(use)
 
     -- Themes
     --use { 'dracula/vim',  as = 'dracula' }
-    use 'nvim-treesitter/nvim-treesitter-textobjects'    --"use 'joshdick/onedark.vim'
     --"use { 'humanoid-colors/vim-humanoid-colorscheme', 'branch': 'main' }
     --"use 'arcticicestudio/nord-vim'
     use 'wadackel/vim-dogrun'               -- Needed for lightline.
