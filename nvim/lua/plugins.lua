@@ -47,7 +47,7 @@ return require('packer').startup(function(use)
 
     use 'tmux-plugins/vim-tmux-focus-events'-- Activate focus events in emulators like tmux.
     use 'itchyny/lightline.vim'             -- Displays a line that shows what mode you're in.
-    use 'tpope/vim-commentary'              -- Comment and un-comment with 'gc'.
+    use 'numToStr/Comment.nvim'             -- Comment and un-comment with 'gc'.
     use 'editorconfig/editorconfig-vim'     -- Support for .editorconfig files.
     use 'chrisbra/Colorizer'                -- Colorise color strings, see <leader>cc keymap in init.vim.
     use 'alvan/vim-closetag'                -- Auto-closing for xml tags.

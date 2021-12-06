@@ -1,9 +1,10 @@
 -- Keep transitioning settings from init.vim to eventually use this as init.lua
-
 local cmd = vim.cmd  -- to execute Vim commands e.g. cmd('pwd')
 local fn = vim.fn    -- to call Vim functions e.g. fn.bufnr()
 local g = vim.g      -- a table to access global variables
 local opt = vim.opt  -- to set options
+
+require'Comment'.setup()
 
 -- Highlight yanked text shortly.
 cmd 'au TextYankPost * lua vim.highlight.on_yank { timeout = 300 }'
