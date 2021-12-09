@@ -1,8 +1,10 @@
 local cmd = vim.cmd
-local fn = vim.fn local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
+local fn = vim.fn
 
-if fn.empty(fn.glob(install_path)) > 0 then
-  packer_bootstrap = fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
+-- Install packer.
+local install_path = fn.stdpath 'data' .. '/site/pack/packer/start/packer.nvim'
+if fn.empty(vim.fn.glob(install_path)) > 0 then
+  fn.execute('!git clone https://github.com/wbthomason/packer.nvim ' .. install_path)
 end
 
 -- Run :PackerCompile whenever plugins.lua gets updated.
@@ -13,16 +15,12 @@ cmd([[
   augroup end
 ]])
 
+-- Install plugins.
 return require('packer').startup(function(use)
     use 'wbthomason/packer.nvim'            -- Packer can manage itself.
 
-    --
-    -- LSP Goodness
-    --
-    use {
-        'williamboman/nvim-lsp-installer',  -- Adds :LspInstall command.
-        requires = 'neovim/nvim-lspconfig'
-    }
+    -- Adds :LspInstall command.
+    use { 'williamboman/nvim-lsp-installer', requires = 'neovim/nvim-lspconfig' }
 
     use {
         'hrsh7th/nvim-cmp',
@@ -37,11 +35,13 @@ return require('packer').startup(function(use)
         }
     }
 
-    use 'tjdevries/lsp_extensions.nvim'
     use 'jose-elias-alvarez/null-ls.nvim'   -- Inject non-LSP sources into the nvim's LSP interface.
-    use 'hashivim/vim-terraform'            -- Needed for TF format on save. TODO: Replace with up to date alternative?
+    use 'tjdevries/lsp_extensions.nvim'     -- Enable inline hints.
 
-    use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }  -- Treesitter, update parsers on update.
+    -- UI to select things (files, grep results, open buffers...)
+    use { 'nvim-telescope/telescope.nvim', requires = 'nvim-lua/plenary.nvim' }
+    -- The latest & greatest in incremental tree parsing for highlighting, editing, and navigating code.
+    use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
     use 'nvim-treesitter/nvim-treesitter-textobjects' -- Additional text objects for treesitter.
     use 'nvim-treesitter/playground'        -- Show the Treesitter tree with :TSPlaygroundToggle.
 
@@ -57,12 +57,14 @@ return require('packer').startup(function(use)
     use 'tpope/vim-surround'                -- Add "surround editing-- with "cs".
     use 'vimwiki/vimwiki'
 
+    use 'hashivim/vim-terraform'            -- Needed for TF format on save. TODO: Replace with up to date alternative?
+
     -- Themes
     --use { 'dracula/vim',  as = 'dracula' }
     --"use { 'humanoid-colors/vim-humanoid-colorscheme', 'branch': 'main' }
     --"use 'arcticicestudio/nord-vim'
     use 'wadackel/vim-dogrun'               -- Needed for lightline.
-    use { 'synul/githubsy.vim', branch = 'main' }
+    use { 'synul/githubsy.vim', branch = 'main' } -- What a fantastic colorscheme!
 
     -- Automatically set up your configuration after cloning packer.nvim
     -- Put this at the end after all plugins
