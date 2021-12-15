@@ -1,0 +1,26 @@
+# Some misconfig is keeping this from working. Going with default right now.
+#---
+#template:
+#  direction: Horizontal
+#  parts:
+#    - direction: Vertical
+#      borderless: true
+#      split_size:
+#        Fixed: 1
+#      run:
+#        plugin: tab-bar
+#
+#    - direction: Vertical
+#      body: true
+#
+#    - direction: Vertical
+#      borderless: true
+#      split_size:
+#        Fixed: 1
+#      run:
+#        plugin: status-bar
+#tabs:
+#  - direction: Vertical
+#
+#  - direction: Vertical
+
