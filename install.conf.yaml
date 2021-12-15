@@ -2,6 +2,7 @@
     link:
       relink: true
       force: true
+      create: true
 
 - clean: ['~']
 
@@ -12,6 +13,7 @@
     ~/.config/nvim: nvim
     ~/.config/Code/User: vscode
     ~/.config/rustfmt/rustfmt.toml: rustfmt.toml
+    ~/.config/zellij: zellij
     # ~/.tmux.conf: .tmux.conf
     ~/.zshrc: .zshrc
 
