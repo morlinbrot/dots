@@ -76,8 +76,8 @@ map <leader>q :q<CR>
 " Shortcut resetting last search highlight.
 nmap <leader>hl :noh<CR>
 " FZF
-map <leader>o :Files<CR>
-map <leader>O :Files ~/<CR>
+map <leader>f :Files<CR>
+map <leader>F :Files ~/<CR>
 map <leader>b :Buffer<CR>
 map <leader>l :Lines<CR>
 map <leader>rg :Rg<CR>
