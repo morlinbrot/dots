@@ -1,0 +1,7 @@
+new_tab dots
+launch zsh
+cd ~/dots
+
+new_tab prx
+launch zsh
+cd ~/prx

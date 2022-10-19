@@ -1,3 +1,6 @@
+# This is the config file for the `dotbot` tool that is installed as a git submodule.
+# https://github.com/anishathalye/dotbot
+
 - defaults:
     link:
       relink: true
@@ -7,14 +10,10 @@
 - clean: ['~']
 
 - link:
-    # ~/.config/alacritty: alacritty
     ~/.config/bat/config: bat.conf
-    # ~/.config/fish: fish
+    ~/.config/kitty: kitty
     ~/.config/nvim: nvim
-    # ~/.config/Code/User: vscode
     ~/.config/rustfmt/rustfmt.toml: rustfmt.toml
-    # ~/.config/zellij: zellij
-    # ~/.tmux.conf: .tmux.conf
     ~/.zshrc: .zshrc
 
 - create:
