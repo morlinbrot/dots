@@ -7,13 +7,13 @@
 - clean: ['~']
 
 - link:
-    ~/.config/alacritty: alacritty
+    # ~/.config/alacritty: alacritty
     ~/.config/bat/config: bat.conf
     # ~/.config/fish: fish
     ~/.config/nvim: nvim
-    ~/.config/Code/User: vscode
+    # ~/.config/Code/User: vscode
     ~/.config/rustfmt/rustfmt.toml: rustfmt.toml
-    ~/.config/zellij: zellij
+    # ~/.config/zellij: zellij
     # ~/.tmux.conf: .tmux.conf
     ~/.zshrc: .zshrc
 

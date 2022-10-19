@@ -33,6 +33,7 @@ template:
 
 tabs:
   - name: "tty"
+    focus: true
   - name: "prx"
     direction: Vertical
     run:
