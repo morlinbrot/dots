@@ -96,6 +96,7 @@ alias cb='cargo build'
 alias cc='cargo check'
 alias cr='cargo run'
 alias ct='cargo test'
+alias cnt='cargo nextest run'
 
 # What kind of pleb would write out 'nvim' all the time!?
 alias nv='nvim'
@@ -111,6 +112,15 @@ alias tfp='terraform plan'
 alias tfa='terraform apply'
 alias tfd='terraform destroy'
 
+# Just
+alias j='just'
+alias jb='just build'
+alias jr='just run'
+alias jt='just test'
+
+# Default editor
+export EDITOR="/opt/homebrew/bin/hx"
+
 #  SSH
 export SSH_KEY_PATH="~/.ssh/rsa_id"
 
@@ -119,24 +129,38 @@ export SSH_KEY_PATH="~/.ssh/rsa_id"
 export FZF_DEFAULT_COMMAND='rg --files --hidden --follow -g "!**/.git/*" -g "!**/node_modules/*" -g "!**/target/*" -g "!dotbot/*" -g "!**/.terraform/*"'
 
 # ++++  ++++ #
-#  RANDOMS
+#  PATH
 # ++++  ++++ #
 export PATH="/opt:$PATH"
+
+# Various places where apps can be put.
+export PATH="$HOME/.local/bin:$PATH"
+
+# Add homebrew-installed llvm to the path.
+export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
+
+# NVM
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+# Global npm packages (as per the current active nvm node version)
+export PATH="(npm config get prefix --location=global):$PATH"
+
+# GO
+export GOPATH="$HOME/.go"
+export PATH="$GOPATH/bin:$PATH"
+
+# ++++  ++++ #
+#  RANDOMS
+# ++++  ++++ #
+unsetopt AUTO_CD
 
 # Source ghc and friends (Haskell)
 if [ -d "~/.ghcup/env" ]; then
     . ~/.ghcup/env
 fi
 
-# NVM
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
-# Global npm packages (as per the current active nvm node version)
-export PATH="(npm config --global get prefix):$PATH"
-
 # STARSHIP cross-shell prompt
 eval "$(starship init zsh)"
-
 # auto-suggestions
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=244"
 
@@ -144,4 +168,14 @@ ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=244"
 #  TRASH ?
 # ++++  ++++ #
 # Activate useful key bindings and fuzzy completion for fzf.
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+#[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# KITTY
+scroll-and-clear-screen() {
+    printf '\n%.0s' {1..$LINES}
+    zle clear-screen
+}
+zle -N scroll-and-clear-screen
+bindkey '^l' scroll-and-clear-screen
+
