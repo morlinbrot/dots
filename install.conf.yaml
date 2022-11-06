@@ -10,6 +10,7 @@
 - clean: ['~']
 
 - link:
+    ~/.cargo/config.toml: cargo.config.toml
     ~/.config/bat/config: bat.conf
     ~/.config/kitty: kitty
     ~/.config/nvim: nvim
