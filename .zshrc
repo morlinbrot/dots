@@ -164,13 +164,6 @@ eval "$(starship init zsh)"
 # auto-suggestions
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=244"
 
-# ++++  ++++ #
-#  TRASH ?
-# ++++  ++++ #
-# Activate useful key bindings and fuzzy completion for fzf.
-#[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
 # KITTY
 scroll-and-clear-screen() {
     printf '\n%.0s' {1..$LINES}

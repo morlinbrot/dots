@@ -1,0 +1,9 @@
+bat
+cargo-edit
+cargo-expand
+cargo-watch
+exa
+fzf
+ripgrep
+sccache
+wasm-pack

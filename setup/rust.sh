@@ -8,7 +8,7 @@ fi
 # Install favourite components.
 rustup component add clippy rustfmt
 
-cargo install bat cargo-edit exa ripgrep wasm-pack
+xargs cargo install < cargo-apps.txt
 
 # Install rust-analyzer.
 git clone https://github.com/rust-analyzer/rust-analyzer && cd rust-analyzer
