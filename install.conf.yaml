@@ -12,6 +12,8 @@
 - link:
     ~/.cargo/config.toml: cargo.config.toml
     ~/.config/bat/config: bat.conf
+    ~/.config/helix/config.toml: helix/config.toml
+    ~/.config/helix/languages.toml: helix/languages.toml
     ~/.config/kitty: kitty
     ~/.config/nvim: nvim
     ~/.config/rustfmt/rustfmt.toml: rustfmt.toml
