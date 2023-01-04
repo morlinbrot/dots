@@ -5,6 +5,7 @@ line-number = "relative"
 mouse = true
 color-modes = true
 idle-timeout = 100
+bufferline = "multiple"
 
 [editor.cursor-shape]
 insert = "bar"
@@ -21,6 +22,8 @@ render = true
 "∞" = "flip_selections"
 "," = "collapse_selection"
 ";" = "keep_primary_selection"
+"C-l" = "goto_next_buffer"
+"C-h" = "goto_previous_buffer"
 
 [keys.insert]
 "C-j" = "normal_mode"
@@ -29,6 +32,8 @@ render = true
 "C-n" = "move_line_down"
 "ƒ" = "move_next_word_start"
 "∫" = "move_prev_word_end"
+"C-f" = "move_char_right"
+"C-b" = "move_char_left"
 
 [keys.select]
 "C-j" = ["normal_mode", "collapse_selection"]
