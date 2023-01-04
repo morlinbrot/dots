@@ -1,9 +1,10 @@
 bat
-cargo-edit
 cargo-expand
+cargo-nextest
 cargo-watch
 exa
 fzf
 ripgrep
 sccache
+sqlx-cli
 wasm-pack
