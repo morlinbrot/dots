@@ -44,3 +44,18 @@ roots = ["deno.json", "package.json", "tsconfig.json"]
 config = { enable = true, lint = true, unstable = true }
 language-server = { command = "deno", args = ["lsp"], language-id = "typescriptreact" }
 indent = { tab-width = 2, unit = "  " }
+
+[[language]]
+name = "protobuf"
+scope = "source.proto"
+injection-regex = "protobuf"
+file-types = ["proto"]
+roots = []
+comment-token = "//"
+indent = { tab-width = 2, unit = "  " }
+language-server = { command = "bufls", args = ["serve"] }
+auto-format = true
+
+[[grammar]]
+name = "protobuf"
+source = { git = "https://github.com/yusdacra/tree-sitter-protobuf", rev = "19c211a01434d9f03efff99f85e19f967591b175"}
