@@ -1,5 +1,6 @@
 bat
 cargo-expand
+cargo-feature
 cargo-nextest
 cargo-watch
 exa
