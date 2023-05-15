@@ -1,4 +1,5 @@
-theme = "catppuccin_mocha"
+# theme = "catppuccin_mocha"
+theme = "githubsy"
 
 [editor]
 line-number = "relative"
@@ -16,11 +17,14 @@ insert = "bar"
 
 [editor.lsp]
 display-messages = true
+display-inlay-hints = true
 
 [editor.indent-guides]
 render = true
 
 [keys.normal]
+"i" = ["insert_mode", "collapse_selection"]
+"a" = ["append_mode", "collapse_selection"]
 "A-k" = "move_line_up"
 "∞" = "flip_selections"
 "," = "collapse_selection"
@@ -30,6 +34,10 @@ render = true
 "X" = ["ensure_selections_forward", "flip_selections", "extend_line_up", "extend_to_line_bounds"]
 "c" = ["trim_selections", "change_selection"]
 "C-k" = ["insert_mode", "kill_to_line_end"]
+
+[keys.normal.space]
+F = "file_picker"
+f = "file_picker_in_current_directory"
 
 [keys.insert]
 "C-j" = "normal_mode"
