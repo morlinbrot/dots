@@ -20,6 +20,10 @@
     ~/.config/starship.toml: starship.toml
     ~/.zshrc: .zshrc
 
+    # MacOSX specific
+    # Disable annoying non-breaking space on alt+space:
+    ~/Library/KeyBindings/DefaultKeyBinding.dict: DefaultKeyBinding.dict
+
 - create:
     - ~/prx
 
