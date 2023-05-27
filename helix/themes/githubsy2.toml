@@ -1,0 +1,216 @@
+"keyword" = { fg = "red.2" } # pub, fn, impl, async
+"keyword.control" = { fg = "red.2", modifiers = ["italic"] } # use
+"keyword.storage.modifier" = { fg = "red.3", modifiers = ["italic"] } # mut, const
+
+"label" = "orange.2" # lifetimes
+
+"type" = "blue.2" # all types, needs to be pl-constant
+"type.builtin" = "blue.1"
+"variable.other.member" = "blue.0"
+
+"variable" = "pale.blue.0"
+"variable.parameter" = { fg = "purple.0", modifiers = ["italic"] }
+"variable.builtin" = "orange.2" # self
+
+# "function" = "#A5A1FE" # functions
+"function" = "purple.1" # functions
+"function.builtin" = "purple.1"
+"function.macro" = "purple.1"
+
+"punctuation" = "pale.blue.0"
+"punctuation.delimiter" = "blue.0" # colon, semicolon
+"punctuation.special" = "green.2"
+"operator" = "blue.0" # ->, =, !
+
+"constant" = "purple.1"
+"constant.builtin" = "blue.0" # booleans
+"constant.numeric" = "blue.0" # numbers
+"constant.character" = "blue.1" # chars
+# "constant.character.escape" = "pink"
+
+"string" = "blue.2" # string literals
+"string.regexp" = "purple.1"
+"string.special" = "blue.3" # escape chars
+
+"comment" = { fg = "dark.pale.blue.1", modifiers = ["italic"] }
+
+"constructor" = "orange.2" # TypeScript: function MyComp()
+"tag" = "green.2" # HTML tags
+
+"namespace" = { fg = "pale.blue.0", modifiers = ["italic"] }
+
+# "special" = "blue.2" # fuzzy highlight
+
+"markup" = "blue.2"
+"markup.heading.marker" = { fg = "orange.3", modifiers = ["bold"] }
+"markup.heading.1" = "red.2"
+"markup.heading.2" = "orange.2"
+"markup.heading.3" = "blue.1"
+"markup.heading.4" = "purple.0"
+"markup.heading.5" = "green.0"
+"markup.heading.6" = "pale.blue.0"
+"markup.list" = "red.2"
+"markup.bold" = { modifiers = ["bold"] }
+"markup.italic" = { modifiers = ["italic"] }
+"markup.strikethrough" = { modifiers = ["crossed_out"] }
+"markup.link.url" = { fg = "green.0", modifiers = ["italic", "underlined"] }
+"markup.link.text" = "blue.0"
+"markup.raw" = "blue.0" # code (backtick-enclosed)
+
+"diff.plus" = "green.2"
+"diff.minus" = "red.4"
+"diff.delta" = "blue.3"
+
+# User Interface
+# --------------
+"ui.background" = { fg = "pale.purple.2", bg = "background" } # derive macros
+
+"ui.linenr" = { fg = "dark.pale.blue.0" }
+"ui.linenr.selected" = { fg = "purple.1" }
+# "ui.gutter.selected" = { bg = "dark.pale.blue.4" }
+
+"ui.statusline" = { fg = "dark.pale.purple.2", bg = "dark.purple.3" }
+# "ui.statusline.inactive" = { fg = "surface2", bg = "mantle" }
+"ui.statusline.normal" = { fg = "dark.purple.4", bg = "pale.purple.2", modifiers = ["bold"] }
+"ui.statusline.insert" = { fg = "dark.purple.4", bg = "green.1", modifiers = ["bold"] }
+"ui.statusline.select" = { fg = "dark.purple.4", bg = "orange.2", modifiers = ["bold"] }
+
+"ui.text" = "ui.fg" # space menu font
+"ui.text.focus" = { fg = "orange.2", bg = "dark.pale.blue.2", modifiers = ["bold"] }
+
+"ui.popup" = { fg = "dark.pale.blue.3", bg = "dark.blue.3" } # space menu, fg is border
+"ui.window" = { fg = "dark.pale.blue.2" }
+"ui.help" = { fg = "ui.fg", bg = "dark.blue.4" }
+
+"ui.menu" = { fg = "ui.fg", bg = "ui.bg" } # colon menu
+"ui.menu.selected" = { fg = "orange.2", bg = "ui.bg", modifiers = ["bold"] }
+"ui.menu.scroll" = { fg = "orange.2" }
+
+"ui.bufferline" = { fg = "ui.fg", bg = "background" }
+"ui.bufferline.active" = { fg = "orange.2", modifiers = ["bold", "italic"]}
+
+"ui.virtual" = "dark.pale.blue.4"
+# "ui.virtual.ruler" = { bg = "surface0" }
+# "ui.virtual.indent-guide" = "surface0"
+"ui.virtual.inlay-hint" = "dark.pale.blue.4"
+
+"ui.selection" = { bg = "ui.bg.sec" } # selection in editing area
+# "ui.selection.primary" = { bg = "ui.bg.sec" }
+
+"ui.cursor" = { fg = "ui.bg.sec", bg = "blue.1" } # Secondary cursor.
+"ui.cursor.primary" = { fg = "ui.bg.sec", bg = "orange.2" }
+"ui.cursor.match" = { fg = "ui.bg.sec", bg = "blue.1", modifiers = ["bold"] }
+
+# "ui.cursorline.primary" = { bg = "cursorline" }
+
+# "ui.highlight" = { bg = "ui.bg", modifiers = ["bold"] }
+
+"diagnostic.error" = { underline = { color = "red.4", style = "curl" } }
+"diagnostic.warning" = { underline = { color = "yellow.4", style = "curl" } }
+"diagnostic.info" = { underline = { color = "green.4", style = "curl" } }
+"diagnostic.hint" = { underline = { color = "blue.2", style = "curl" } }
+
+error = "red.4"
+warning = "yellow.4"
+info = "green.4"
+hint = "blue.2"
+
+[palette]
+
+background = "#0D1217" # dark.blue.2
+"ui.bg" = "#080D12" # dark.blue.3
+"ui.bg.sec" = "#282D32" # dark.blue.0
+"ui.fg" = "#79C0FF" # blue.2
+
+# Palette created with https://paletton.com/#uid=33z0I0ki6++4d+Zce+Znw+XtlZO
+# 1. #79C0FF as base color
+# 2. Set "Adjacent Colors", change to 60 deg dist, copy blue, purple, green
+# 2.1 Set "Dark Pale Pastel" preset, +10 contr, +10 sat, -15 bright, copy dark blue & purple
+# 2.2 Set "Lightest Pale Pastel" preset, copy pale blue & purple
+# 2.3 Set "Lightest Pale Pastel" preset, -20 bright, copy dark pale blue & purple
+# 3. Set "Triad", change to 45 deg dist, copy yellow
+# 4. Set "Apply as base color" for red & copy
+# 5. Set #FFA657 as base color, copy orange
+
+# Primary color:
+"blue.0" = "#E0F0FF"
+"blue.1" = "#A4D4FF"
+"blue.2" = "#79C0FF"
+"blue.3" = "#51ADFF"
+"blue.4" = "#2596FC"
+
+# Secondary color (1):
+"purple.0" = "#EEE0FF"
+"purple.1" = "#CEA6FF"
+"purple.2" = "#B77BFF"
+"purple.3" = "#A153FF"
+"purple.4" = "#8828FC"
+
+# Secondary color (2):
+"green.0" = "#EBFFDD"
+"green.1" = "#C6FF9E"
+"green.2" = "#ABFF6F"
+"green.3" = "#91FF44"
+"green.4" = "#76FE15"
+
+# Complement color:
+"orange.0" = "#FFF6EE"
+"orange.1" = "#FFCB9D"
+"orange.2" = "#FFA657"
+"orange.3" = "#FE7D09"
+"orange.4" = "#C85E00"
+
+# Secondary compl color (1):
+"yellow.0" = "#FFFADD"
+"yellow.1" = "#FFEF9E"
+"yellow.2" = "#FFE86F"
+"yellow.3" = "#FFE144"
+"yellow.4" = "#FFD915"
+
+# Secondary compl color (2):
+"red.0" = "#FFC1BE"
+"red.1" = "#FF9994"
+"red.2" = "#FF766F"
+"red.3" = "#E14E46"
+"red.4" = "#C02A22"
+
+# Primary dark color:
+"dark.blue.0" = "#282D32"
+"dark.blue.1" = "#14191E"
+"dark.blue.2" = "#0D1217"
+"dark.blue.3" = "#080D12"
+"dark.blue.4" = "#04090D"
+
+# Secondary dark color (1):
+"dark.purple.0" = "#2E2A34"
+"dark.purple.1" = "#19151F"
+"dark.purple.2" = "#120D18"
+"dark.purple.3" = "#0D0813"
+"dark.purple.4" = "#08040E"
+
+# Pale
+# "lightest pale pastel"
+"pale.blue.0" = "#E4F0FB"
+"pale.blue.1" = "#CEE2F5"
+"pale.blue.2" = "#B6D2EC"
+"pale.blue.3" = "#9DC1E0"
+"pale.blue.4" = "#85AED2"
+
+"pale.purple.0" = "#EFE4FB"
+"pale.purple.1" = "#E0CFF6"
+"pale.purple.2" = "#D0B8ED"
+"pale.purple.3" = "#BEA0E3"
+"pale.purple.4" = "#AC88D6"
+
+# "lightest pale pastel, -20 bright"
+"dark.pale.blue.0" = "#A4B1BC"
+"dark.pale.blue.1" = "#8999A7"
+"dark.pale.blue.2" = "#748899"
+"dark.pale.blue.3" = "#61788C"
+"dark.pale.blue.4" = "#4F6980"
+
+"dark.pale.purple.0" = "#B4A9C1"
+"dark.pale.purple.1" = "#9D8FAE"
+"dark.pale.purple.2" = "#8B7AA0"
+"dark.pale.purple.3" = "#7B6693"
+"dark.pale.purple.4" = "#6A5486"
