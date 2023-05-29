@@ -1,19 +1,18 @@
-"keyword" = { fg = "red.2" } # pub, fn, impl, async
+"keyword" = { fg = "orange.3" } # pub, fn, impl, async
 "keyword.control" = { fg = "red.2", modifiers = ["italic"] } # use
-"keyword.storage.modifier" = { fg = "red.3", modifiers = ["italic"] } # mut, const
+"keyword.storage.modifier" = { fg = "red.2", modifiers = ["italic"] } # mut, const
 
 "label" = "orange.2" # lifetimes
 
-"type" = "blue.2" # all types, needs to be pl-constant
+"type" = "blue.2" # all types
 "type.builtin" = "blue.1"
-"variable.other.member" = "blue.0"
 
 "variable" = "pale.blue.0"
 "variable.parameter" = { fg = "purple.0", modifiers = ["italic"] }
 "variable.builtin" = "orange.2" # self
+"variable.other.member" = "pale.blue.1"
 
-# "function" = "#A5A1FE" # functions
-"function" = "purple.1" # functions
+"function" = "purple.0" # functions
 "function.builtin" = "purple.1"
 "function.macro" = "purple.1"
 
@@ -26,7 +25,7 @@
 "constant.builtin" = "blue.0" # booleans
 "constant.numeric" = "blue.0" # numbers
 "constant.character" = "blue.1" # chars
-# "constant.character.escape" = "pink"
+# "constant.character.escape" = "purple.0"
 
 "string" = "blue.2" # string literals
 "string.regexp" = "purple.1"
@@ -42,13 +41,13 @@
 # "special" = "blue.2" # fuzzy highlight
 
 "markup" = "blue.2"
-"markup.heading.marker" = { fg = "orange.3", modifiers = ["bold"] }
-"markup.heading.1" = "red.2"
-"markup.heading.2" = "orange.2"
-"markup.heading.3" = "blue.1"
-"markup.heading.4" = "purple.0"
-"markup.heading.5" = "green.0"
-"markup.heading.6" = "pale.blue.0"
+"markup.heading.marker" = { fg = "orange.2", modifiers = ["bold"] }
+"markup.heading.1" = "orange.2"
+"markup.heading.2" = "blue.1"
+"markup.heading.3" = "purple.0"
+"markup.heading.4" = "green.0"
+"markup.heading.5" = "pale.blue.0"
+"markup.heading.6" = "pale.purple.0"
 "markup.list" = "red.2"
 "markup.bold" = { modifiers = ["bold"] }
 "markup.italic" = { modifiers = ["italic"] }
@@ -63,43 +62,44 @@
 
 # User Interface
 # --------------
-"ui.background" = { fg = "pale.purple.2", bg = "background" } # derive macros
+"ui.background" = { fg = "ui.fg.light", bg = "background" } # derive macros?, fg is picker border/lines
 
-"ui.linenr" = { fg = "dark.pale.blue.0" }
+"ui.linenr" = { fg = "purple.4" }
 "ui.linenr.selected" = { fg = "purple.1" }
 # "ui.gutter.selected" = { bg = "dark.pale.blue.4" }
 
-"ui.statusline" = { fg = "dark.pale.purple.2", bg = "dark.purple.3" }
-# "ui.statusline.inactive" = { fg = "surface2", bg = "mantle" }
-"ui.statusline.normal" = { fg = "dark.purple.4", bg = "pale.purple.2", modifiers = ["bold"] }
+"ui.statusline" = { fg = "ui.fg", bg = "dark.purple.3" }
+"ui.statusline.inactive" = { fg = "dark.pale.purple.1", bg = "dark.purple.2" }
+"ui.statusline.normal" = { fg = "dark.purple.4", bg = "purple.1", modifiers = ["bold"] }
 "ui.statusline.insert" = { fg = "dark.purple.4", bg = "green.1", modifiers = ["bold"] }
 "ui.statusline.select" = { fg = "dark.purple.4", bg = "orange.2", modifiers = ["bold"] }
 
-"ui.text" = "ui.fg" # space menu font
+"ui.text" = "ui.fg" # space menu text
 "ui.text.focus" = { fg = "orange.2", bg = "dark.pale.blue.2", modifiers = ["bold"] }
+# "ui.text.info" = "ui.fg" # space menu contents
 
-"ui.popup" = { fg = "dark.pale.blue.3", bg = "dark.blue.3" } # space menu, fg is border
-"ui.window" = { fg = "dark.pale.blue.2" }
-"ui.help" = { fg = "ui.fg", bg = "dark.blue.4" }
+"ui.popup" = { fg = "ui.fg.light", bg = "ui.bg.2" } # space menu, fg is border/lines
+"ui.help" = { fg = "ui.fg.light", bg = "ui.bg.2" } # colon menu descriptions
+"ui.window" = { fg = "dark.pale.blue.2" } # border between splits
 
-"ui.menu" = { fg = "ui.fg", bg = "ui.bg" } # colon menu
-"ui.menu.selected" = { fg = "orange.2", bg = "ui.bg", modifiers = ["bold"] }
+"ui.menu" = { fg = "ui.fg", bg = "ui.bg.2" } # colon menu
+"ui.menu.selected" = { fg = "orange.2", modifiers = ["bold"] }
 "ui.menu.scroll" = { fg = "orange.2" }
 
 "ui.bufferline" = { fg = "ui.fg", bg = "background" }
 "ui.bufferline.active" = { fg = "orange.2", modifiers = ["bold", "italic"]}
 
 "ui.virtual" = "dark.pale.blue.4"
-# "ui.virtual.ruler" = { bg = "surface0" }
-# "ui.virtual.indent-guide" = "surface0"
+# "ui.virtual.ruler" = { bg = "dark.blue.0" }
+"ui.virtual.indent-guide" = "dark.blue.0"
 "ui.virtual.inlay-hint" = "dark.pale.blue.4"
 
-"ui.selection" = { bg = "ui.bg.sec" } # selection in editing area
-# "ui.selection.primary" = { bg = "ui.bg.sec" }
+"ui.selection" = { bg = "ui.bg.2" } # selection in editing area
+# "ui.selection.primary" = { bg = "ui.bg.2" }
 
-"ui.cursor" = { fg = "ui.bg.sec", bg = "blue.1" } # Secondary cursor.
-"ui.cursor.primary" = { fg = "ui.bg.sec", bg = "orange.2" }
-"ui.cursor.match" = { fg = "ui.bg.sec", bg = "blue.1", modifiers = ["bold"] }
+"ui.cursor" = { fg = "ui.bg.2", bg = "blue.1" } # Secondary cursor.
+"ui.cursor.primary" = { fg = "ui.bg.2", bg = "orange.2" }
+"ui.cursor.match" = { fg = "ui.bg.2", bg = "dark.pale.blue.4", modifiers = ["bold"] }
 
 # "ui.cursorline.primary" = { bg = "cursorline" }
 
@@ -119,8 +119,10 @@ hint = "blue.2"
 
 background = "#0D1217" # dark.blue.2
 "ui.bg" = "#080D12" # dark.blue.3
-"ui.bg.sec" = "#282D32" # dark.blue.0
+"ui.bg.1" = "#14191E" # dark.blue.1
+"ui.bg.2" = "#282D32" # dark.blue.0
 "ui.fg" = "#79C0FF" # blue.2
+"ui.fg.light" = "#9DC1E0" # dark.pale.blue.3
 
 # Palette created with https://paletton.com/#uid=33z0I0ki6++4d+Zce+Znw+XtlZO
 # 1. #79C0FF as base color
@@ -140,11 +142,13 @@ background = "#0D1217" # dark.blue.2
 "blue.4" = "#2596FC"
 
 # Secondary color (1):
-"purple.0" = "#EEE0FF"
-"purple.1" = "#CEA6FF"
-"purple.2" = "#B77BFF"
-"purple.3" = "#A153FF"
-"purple.4" = "#8828FC"
+# The original pillsypurple!
+# https://paletton.com/#uid=14y0u0kapNrb2ZZbxTz6AJK5MvY
+"purple.0" = "#D4ACFC"
+"purple.1" = "#C49DEC"
+"purple.2" = "#BB9ADC"
+"purple.3" = "#BEAAD2"
+"purple.4" = "#9E8FAC"
 
 # Secondary color (2):
 "green.0" = "#EBFFDD"
@@ -168,11 +172,12 @@ background = "#0D1217" # dark.blue.2
 "yellow.4" = "#FFD915"
 
 # Secondary compl color (2):
-"red.0" = "#FFC1BE"
-"red.1" = "#FF9994"
-"red.2" = "#FF766F"
-"red.3" = "#E14E46"
-"red.4" = "#C02A22"
+# https://paletton.com/#uid=1000u0khSqZ7jrhbKroodqwuGq8
+"red.0" = "#D9A8A8"
+"red.1" = "#DA8A8A"
+"red.2" = "#D75F5F"
+"red.3" = "#D33333"
+"red.4" = "#D00909"
 
 # Primary dark color:
 "dark.blue.0" = "#282D32"
