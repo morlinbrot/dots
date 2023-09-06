@@ -1,0 +1,3 @@
+- link:
+    # Disable annoying non-breaking space on alt+space:
+    ~/Library/KeyBindings/DefaultKeyBinding.dict: DefaultKeyBinding.dict

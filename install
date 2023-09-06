@@ -1,15 +1,22 @@
 #!/usr/bin/env bash
 
+# This is a customised dotbot installation script that supports a split config per platform.
+# Create a ´dotbot.$PLATFORM.conf.yaml´ for each platform and run `./install $PLATFORM`, e.g. `./install mac` with both a `dotbot.conf.yaml` and a `dotbot.mac.conf.yaml` file present.
+# Taken from: https://github.com/anishathalye/dotbot/pull/11#issuecomment-73082152
+
 set -e
 
-CONFIG="install.conf.yaml"
+DOTBOT_PREFIX="dotbot."
+DEFAULT_CONFIG_PREFIX="default"
+CONFIG_SUFFIX=".yaml"
 DOTBOT_DIR="dotbot"
 
 DOTBOT_BIN="bin/dotbot"
 BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 cd "${BASEDIR}"
-git -C "${DOTBOT_DIR}" submodule sync --quiet --recursive
 git submodule update --init --recursive "${DOTBOT_DIR}"
 
-"${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" -c "${CONFIG}" "${@}"
+for conf in ${DEFAULT_CONFIG_PREFIX} ${@}; do
+    "${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" -c "${DOTBOT_PREFIX}${conf}${CONFIG_SUFFIX}"
+done

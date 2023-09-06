@@ -1,0 +1,2 @@
+- shell:
+  - setxkbmap -option caps:ctrl_modifier # Re-map Caps Lock to Ctrl

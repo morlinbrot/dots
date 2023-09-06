@@ -15,16 +15,12 @@
     ~/.config/helix/config.toml: helix/config.toml
     ~/.config/helix/languages.toml: helix/languages.toml
     ~/.config/helix/themes/githubsy.toml: helix/themes/githubsy.toml
-    ~/.config/helix/themes/githubsy_set2.toml: helix/themes/githubsy2.toml
     ~/.config/kitty: kitty
+    ~/.config/nix: nix
     ~/.config/nvim: nvim
     ~/.config/rustfmt/rustfmt.toml: rustfmt.toml
     ~/.config/starship.toml: starship.toml
     ~/.zshrc: .zshrc
-
-    # MacOSX specific
-    # Disable annoying non-breaking space on alt+space:
-    ~/Library/KeyBindings/DefaultKeyBinding.dict: DefaultKeyBinding.dict
 
 - create:
     - ~/prx
@@ -34,4 +30,3 @@
   - git config --global include.path ~/dots/templates/git_aliases
   - git config --global core.editor "nvim"
   - git config --global core.pager ""
-  - setxkbmap -option caps:ctrl_modifier # Re-map Caps Lock to Ctrl
