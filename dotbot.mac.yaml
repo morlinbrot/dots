@@ -1,3 +1,6 @@
 - link:
+    ~/Library/Application Support/nushell:
+      path: nushell
+      if: '[[ "$(uname)" == "Darwin" ]]'
     # Disable annoying non-breaking space on alt+space:
     ~/Library/KeyBindings/DefaultKeyBinding.dict: DefaultKeyBinding.dict
