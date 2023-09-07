@@ -28,5 +28,5 @@
 - shell:
   - [git submodule update --init --recursive, Installing submodules]
   - git config --global include.path ~/dots/templates/git_aliases
-  - git config --global core.editor "nvim"
+  - git config --global core.editor "hx"
   - git config --global core.pager ""
