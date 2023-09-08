@@ -36,81 +36,109 @@ source $ZSH/oh-my-zsh.sh
 alias prx='cd ~/prx'
 alias py='python3'
 alias npmg='npm list -g --depth=0'
-alias npmlist='npm list --depth=0'
-alias dossh='~/ssh.sh'
-alias sup='sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y'
-alias pac='sudo pacman -Syu'
-# Set sound to more than 100%
-alias loud='pactl set-sink-volume 1 150%'
-# Clear swap
-alias swap='sudo swapoff -a && sudo swapon -a'
-
-# Specific/dependent aliases.
-alias cdcfm='cd ~/prx/hanseaticsoft/cfm-cloud/CloudFleetManager/ReactApps'
-alias cdalt='cd ~/prx/hanseaticsoft/cfm-cloud-ALT/CloudFleetManager/ReactApps'
-alias cdhs='cd ~/prx/hanseaticsoft/cfm-cloud/ui/react-hs'
 
 # Git aliases.
-alias gcl='git clone'
-alias gp='git pull'
-alias gprb='git pull --rebase'
+alias ga='git add'
+alias gaa='git add -all'
+alias gap='git add --patch'
+alias gau='git add --update'
+alias gav='git add --verbose'
+
+alias gbl='git blame -w'
+
+alias gbr='git branch --remote'
+
 alias gco='git checkout'
+alias gcob='git checkout -b'
 alias gcom='git checkout master'
 alias gcod='git checkout dev'
-alias gs='git status'
+
+alias gcp='git cherry-pick'
+alias gcpa='git cherry-pick --abort'
+alias gcpc='git cherry-pick --continue'
+
+alias gcl='git clone --recurse-submodules'
+
+alias gc='git commit -v'
+alias gca='git commit -v --all'
+alias gcam='git commit --all --message'
+alias gcm='git commit --message'
+alias gc!='git commit -v --amend'
+alias gcn!='git commit --amend --no-edit'
+alias gcan!='git commit --all --amend --no-edit'
+
 alias gd='git diff'
-alias grs='git reset'
-alias grsh='git reset --hard'
-alias gst='git stash'
-alias gstp='git stash pop'
+
+alias gf='git fetch'
+alias gfa='git fetch --all --prune --jobs=10'
+
+alias glg='git log --stat'
+alias glgp='git log --stat --patch'
+alias gls='git log --graph --pretty="%C(auto)%h%Creset%C(auto)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset"'
+alias glsa='git log --graph --pretty="%C(auto)%h%Creset%C(auto)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset" --all'
+alias glsd='git log --graph --pretty="%C(auto)%h%Creset%C(auto)%d%Creset %s %Cgreen(%ad) %C(bold blue)<%an>%Creset" --date=short'
 
 alias gm='git merge'
-alias gcp='git cherry-pick'
-alias gcpc='git cherry-pick --continue'
-alias gcpa='git cherry-pick --abort'
+alias gma='git merge --abort'
+alias gms="git merge --squash"
 
-alias grb='git rebase'
-alias grbc='git rebase --continue'
-alias grba='git rebase --abort'
-
-alias ga='git add'
-alias gaa='git add .'
-alias gc='git commit'
-alias gca='git commit -a'
-alias gcaa='git commit --amend'
+alias gp='git pull'
+alias gpr='git pull --rebase'
+alias gprb='git pull --rebase'
+alias gpra='git pull --rebase --autostash'
+alias gprba='git pull --rebase --autostash'
 
 alias gpp='git push'
+alias gpp!='git push --force'
+alias gppu='git push -u origin'
 
-# Favourite 'git log' git aliases.
-alias gls='git ls'
-alias gla='git la'
-alias glf='git lf'
+alias grb='git rebase'
+alias grba='git rebase --abort'
+alias grbc='git rebase --continue'
+alias grbi='git rebase --interactive'
+alias grbo='git rebase --onto'
+alias grbs='git rebase --skip'
+
+alias gr='git remote'
+alias grv='git remote --verbose'
+alias grsu='git remote set-url'
+
+alias grs='git reset'
+alias grsh='git reset --hard'
+
+alias grm='git rm'
+alias grmc='git rm --cached'
+
+alias gst='git stash'
+alias gsta='git stash apply'
+alias gstl='git stash list'
+alias gstp='git stash pop'
+alias gstu='git stash --include-untracked'
+
+alias gs='git status'
+
+alias gsw='git switch'
+alias gswc='git switch --create'
 
 # Handy exa shorts.
-alias xl='exa -l'
 alias xla='exa -la'
 alias xlt='exa -lTL2'
 
 # Rust!
+alias c='cargo'
 alias cb='cargo build'
-alias cc='cargo check'
+alias cch='cargo check' # `cc` interferes with the linker of the same name
 alias cr='cargo run'
 alias ct='cargo test'
 alias cnt='cargo nextest run'
+alias cw='cargo watch'
 
 # What kind of pleb would write out 'nvim' all the time!?
 alias nv='nvim'
 alias v='nvim'
-alias k='kak'
-alias wiki='nvim -c VimwikiIndex'
-alias config='nvim $HOME/.config/nvim/init.vim'
 
 # terraform
 alias tf='terraform'
-alias tfi='terraform init'
-alias tfp='terraform plan'
-alias tfa='terraform apply'
-alias tfd='terraform destroy'
 
 # Just
 alias j='just'

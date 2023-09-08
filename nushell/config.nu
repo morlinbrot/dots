@@ -2,8 +2,8 @@
 #
 # version = "0.84.0"
 
-use commands.nu *
 use aliases.nu *
+use commands.nu *
 
 # # For more information on defining custom themes, see
 # https://www.nushell.sh/book/coloring_and_theming.html
