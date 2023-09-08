@@ -140,6 +140,22 @@ let light_theme = {
 #     carapace $spans.0 nushell $spans | from json
 # }
 
+let zoxide_completer = {|spans|
+    $spans | skip 1 | zoxide query -l $in | lines | where {|x| $x != $env.PWD}
+}
+
+let git_completer = {|spans|
+    # TODO
+}
+
+let external_multi_completer = {|spans|
+    match $spans.0 {
+        z => $zoxide_completer,
+        zi => $zoxide_completer,
+        git => $git_completer,
+    } | do $in $spans
+}
+
 # The default config record. This is where much of your global configuration is setup.
 $env.config = {
     show_banner: true # true or false to enable or disable the welcome banner at startup
@@ -222,7 +238,7 @@ $env.config = {
         external: {
             enable: true # set to false to prevent nushell looking into $env.PATH to find more suggestions, `false` recommended for WSL users as this look up may be very slow
             max_results: 100 # setting it lower can improve completion performance at the cost of omitting some options
-            completer: null # check 'carapace_completer' above as an example
+            completer: $external_multi_completer # check 'carapace_completer' above as an example
         }
     }
 
@@ -769,3 +785,6 @@ $env.config = {
         }
     ]
 }
+
+# Source zoxide config produced by init command in env.nu
+source ~/.zoxide.nu

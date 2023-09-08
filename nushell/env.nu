@@ -2,26 +2,10 @@
 #
 # version = "0.84.0"
 
+$env.STARSHIP_SHELL = "nu"
+
 def create_left_prompt [] {
-    mut home = ""
-    try {
-        if $nu.os-info.name == "windows" {
-            $home = $env.USERPROFILE
-        } else {
-            $home = $env.HOME
-        }
-    }
-
-    let dir = ([
-        ($env.PWD | str substring 0..($home | str length) | str replace $home "~"),
-        ($env.PWD | str substring ($home | str length)..)
-    ] | str join)
-
-    let path_color = (if (is-admin) { ansi red_bold } else { ansi green_bold })
-    let separator_color = (if (is-admin) { ansi light_red_bold } else { ansi light_green_bold })
-    let path_segment = $"($path_color)($dir)"
-
-    $path_segment | str replace --all (char path_sep) $"($separator_color)/($path_color)"
+    starship prompt --cmd-duration $env.CMD_DURATION_MS $'--status=($env.LAST_EXIT_CODE)'
 }
 
 def create_right_prompt [] {
@@ -29,7 +13,7 @@ def create_right_prompt [] {
     let time_segment = ([
         (ansi reset)
         (ansi magenta)
-        (date now | format date '%Y/%m/%d %r')
+        (date now | format date '%Y/%m/%d %H:%M:%S ')
     ] | str join | str replace --regex --all "([/:])" $"(ansi green)${1}(ansi magenta)" |
         str replace --regex --all "([AP]M)" $"(ansi magenta_underline)${1}")
 
@@ -43,15 +27,15 @@ def create_right_prompt [] {
 }
 
 # Use nushell functions to define your right and left prompt
-$env.PROMPT_COMMAND = {|| create_left_prompt }
-# $env.PROMPT_COMMAND_RIGHT = {|| create_right_prompt }
+$env.PROMPT_COMMAND = { || create_left_prompt }
+$env.PROMPT_COMMAND_RIGHT = {|| create_right_prompt }
 
 # The prompt indicators are environmental variables that represent
 # the state of the prompt
-$env.PROMPT_INDICATOR = {|| "> " }
-$env.PROMPT_INDICATOR_VI_INSERT = {|| ": " }
-$env.PROMPT_INDICATOR_VI_NORMAL = {|| "> " }
-$env.PROMPT_MULTILINE_INDICATOR = {|| "::: " }
+$env.PROMPT_INDICATOR = ""
+$env.PROMPT_INDICATOR_VI_INSERT = ": "
+$env.PROMPT_INDICATOR_VI_NORMAL = "〉"
+$env.PROMPT_MULTILINE_INDICATOR = "::: "
 
 # Specifies how environment variables are:
 # - converted from a string to a value on Nushell startup (from_string)
@@ -71,6 +55,8 @@ $env.ENV_CONVERSIONS = {
 # Directories to search for scripts when calling source or use
 $env.NU_LIB_DIRS = [
     # ($nu.default-config-dir | path join 'scripts') # add <nushell-config-dir>/scripts
+    # Module resolution doesn't seem to work through the symlink set up by dotbot.
+    "~/dots/nushell"
 ]
 
 # Directories to search for plugin binaries when calling register
@@ -80,3 +66,6 @@ $env.NU_PLUGIN_DIRS = [
 
 # To add entries to PATH (on Windows you might use Path), you can use the following pattern:
 # $env.PATH = ($env.PATH | split row (char esep) | prepend '/some/path')
+
+# Run the zoxide setup script. Result will be sourced in config.nu
+zoxide init nushell | save -f ~/.zoxide.nu

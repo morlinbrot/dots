@@ -6,6 +6,6 @@ cargo-watch
 exa
 fzf
 ripgrep
-sccache
 sqlx-cli
 wasm-pack
+zoxide
