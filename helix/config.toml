@@ -29,7 +29,8 @@ skip-levels = 1
 "i" = ["insert_mode", "collapse_selection"]
 "a" = ["append_mode", "collapse_selection"]
 "A-k" = "move_line_up"
-"∞" = "flip_selections"
+"∞" = "flip_selections" # Output of alt+; on Mac (DE Layout)
+"…" = "flip_selections" # Output of alt+; on Mac (US Layout)
 "," = "collapse_selection"
 ";" = "keep_primary_selection"
 "C-l" = "goto_next_buffer"
@@ -60,8 +61,11 @@ f = "file_picker_in_current_directory"
 w = ":w"
 q = ":q"
 c = ":bc"
+x = ":x"
+t = ":sh kitty @ launch --no-response --type os-window --cwd current --title 'cargo-test' && kitty @ send-text --match 'title:^cargo-test' 'cargo test\\n'"
 
 [keys.normal."C-backspace"]
+c = ":config-open"
 o = ":config-open"
 r = ":config-reload"
 l = ":o ~/.config/helix/languages.toml"
