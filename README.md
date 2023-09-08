@@ -12,6 +12,17 @@ Run `setup.sh` to setup some additional plugins like oh-my-zsh etc.
 - Integrate `setup.sh` into some automatic setup.
 - Remove `templates` folder.
 
+# Usage
+## Cargo apps
+Make sure to have sccache installed:
+```
+brew install sccache
+```
+Install all the cargo apps in one go:
+```
+cat ./setup/cargo-apps.txt | xargs cargo install
+```
+
 # Notes
 ### nvm
 Required packages.
