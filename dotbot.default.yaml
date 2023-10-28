@@ -20,6 +20,7 @@
     ~/.config/nvim: nvim
     ~/.config/rustfmt/rustfmt.toml: rustfmt.toml
     ~/.config/starship.toml: starship.toml
+    ~/.dprint.json: dprint.json
     ~/.zshrc: .zshrc
 
 - create:
