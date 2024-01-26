@@ -4,6 +4,7 @@
 
 use aliases.nu *
 use commands.nu *
+use completions-git.nu *
 
 # # For more information on defining custom themes, see
 # https://www.nushell.sh/book/coloring_and_theming.html
@@ -144,15 +145,10 @@ let zoxide_completer = {|spans|
     $spans | skip 1 | zoxide query -l $in | lines | where {|x| $x != $env.PWD}
 }
 
-let git_completer = {|spans|
-    # TODO
-}
-
 let external_multi_completer = {|spans|
     match $spans.0 {
         z => $zoxide_completer,
-        zi => $zoxide_completer,
-        git => $git_completer,
+        zi => $zoxide_completer
     } | do $in $spans
 }
 
@@ -167,10 +163,6 @@ $env.config = {
 
     rm: {
         always_trash: false # always act as if -t was given. Can be overridden with -p
-    }
-
-    cd: {
-        abbreviations: false # allows `cd s/o/f` to expand to `cd some/other/folder`
     }
 
     table: {
@@ -238,7 +230,8 @@ $env.config = {
         external: {
             enable: true # set to false to prevent nushell looking into $env.PATH to find more suggestions, `false` recommended for WSL users as this look up may be very slow
             max_results: 100 # setting it lower can improve completion performance at the cost of omitting some options
-            completer: $external_multi_completer # check 'carapace_completer' above as an example
+            # completer: $external_multi_completer # check 'carapace_completer' above as an example
+            completer: null # check 'carapace_completer' above as an example
         }
     }
 

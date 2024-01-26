@@ -68,4 +68,5 @@ $env.NU_PLUGIN_DIRS = [
 # $env.PATH = ($env.PATH | split row (char esep) | prepend '/some/path')
 
 # Run the zoxide setup script. Result will be sourced in config.nu
-zoxide init nushell | save -f ~/.zoxide.nu
+# Modified to include some transformations for Nushell v0.89
+zoxide init nushell | str replace --all "-- $rest" "-- ...$rest" | str replace --all "def-env" "def --env" | save -f ~/.zoxide.nu
