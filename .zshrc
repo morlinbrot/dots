@@ -201,3 +201,11 @@ scroll-and-clear-screen() {
 zle -N scroll-and-clear-screen
 bindkey '^l' scroll-and-clear-screen
 
+# BUN
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+# completions
+[ -s "/Users/zisulin/.bun/_bun" ] && source "/Users/zisulin/.bun/_bun"
+
+# .NET CORE SDK tools
+export PATH="$PATH:/Users/zisulin/.dotnet/tools"
