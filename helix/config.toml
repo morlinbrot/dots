@@ -11,6 +11,12 @@ bufferline = "multiple"
 hidden = false
 
 [editor.auto-pairs]
+'(' = ')'
+'{' = '}'
+'[' = ']'
+'"' = '"'
+"'" = "'"
+'`' = '`'
 '<' = '>'
 
 [editor.soft-wrap]
@@ -30,6 +36,9 @@ display-inlay-hints = true
 [editor.indent-guides]
 render = true
 skip-levels = 1
+
+[editor.whitespace.render]
+space = "all"
 
 [keys.normal]
 "i" = ["insert_mode", "collapse_selection"]

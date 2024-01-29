@@ -35,7 +35,7 @@ provideFormatter = true
 # TODO: Replace ts-langserver with Deno?
 [[language]]
 name = "typescript"
-language-servers = [ "typescript-language-server", "eslint", "emmet-ls" ]
+language-servers = [ "deno", "eslint", "emmet-ls" ]
 formatter = { command = "dprint", args = [ "fmt", "--stdin", "typescript" ] }
 auto-format = true
 
@@ -47,13 +47,13 @@ auto-format = true
 
 [[language]]
 name = "javascript"
-language-servers = [ "typescript-language-server", "eslint", "emmet-ls" ]
+language-servers = [ "deno", "eslint", "emmet-ls" ]
 formatter = { command = "dprint", args = [ "fmt", "--stdin", "javascript" ] }
 auto-format = true
 
 [[language]]
 name = "jsx"
-language-servers = [ "typescript-language-server", "eslint", "emmet-ls" ]
+language-servers = [ "deno", "eslint", "emmet-ls" ]
 formatter = { command = "dprint", args = [ "fmt", "--stdin", "jsx" ] }
 auto-format = true
 
@@ -81,3 +81,7 @@ auto-format = true
 [[grammar]]
 name = "protobuf"
 source = { git = "https://github.com/yusdacra/tree-sitter-protobuf", rev = "19c211a01434d9f03efff99f85e19f967591b175"}
+
+[[language]]
+name = "kotlin"
+auto-format = true
