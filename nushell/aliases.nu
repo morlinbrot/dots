@@ -2,7 +2,7 @@ export alias prx = cd ~/prx
 export alias py = python3
 export alias npmg = npm list -g --depth=0
 export alias ga = git add
-export alias gaa = git add -all
+export alias gaa = git add --all
 export alias gap = git add --patch
 export alias gau = git add --update
 export alias gav = git add --verbose
