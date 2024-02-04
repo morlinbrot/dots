@@ -209,3 +209,6 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 
 # .NET CORE SDK tools
 export PATH="$PATH:/Users/zisulin/.dotnet/tools"
+
+export ANDROID_HOME="/Users/zisulin/Library/Android/sdk"
+export PATH="$PATH:$ANDROID_HOME/tools/:$ANDROID_HOME/tools/bin:$ANDROID_HOME/platform-tools/"
