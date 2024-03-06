@@ -1,0 +1,7 @@
+kitty
+helix
+nvim
+starship
+sccache
+fd
+

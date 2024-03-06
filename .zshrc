@@ -205,10 +205,10 @@ bindkey '^l' scroll-and-clear-screen
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 # completions
-[ -s "/Users/zisulin/.bun/_bun" ] && source "/Users/zisulin/.bun/_bun"
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 
 # .NET CORE SDK tools
-export PATH="$PATH:/Users/zisulin/.dotnet/tools"
+export PATH="$PATH:$HOME/.dotnet/tools"
 
-export ANDROID_HOME="/Users/zisulin/Library/Android/sdk"
+export ANDROID_HOME="$HOME/Library/Android/sdk"
 export PATH="$PATH:$ANDROID_HOME/tools/:$ANDROID_HOME/tools/bin:$ANDROID_HOME/platform-tools/"

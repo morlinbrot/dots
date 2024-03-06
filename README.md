@@ -1,68 +1,67 @@
 # Einmal configs deluxe, bitte!
 Various config files for shells, editors, etc.
 
-On a fresh (unix) system, run scripts in `system-setup` for installation of the most important programs.
+The setup is currently focused on MacOS but should be applicable to other Unixes by replacing the Homebrew installation with the appropriate package manager.
 
-Run `./install` to execute automatic config setup provided by [dotbot](https://github.com/anishathalye/dotbot).
-Run `setup.sh` to setup some additional plugins like oh-my-zsh etc.
+The setup uses [dotbot](https://github.com/anishathalye/dotbot) to manage config files. Instead of copying files, symlinks are created so any changes done to a file here will take effect directly.
 
-# Current Status
-- Complete migration to lua config for nvim. Auto-completion not working.
-- Make initial installation cross-platform with a tool like ansible.
-- Integrate `setup.sh` into some automatic setup.
-- Remove `templates` folder.
+_The setup currently expects this repo to be cloned to `$HOME/dots`._
 
-# Usage
-## Cargo apps
-Make sure to have sccache installed:
+# Fresh Setup On A New System
+
+Utilities to set up from scratch on a new system. Currently focused on MacOs.
+
+## 1. Install Homebrew Apps
+
 ```
-brew install sccache
-```
-Install all the cargo apps in one go:
-```
-cat ./setup/cargo-apps.txt | xargs cargo install
+brew install $(<setup/brew-apps.txt)
 ```
 
-# Notes
-### nvm
-Required packages.
-`python3-dev python3-pip`
+Enable installing of nerd fonts via Homebrew.
 
-Python plugin host for nvim.
-`pip3 install pynvim`
-
-### fzf
-Enable the fzf plugin in the .vimrc file:
 ```
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
+brew tap homebrew/cask-fonts
 ```
 
-Set the fzf's default command in .bashrc or .zshrc:
+VictorMono as an example:
 ```
-export FZF_DEFAULT_COMMAND='rg --files --hidden --follow -g "!.git/*" -g "!node_modules/*" -g "!target/*"'
-```
-We need ripgrep to be able to use it with fzf.
-```
-cargo install ripgrep
+brew install --cask font-victor-mono-nerd-font
 ```
 
-### Fish shell + nvm
-Some plugins might need the currently active node binary (e.g. coc.nvim)
-https://github.com/FabioAntunes/fish-nvm#how-it-works
+## 2. Install Rust
 
-Manual steps to make the binary available:
-```
-touch /usr/local/bin/node
-```
+Run [Rust's install script](https://www.rust-lang.org/tools/install)
 
-Paste content:
 ```
-#! /usr/bin/env fish
-__nvm_run "node" $argv
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 ```
 
-Make executable.
+## 3. Install Cargo Apps
+
+The current config wraps `cargo` with [sccache](https://crates.io/crates/sccache). If you have already run the `./install` script, you'll have to make sure to have sccache installed, e.g. already run the Homebrew installs.
+
+Use xargs to install all programs at once:
+
 ```
-chmod +x /usr/local/bin/node
+xargs cargo install < brew/cargo-apps.txt
+```
+
+## 4. Oh-my-zsh
+Install oh-my-zsh with:
+```
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+```
+
+And the zsh-autosuggestions plugin:
+
+```
+git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+```
+
+# Dotbot for Config File Management
+
+Simply run the script below to symlink the config files in this repo:
+
+```
+./install
 ```
