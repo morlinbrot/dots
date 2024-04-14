@@ -1,0 +1,64 @@
+[
+  {
+    "context": "Editor",
+    "bindings": {
+      "ctrl-c": "editor::ToggleComments",
+
+      "g l": "vim::EndOfLine",
+      "g h": "vim::StartOfLine",
+      "g g": "vim::StartOfDocument",
+      "g e": "vim::EndOfDocument"
+    }
+  },
+  {
+    // All modes except insert.
+    "context": "Editor && VimControl && vim_mode != insert && !VimWaiting && !menu",
+    "bindings": {
+      "d": "vim::DeleteRight",
+      "x": "vim::ToggleVisualLine",
+      "ctrl-w": "editor::SelectLargerSyntaxNode",
+      "ctrl-shift-w": "editor::SelectSmallerSyntaxNode",
+      "ctrl-j": ["workspace::SendKeystrokes", "escape"],
+
+      "space w": "workspace::Save",
+      "space k": "editor::Hover"
+    }
+  },
+  {
+    "context": "Editor && vim_mode == normal && !VimWaiting && !menu",
+    "bindings": {
+      "U": "editor::Redo"
+    }
+  },
+  {
+    "context": "Editor && vim_mode == visual || vim_mode == visual_line && !VimWaiting && !menu",
+    "bindings": {
+      "shift-r": "vim::Paste",
+      "d": "vim::VisualDelete"
+      // "ctrl-r": "vim::Paste",
+      // "x": "vim::NormalBefore"
+      // "x": "editor::AddSelectionBelow"
+    }
+  },
+  {
+    "context": "Editor && VimControl && vim_mode != insert && vim_operator == x  && !VimWaiting && !menu",
+    "bindings": {
+      // "x": "editor::AddSelectionBelow"
+    }
+  },
+  {
+    "context": "Editor && vim_mode == insert && !VimWaiting && !menu",
+    "bindings": {
+      "ctrl-d": "vim::DeleteRight",
+      "ctrl-h": "vim::DeleteLeft",
+      "ctrl-j": "vim::NormalBefore",
+      "ctrl-r": "editor::Paste"
+    }
+  },
+  {
+    "context": "Editor && vim_operator == g && !VimWaiting && !menu",
+    "bindings": {
+      //
+    }
+  }
+]
