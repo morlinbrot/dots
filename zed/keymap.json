@@ -1,13 +1,10 @@
 [
   {
-    "context": "Editor",
+    "context": "Editor || Terminal",
     "bindings": {
       "ctrl-c": "editor::ToggleComments",
-
-      "g l": "vim::EndOfLine",
-      "g h": "vim::StartOfLine",
-      "g g": "vim::StartOfDocument",
-      "g e": "vim::EndOfDocument"
+      "ctrl-j": ["workspace::SendKeystrokes", "escape"],
+      "ctrl-shift-z": "workspace::ToggleZoom"
     }
   },
   {
@@ -16,49 +13,56 @@
     "bindings": {
       "d": "vim::DeleteRight",
       "x": "vim::ToggleVisualLine",
-      "ctrl-w": "editor::SelectLargerSyntaxNode",
+      "X": "vim::ToggleVisualLine",
+
+      "g l": "vim::EndOfLine",
+      "g h": "vim::StartOfLine",
+      "g g": "vim::StartOfDocument",
+      "g e": "vim::EndOfDocument",
+
+      // "ctrl-w": "editor::SelectLargerSyntaxNode",
       "ctrl-shift-w": "editor::SelectSmallerSyntaxNode",
-      "ctrl-j": ["workspace::SendKeystrokes", "escape"],
+
+      "shift-c": "editor::AddSelectionBelow",
 
       "space w": "workspace::Save",
-      "space k": "editor::Hover"
+      "space k": "editor::Hover",
+      "space a": "editor::ToggleCodeActions",
+      "space r": "editor::Rename"
     }
   },
   {
+    // Normal mode.
     "context": "Editor && vim_mode == normal && !VimWaiting && !menu",
     "bindings": {
       "U": "editor::Redo"
     }
   },
   {
+    // Visual modes.
     "context": "Editor && vim_mode == visual || vim_mode == visual_line && !VimWaiting && !menu",
     "bindings": {
       "shift-r": "vim::Paste",
-      "d": "vim::VisualDelete"
-      // "ctrl-r": "vim::Paste",
-      // "x": "vim::NormalBefore"
-      // "x": "editor::AddSelectionBelow"
+      "d": "vim::VisualDelete",
+      "x": "editor::SelectDown",
+      "X": "editor::SelectUp",
+      "v": "editor::SelectLargerSyntaxNode",
+      "V": "editor::SelectSmallerSyntaxNode"
     }
   },
   {
-    "context": "Editor && VimControl && vim_mode != insert && vim_operator == x  && !VimWaiting && !menu",
-    "bindings": {
-      // "x": "editor::AddSelectionBelow"
-    }
-  },
-  {
+    // Insert mode.
     "context": "Editor && vim_mode == insert && !VimWaiting && !menu",
     "bindings": {
       "ctrl-d": "vim::DeleteRight",
       "ctrl-h": "vim::DeleteLeft",
-      "ctrl-j": "vim::NormalBefore",
       "ctrl-r": "editor::Paste"
     }
   },
   {
     "context": "Editor && vim_operator == g && !VimWaiting && !menu",
     "bindings": {
-      //
+      // "x": "editor::AddSelectionBelow"
     }
   }
 ]
