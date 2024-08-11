@@ -7,9 +7,9 @@
 // custom settings, run the `open default settings` command
 // from the command palette or from `Zed` application menu.
 {
-  "theme": "Catppuccin Mocha",
-  "buffer_font_size": 14,
-  "buffer_font_family": "VictorMono Nerd Font Propo",
+  "theme": "Tokyo Night",
+  "buffer_font_size": 16,
+  "buffer_font_family": "Iosevka Fixed",
   "vim_mode": true,
   "relative_line_numbers": true,
   "seed_search_query_from_cursor": "selection",
@@ -19,15 +19,13 @@
   "tabs": {
     "git_status": true
   },
-  "git": {
-    "inline_blame": {
-      "enabled": true
-    }
-  },
   "vim": {
     "use_smartcase_find": true
   },
   "language_overrides": {
+    "Gleam": {
+      "show_inline_completions": false
+    },
     "TypeScript": {
       "code_actions_on_format": {
         "source.organizeImports": true

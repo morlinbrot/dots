@@ -4,7 +4,7 @@
     "bindings": {
       "ctrl-c": "editor::ToggleComments",
       "ctrl-j": ["workspace::SendKeystrokes", "escape"],
-      "ctrl-shift-z": "workspace::ToggleZoom"
+      "ctrl-shift-f": "workspace::ToggleZoom"
     }
   },
   {
