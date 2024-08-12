@@ -16,7 +16,7 @@
     ~/.config/helix/languages.toml: helix/languages.toml
     ~/.config/helix/themes/githubsy.toml: helix/themes/githubsy.toml
     ~/.config/kitty: kitty
-    ~/.config/kitty/current-theme.conf: kitty/themes/githubsy.conf
+    ~/.config/kitty/current-theme.conf: kitty/themes/tokyo-night.conf
     ~/.config/nvim: nvim
     ~/.config/rustfmt/rustfmt.toml: rustfmt.toml
     ~/.config/starship.toml: starship.toml
