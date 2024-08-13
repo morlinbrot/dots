@@ -58,6 +58,11 @@ And the zsh-autosuggestions plugin:
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 ```
 
+As well as the zsh-syntax-highlighting:
+```sh
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+```
+
 # Dotbot for Config File Management
 
 Simply run the script below to symlink the config files in this repo:

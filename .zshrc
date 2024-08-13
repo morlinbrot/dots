@@ -24,6 +24,7 @@ plugins=(
   jsontools
   z
   zsh-autosuggestions
+  zsh-syntax-highlighting
 )
 
 # Include oh-my-zsh config.
