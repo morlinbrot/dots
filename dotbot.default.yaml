@@ -20,6 +20,7 @@
     ~/.config/nvim: nvim
     ~/.config/rustfmt/rustfmt.toml: rustfmt.toml
     ~/.config/starship.toml: starship.toml
+    ~/.config/wezterm: wezterm
     ~/.config/zed/settings.json: zed/settings.json
     ~/.config/zed/keymap.json: zed/keymap.json
     ~/.dprint.json: dprint.json

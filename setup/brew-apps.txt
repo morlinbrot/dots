@@ -1,7 +1,8 @@
-kitty
 helix
 nvim
 starship
 sccache
 fd
+fzf
+wezterm
 

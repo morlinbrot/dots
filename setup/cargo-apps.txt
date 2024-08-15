@@ -4,7 +4,6 @@ cargo-feature
 cargo-nextest
 cargo-watch
 exa
-fzf
 ripgrep
 sqlx-cli
 wasm-pack
