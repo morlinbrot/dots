@@ -159,7 +159,25 @@ export SSH_KEY_PATH="~/.ssh/rsa_id"
 
 # FZF
 # Use ripgrep for :Files
-export FZF_DEFAULT_COMMAND='rg --files --hidden --follow -g "!**/.git/*" -g "!**/node_modules/*" -g "!**/target/*" -g "!dotbot/*" -g "!**/.terraform/*"'
+# export FZF_DEFAULT_COMMAND='rg --files --hidden --follow -g "!**/.git/*" -g "!**/node_modules/*" -g "!**/target/*" -g "!dotbot/*" -g "!**/.terraform/*"'
+
+# Use fd instead of find for fzf.
+export FZF_DEFAULT_COMMAND="fd --type file --hidden --follow --strip-cwd-prefix --exclude .git"
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_ALT_C_COMMAND="fd --type=d --hidden --stript-cwd-prefix --exclude .git"
+export FZF_DEFAULT_OPTS="--bind=space:toggle,ctrl-l:select,ctrl-h:deselect,ctrl-x:deselect-all"
+
+# Use fd for path completions candidates.
+_fzf_compgen_path() {
+    fd --hidden --exclude .git . "$1"
+}
+
+# Use fd for directory completion.
+_fzf_compgen_dir() {
+    fd --type=d --hidden --exclude .git . "$1"
+}
+
+eval "$(fzf --zsh)"
 
 # ++++  ++++ #
 #  PATH
