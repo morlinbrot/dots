@@ -171,5 +171,8 @@ $env.config = {
     edit_mode: vi # emacs, vi
 }
 
+# Source oh-my-posh config created in env.nu
+source  ($nu.default-config-dir | path join 'gen/oh-my-posh.nu')
+
 # Source zoxide config produced by init command in env.nu
-source ~/.zoxide.nu
+source  ($nu.default-config-dir | path join 'gen/zoxide.nu')
