@@ -30,6 +30,9 @@ plugins=(
 # Include oh-my-zsh config.
 source $ZSH/oh-my-zsh.sh
 
+# Initialize oh-my-posh prompt.
+eval "$(oh-my-posh init zsh --config ~/.config/oh-my-posh/default.omp.toml)"
+
 # ++++ # ++++ #
 #  ALIASES
 # ++++ # ++++ #
@@ -189,8 +192,6 @@ if [ -d "~/.ghcup/env" ]; then
     . ~/.ghcup/env
 fi
 
-# STARSHIP cross-shell prompt
-eval "$(starship init zsh)"
 # auto-suggestions
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=244"
 

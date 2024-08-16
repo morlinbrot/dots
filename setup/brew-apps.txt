@@ -1,8 +1,8 @@
 helix
 nvim
-starship
 sccache
 fd
 fzf
+oh-my-posh
 wezterm
 

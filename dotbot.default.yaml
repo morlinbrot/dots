@@ -18,8 +18,8 @@
     ~/.config/kitty: kitty
     ~/.config/kitty/current-theme.conf: kitty/themes/tokyo-night.conf
     ~/.config/nvim: nvim
+    ~/.config/oh-my-posh: oh-my-posh
     ~/.config/rustfmt/rustfmt.toml: rustfmt.toml
-    ~/.config/starship.toml: starship.toml
     ~/.config/wezterm: wezterm
     ~/.config/zed/settings.json: zed/settings.json
     ~/.config/zed/keymap.json: zed/keymap.json
