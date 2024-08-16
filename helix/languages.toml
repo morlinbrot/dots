@@ -36,25 +36,25 @@ provideFormatter = true
 [[language]]
 name = "typescript"
 language-servers = [ "deno", "eslint", "emmet-ls" ]
-formatter = { command = "dprint", args = [ "fmt", "--stdin", "typescript" ] }
+# formatter = { command = "dprint", args = [ "fmt", "--stdin", "typescript" ] }
 auto-format = true
 
 [[language]]
 name = "tsx"
 language-servers = [ "deno", "eslint", "emmet-ls" ]
-formatter = { command = "dprint", args = [ "fmt", "--stdin", "tsx" ] }
+# formatter = { command = "dprint", args = [ "fmt", "--stdin", "tsx" ] }
 auto-format = true
 
 [[language]]
 name = "javascript"
 language-servers = [ "deno", "eslint", "emmet-ls" ]
-formatter = { command = "dprint", args = [ "fmt", "--stdin", "javascript" ] }
+# formatter = { command = "dprint", args = [ "fmt", "--stdin", "javascript" ] }
 auto-format = true
 
 [[language]]
 name = "jsx"
 language-servers = [ "deno", "eslint", "emmet-ls" ]
-formatter = { command = "dprint", args = [ "fmt", "--stdin", "jsx" ] }
+# formatter = { command = "dprint", args = [ "fmt", "--stdin", "jsx" ] }
 auto-format = true
 
 [[language]]
