@@ -1,4 +1,5 @@
 - link:
+    # Nushell refuses to be reasonable and respect the XDG spec.
     ~/Library/Application Support/nushell: nushell
     # Disable annoying non-breaking space on alt+space:
     ~/Library/KeyBindings/DefaultKeyBinding.dict: DefaultKeyBinding.dict

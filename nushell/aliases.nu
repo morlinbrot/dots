@@ -7,6 +7,7 @@ export alias gap = git add --patch
 export alias gau = git add --update
 export alias gav = git add --verbose
 export alias gbl = git blame -w
+export alias gb = git branch
 export alias gbr = git branch --remote
 export alias gco = git checkout
 export alias gcob = git checkout -b
