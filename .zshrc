@@ -151,6 +151,7 @@ alias jr='just run'
 alias jt='just test'
 alias jw='just watch'
 alias js='just serve'
+alias jl='just lint'
 
 # Default editor
 export EDITOR="/opt/homebrew/bin/hx"
