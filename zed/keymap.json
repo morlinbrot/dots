@@ -28,7 +28,16 @@
       "space w": "workspace::Save",
       "space k": "editor::Hover",
       "space a": "editor::ToggleCodeActions",
-      "space r": "editor::Rename"
+      "space r": "editor::Rename",
+
+      // Splitting panes.
+      "cmd-k k": "pane::SplitUp",
+      "cmd-k j": "pane::SplitDown",
+      "cmd-k h": "pane::SplitLeft",
+      "cmd-k l": "pane::SplitRight",
+      // Kitty-like movements between panes.
+      "ctrl-shift-l": "workspace::ActivateNextPane",
+      "ctrl-shift-h": "workspace::ActivatePreviousPane"
     }
   },
   {
@@ -52,7 +61,7 @@
   },
   {
     // Insert mode.
-    "context": "Editor && vim_mode == insert && !VimWaiting && !menu",
+    "context": "Editor && vim_mode == insert && !VimWaiting",
     "bindings": {
       "ctrl-d": "vim::DeleteRight",
       "ctrl-h": "vim::DeleteLeft",
