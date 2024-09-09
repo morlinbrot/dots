@@ -1,8 +1,12 @@
-helix
-nvim
-sccache
+deno
 fd
 fzf
+helix
+just
+nushell
+nvim
 oh-my-posh
+postgresql
+sccache
+-- cask visual-studio-code
 wezterm
-
