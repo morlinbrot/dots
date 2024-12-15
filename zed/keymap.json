@@ -5,53 +5,200 @@
       "ctrl-c": "editor::ToggleComments",
       "ctrl-j": ["workspace::SendKeystrokes", "escape"],
       "ctrl-shift-f": "workspace::ToggleZoom",
-      "cmd-shift-j": "terminal_panel::ToggleFocus"
+      "cmd-shift-j": "terminal_panel::ToggleFocus",
+      "cmd-shift-e": "pane::RevealInProjectPanel",
+      "escape": "vim::HelixNormalAfter"
+    }
+  },
+  {
+    // Helix mode!!
+    "context": "vim_mode == helix_normal",
+    "bindings": {
+      "escape": "vim::NormalBefore",
+
+      // Editor basics
+      "/": "vim::Search",
+      "n": "vim::MoveToNextMatch",
+      "N": "vim::MoveToPrevMatch",
+      "ctrl-o": "pane::GoBack",
+      "ctrl-i": "pane::GoForward",
+      "g d": "editor::GoToDefinition",
+      "g shift-d": "editor::GoToDeclaration",
+      "g y": "editor::GoToTypeDefinition",
+      "g shift-i": "editor::GoToImplementation",
+
+      // Modal editing basics
+      "c": "vim::Substitute",
+      "I": "vim::VisualInsertFirstNonWhiteSpace",
+      "A": "vim::VisualInsertEndOfLine",
+      "r": ["vim::PushOperator", "Replace"],
+      "z z": "editor::ScrollCursorCenter",
+      "f": ["vim::PushOperator", { "FindForward": { "before": false } }],
+      "t": ["vim::PushOperator", { "FindForward": { "before": true } }],
+      "shift-f": ["vim::PushOperator", { "FindBackward": { "after": false } }],
+      "shift-t": ["vim::PushOperator", { "FindBackward": { "after": true } }],
+
+      // Buffer manipulation
+      "u": "vim::Undo",
+      "U": "vim::Redo",
+      "p": "vim::Paste",
+      // "y": "vim::VisualYank",
+      "y": ["workspace::SendKeystrokes", "y escape escape"],
+      "o": "vim::InsertLineBelow",
+      "shift-o": "vim::InsertLineAbove",
+      ">": "vim::Indent",
+      "<": "vim::Outdent",
+      "=": "editor::AutoIndent",
+
+      // Helix movements
+      "g l": "vim::EndOfLine",
+      "g h": "vim::StartOfLine",
+      "g g": "vim::StartOfDocument",
+      "g e": "vim::EndOfDocument",
+      "g s": "vim::FirstNonWhitespace",
+
+      "ctrl-k": ["workspace::SendKeystrokes", "ctrl-k shift-a"],
+
+      // Helix selections
+      "x": "vim::ToggleVisualLine",
+      "X": "vim::ToggleVisualLine",
+      "v": "vim::ToggleVisual",
+      "m m": "vim::Matching",
+      "m i w": ["workspace::SendKeystrokes", "v i w"],
+      "m a w": ["workspace::SendKeystrokes", "v a w"],
+      "m i \"": ["workspace::SendKeystrokes", "v i \""],
+      "m a \"": ["workspace::SendKeystrokes", "v a \""],
+      "m i '": ["workspace::SendKeystrokes", "v i '"],
+      "m a '": ["workspace::SendKeystrokes", "v a '"],
+      "m i (": ["workspace::SendKeystrokes", "v i ("],
+      "m a (": ["workspace::SendKeystrokes", "v a ("],
+      "m i )": ["workspace::SendKeystrokes", "v i )"],
+      "m a )": ["workspace::SendKeystrokes", "v a )"],
+      "m i [": ["workspace::SendKeystrokes", "v i ["],
+      "m a [": ["workspace::SendKeystrokes", "v a ["],
+      "m i ]": ["workspace::SendKeystrokes", "v i ]"],
+      "m a ]": ["workspace::SendKeystrokes", "v a ]"],
+      "m i {": ["workspace::SendKeystrokes", "v i {"],
+      "m a {": ["workspace::SendKeystrokes", "v a {"],
+      "m i }": ["workspace::SendKeystrokes", "v i }"],
+      "m a }": ["workspace::SendKeystrokes", "v a }"],
+      "m i t": ["workspace::SendKeystrokes", "v i t"],
+      "m a t": ["workspace::SendKeystrokes", "v a t"],
+      "shift-r": "vim::Paste",
+
+      // Space mode
+      "space f": "file_finder::Toggle",
+      "space w": "workspace::Save",
+      "space k": "editor::Hover",
+      "space a": "editor::ToggleCodeActions",
+      "space r": "editor::Rename",
+      "space s": "outline::Toggle",
+      "space S": "project_symbols::Toggle",
+      "space c": "pane::CloseActiveItem",
+
+      // Scrolling
+      "ctrl-d": "vim::ScrollDown",
+      "ctrl-u": "vim::ScrollUp",
+      "ctrl-e": "vim::LineDown",
+      "ctrl-y": "vim::LineUp",
+
+      // Kitty-like movements between panes.
+      "ctrl-shift-l": "workspace::ActivateNextPane",
+      "ctrl-shift-h": "workspace::ActivatePreviousPane",
+
+      // Window mode.
+      "ctrl-w v": "pane::SplitRight",
+      "ctrl-w s": "pane::SplitDown",
+      "ctrl-w left": ["workspace::ActivatePaneInDirection", "Left"],
+      "ctrl-w right": ["workspace::ActivatePaneInDirection", "Right"],
+      "ctrl-w up": ["workspace::ActivatePaneInDirection", "Up"],
+      "ctrl-w down": ["workspace::ActivatePaneInDirection", "Down"],
+
+      // Personal preferences
+      "alt-k": "editor::MoveLineUp",
+      "alt-j": "editor::MoveLineDown"
     }
   },
   {
     // All modes except insert.
     "context": "Editor && VimControl && vim_mode != insert && !VimWaiting && !menu",
     "bindings": {
+      "c": null, // Nullify vim::Substitute to be able to use "space c"
+
       "d": "vim::DeleteRight",
       "x": "vim::ToggleVisualLine",
       "X": "vim::ToggleVisualLine",
+
+      ">": "vim::Indent",
+      "<": "vim::Outdent",
+      "=": "editor::AutoIndent",
 
       "g l": "vim::EndOfLine",
       "g h": "vim::StartOfLine",
       "g g": "vim::StartOfDocument",
       "g e": "vim::EndOfDocument",
+      "g s": "vim::FirstNonWhitespace",
 
       // "ctrl-w": "editor::SelectLargerSyntaxNode",
       "ctrl-shift-w": "editor::SelectSmallerSyntaxNode",
 
       "shift-c": "editor::AddSelectionBelow",
 
+      // Space mode
+      "space f": "file_finder::Toggle",
       "space w": "workspace::Save",
       "space k": "editor::Hover",
       "space a": "editor::ToggleCodeActions",
       "space r": "editor::Rename",
+      "space s": "outline::Toggle",
+      "space S": "project_symbols::Toggle",
+      "space c": "pane::CloseActiveItem",
 
-      // Splitting panes.
-      "cmd-k k": "pane::SplitUp",
-      "cmd-k j": "pane::SplitDown",
-      "cmd-k h": "pane::SplitLeft",
-      "cmd-k l": "pane::SplitRight",
+      "alt-k": "editor::MoveLineUp",
+      "alt-j": "editor::MoveLineDown",
+
       // Kitty-like movements between panes.
       "ctrl-shift-l": "workspace::ActivateNextPane",
-      "ctrl-shift-h": "workspace::ActivatePreviousPane"
+      "ctrl-shift-h": "workspace::ActivatePreviousPane",
+
+      // Window mode.
+      "ctrl-w v": "pane::SplitRight",
+      "ctrl-w s": "pane::SplitDown"
     }
   },
   {
     // Normal mode.
     "context": "Editor && vim_mode == normal && !VimWaiting && !menu",
     "bindings": {
-      "U": "editor::Redo"
+      "U": "editor::Redo",
+      "ctrl-k": ["workspace::SendKeystrokes", "ctrl-k shift-a"]
     }
   },
   {
-    // Visual modes.
+    // Visual mode.
+    "context": "Editor && !VimWaiting && !menu && vim_mode == visual",
+    "bindings": {}
+  },
+  {
+    // Visual Line mode.
+    "context": "Editor && VimControl && VimWaiting && !menu && vim_mode == visual_line",
+    "bindings": {
+      // After selecting lines with 'x' (putting us into visual mode), this removes the selection on move.
+      "h": ["workspace::SendKeystrokes", "escape h"],
+      "j": ["workspace::SendKeystrokes", "escape j"],
+      "k": ["workspace::SendKeystrokes", "escape k"],
+      "l": ["workspace::SendKeystrokes", "escape l"],
+      "e": ["workspace::SendKeystrokes", "escape e"],
+      "w": ["workspace::SendKeystrokes", "escape w"],
+      "b": ["workspace::SendKeystrokes", "escape b"]
+    }
+  },
+  {
+    // Both visual modes.
     "context": "Editor && vim_mode == visual || vim_mode == visual_line && !VimWaiting && !menu",
     "bindings": {
+      "c": "vim::Substitute", // Enable what we disabled earlier.
+
       "shift-r": "vim::Paste",
       "d": "vim::VisualDelete",
       "x": "editor::SelectDown",
