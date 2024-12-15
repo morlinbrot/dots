@@ -147,11 +147,43 @@ alias tf='terraform'
 # Just
 alias j='just'
 alias jb='just build'
+alias jc='just check'
+alias jd='just dev'
+alias jf='just format'
+alias jl='just lint'
 alias jr='just run'
+alias js='just serve'
+alias jst='just start'
 alias jt='just test'
 alias jw='just watch'
-alias js='just serve'
-alias jl='just lint'
+
+alias d='deno'
+alias dt='deno task'
+
+alias notes='~/notes/notes.sh'
+
+# Python
+alias py='python3'
+alias uvr='uv run'
+alias uvt='uv run test'
+
+# Docker Compose
+alias dk='docker'
+alias dkp='docker ps'
+alias dka='docker ps -a'
+alias dkstop='docker stop $(docker ps -a -q)'
+alias dc='docker compose'
+alias dcp='docker compose ps'
+alias dca='docker compose ps -a'
+alias dcu='docker compose up -d'
+alias dcd='docker compose down'
+
+# Tauri
+alias tauri='cargo tauri'
+alias ct='cargo tauri'
+
+# Moon monorepo management
+alias mn='moon'
 
 # Default editor
 export EDITOR="/opt/homebrew/bin/hx"
