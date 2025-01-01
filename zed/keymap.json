@@ -2,12 +2,46 @@
   {
     "context": "Editor || Terminal",
     "bindings": {
-      "ctrl-c": "editor::ToggleComments",
       "ctrl-j": ["workspace::SendKeystrokes", "escape"],
-      "ctrl-shift-f": "workspace::ToggleZoom",
+      "ctrl-c": "editor::ToggleComments",
+
       "cmd-shift-j": "terminal_panel::ToggleFocus",
-      "cmd-shift-e": "pane::RevealInProjectPanel",
-      "escape": "vim::HelixNormalAfter"
+      "cmd-shift-e": "project_panel::ToggleFocus",
+      "cmd-shift-l": "project_panel::ToggleFocus",
+
+      "ctrl-shift-f": "workspace::ToggleZoom",
+
+      // Splits
+      "ctrl-shift-enter": "pane::SplitRight",
+      "cmd-k h": "pane::SplitLeft",
+      "cmd-k j": "pane::SplitDown",
+      "cmd-k k": "pane::SplitUp",
+      "cmd-k l": "pane::SplitRight",
+      "ctrl-shift h": ["workspace::ActivatePaneInDirection", "Left"],
+      "ctrl-shift j": ["workspace::ActivatePaneInDirection", "Down"],
+      "ctrl-shift k": ["workspace::ActivatePaneInDirection", "Up"],
+      "ctrl-shift l": ["workspace::ActivatePaneInDirection", "Right"],
+      "cmd-k shift-h": ["workspace::SwapPaneInDirection", "Left"],
+      "cmd-k shift-j": ["workspace::SwapPaneInDirection", "Down"],
+      "cmd-k shift-k": ["workspace::SwapPaneInDirection", "Up"],
+      "cmd-k shift-l": ["workspace::SwapPaneInDirection", "Right"],
+
+      // Tabs
+      "alt-h": "pane::ActivatePrevItem",
+      "alt-l": "pane::ActivateNextItem",
+      "alt-shift-h": "pane::SwapItemLeft",
+      "alt-shift-l": "pane::SwapItemRight",
+
+      "ctrl-h": "vim::HelixNormalAfter"
+    }
+  },
+  {
+    "context": "ProjectPanel",
+    "bindings": {
+      "cmd-shift-j": "terminal_panel::ToggleFocus",
+      "cmd-shift-e": "project_panel::ToggleFocus",
+      "cmd-shift-l": "project_panel::ToggleFocus",
+      "cmd-shift-h": "project_panel::ToggleFocus"
     }
   },
   {
@@ -15,6 +49,7 @@
     "context": "vim_mode == helix_normal",
     "bindings": {
       "escape": "vim::NormalBefore",
+      "i": ["workspace::SendKeystrokes", "escape i"],
 
       // Editor basics
       "/": "vim::Search",
@@ -26,24 +61,30 @@
       "g shift-d": "editor::GoToDeclaration",
       "g y": "editor::GoToTypeDefinition",
       "g shift-i": "editor::GoToImplementation",
+      "shift-j": "vim::JoinLines",
 
       // Modal editing basics
       "c": "vim::Substitute",
       "I": "vim::VisualInsertFirstNonWhiteSpace",
       "A": "vim::VisualInsertEndOfLine",
-      "r": ["vim::PushOperator", "Replace"],
+      "r": ["workspace::SendKeystrokes", "escape r"],
+      "z t": "editor::ScrollCursorTop",
       "z z": "editor::ScrollCursorCenter",
+      "z b": "editor::ScrollCursorBottom",
       "f": ["vim::PushOperator", { "FindForward": { "before": false } }],
       "t": ["vim::PushOperator", { "FindForward": { "before": true } }],
       "shift-f": ["vim::PushOperator", { "FindBackward": { "after": false } }],
       "shift-t": ["vim::PushOperator", { "FindBackward": { "after": true } }],
+      "shift-r": "vim::Paste",
+      "ctrl-k": ["workspace::SendKeystrokes", "ctrl-k shift-a"],
 
       // Buffer manipulation
       "u": "vim::Undo",
       "U": "vim::Redo",
       "p": "vim::Paste",
+      "shift-p": ["vim::Paste", { "before": true }],
       // "y": "vim::VisualYank",
-      "y": ["workspace::SendKeystrokes", "y escape escape"],
+      "y": ["workspace::SendKeystrokes", "y escape ctrl-h"],
       "o": "vim::InsertLineBelow",
       "shift-o": "vim::InsertLineAbove",
       ">": "vim::Indent",
@@ -57,13 +98,12 @@
       "g e": "vim::EndOfDocument",
       "g s": "vim::FirstNonWhitespace",
 
-      "ctrl-k": ["workspace::SendKeystrokes", "ctrl-k shift-a"],
-
       // Helix selections
       "x": "vim::ToggleVisualLine",
       "X": "vim::ToggleVisualLine",
       "v": "vim::ToggleVisual",
       "m m": "vim::Matching",
+      "shift-c": "editor::AddSelectionBelow",
       "m i w": ["workspace::SendKeystrokes", "v i w"],
       "m a w": ["workspace::SendKeystrokes", "v a w"],
       "m i \"": ["workspace::SendKeystrokes", "v i \""],
@@ -84,7 +124,6 @@
       "m a }": ["workspace::SendKeystrokes", "v a }"],
       "m i t": ["workspace::SendKeystrokes", "v i t"],
       "m a t": ["workspace::SendKeystrokes", "v a t"],
-      "shift-r": "vim::Paste",
 
       // Space mode
       "space f": "file_finder::Toggle",
@@ -197,6 +236,8 @@
     // Both visual modes.
     "context": "Editor && vim_mode == visual || vim_mode == visual_line && !VimWaiting && !menu",
     "bindings": {
+      "escape": "vim::HelixNormalAfter",
+
       "c": "vim::Substitute", // Enable what we disabled earlier.
 
       "shift-r": "vim::Paste",
@@ -211,6 +252,8 @@
     // Insert mode.
     "context": "Editor && vim_mode == insert && !VimWaiting",
     "bindings": {
+      "escape": "vim::HelixNormalAfter",
+
       "ctrl-d": "vim::DeleteRight",
       "ctrl-h": "vim::DeleteLeft",
       "ctrl-r": "editor::Paste"
