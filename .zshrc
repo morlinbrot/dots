@@ -1,7 +1,7 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
-# Include rustup autocompletions.
+# Include `.zfunc` directory for autocompletions.
 fpath+=~/.zfunc
 
 # Path to your oh-my-zsh installation.
@@ -156,6 +156,8 @@ alias js='just serve'
 alias jst='just start'
 alias jt='just test'
 alias jw='just watch'
+alias jdc='just dc'
+alias jdk='just dk'
 
 alias d='deno'
 alias dt='deno task'
@@ -178,12 +180,21 @@ alias dca='docker compose ps -a'
 alias dcu='docker compose up -d'
 alias dcd='docker compose down'
 
+# Podman
+alias pc='podman compose'
+
+# Kubernetes
+alias kc='kubectl'
+
 # Tauri
 alias tauri='cargo tauri'
 alias ct='cargo tauri'
 
 # Moon monorepo management
 alias mn='moon'
+
+alias db='devbox'
+alias dbs='devbox services'
 
 # Default editor
 export EDITOR="/opt/homebrew/bin/hx"
