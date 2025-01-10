@@ -20,6 +20,12 @@ console_title_template = '{{ .Shell }} in {{ .Folder }}'
       style = 'full'
 
   [[blocks.segments]]
+    type = "os"
+    style = "plain"
+    # template = "{{ if .Env.DEVBOX_SHELL_ENABLED }}<p:purple><b> \uf487</b></p:purple>{{ end }}"
+    template = "{{ if .Env.DEVBOX_SHELL_ENABLED }}<p:purple><b> [db]</b></p:purple>{{ end }}"
+
+  [[blocks.segments]]
     type = "rust"
     style = "plain"
     template = "<p:peach>  {{ .Full }}</p:peach>"
