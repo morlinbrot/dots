@@ -173,7 +173,7 @@ alias uvt='uv run test'
 alias dk='docker'
 alias dkp='docker ps'
 alias dka='docker ps -a'
-alias dkstop='docker stop $(docker ps -a -q)'
+# alias dkstop='docker stop $(docker ps -a -q)'
 alias dc='docker compose'
 alias dcp='docker compose ps'
 alias dca='docker compose ps -a'
@@ -181,11 +181,14 @@ alias dcu='docker compose up -d'
 alias dcd='docker compose down'
 
 # Podman
+alias pm='podman'
 alias pc='podman compose'
 
 # Kubernetes
 alias kc='kubectl'
 
+# Minikube
+alias mk='minikube'
 # Tauri
 alias tauri='cargo tauri'
 alias ct='cargo tauri'

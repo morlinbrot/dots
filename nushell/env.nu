@@ -1,3 +1,4 @@
+use commands.nu *
 
 # The prompt indicators are environmental variables that represent
 # the state of the prompt
@@ -45,3 +46,6 @@ oh-my-posh init nu --print | save ($gen_dir | path join 'oh-my-posh.nu') --force
 # Run the zoxide setup script.
 # Modified to include some transformations for the current Nushell version (0.96.1).
 zoxide init nushell | str replace --all "-- $rest" "-- ...$rest" | str replace --all "def-env" "def --env" | save -f ($gen_dir | path join 'zoxide.nu')
+
+# Parse aliases from .zshrc
+open ~/dots/.zshrc | alias_find_zsh | alias_zsh_to_nu | save ~/dots/nushell/aliases_zsh.nu -f

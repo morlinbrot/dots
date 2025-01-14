@@ -3,6 +3,7 @@
 # version = "0.84.0"
 
 use aliases.nu *
+use aliases_zsh.nu *
 use commands.nu *
 use completions-git.nu *
 
