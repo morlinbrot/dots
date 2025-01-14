@@ -2,9 +2,13 @@
   {
     "context": "Editor || Terminal",
     "bindings": {
-      "ctrl-j": ["workspace::SendKeystrokes", "escape"],
+      // Go directly to helix mode.
+      "ctrl-h": "vim::HelixNormalAfter",
+      // Replace esc with ctrl-j and make sure to always go back to helix mode after.
+      "ctrl-j": ["workspace::SendKeystrokes", "escape ctrl-h"],
       "ctrl-c": "editor::ToggleComments",
 
+      "cmd-shift-o": "projects::OpenRecent",
       "cmd-shift-j": "terminal_panel::ToggleFocus",
       "cmd-shift-e": "project_panel::ToggleFocus",
       "cmd-shift-l": "project_panel::ToggleFocus",
@@ -17,10 +21,8 @@
       "cmd-k j": "pane::SplitDown",
       "cmd-k k": "pane::SplitUp",
       "cmd-k l": "pane::SplitRight",
-      "ctrl-shift h": ["workspace::ActivatePaneInDirection", "Left"],
-      "ctrl-shift j": ["workspace::ActivatePaneInDirection", "Down"],
-      "ctrl-shift k": ["workspace::ActivatePaneInDirection", "Up"],
-      "ctrl-shift l": ["workspace::ActivatePaneInDirection", "Right"],
+      "ctrl-shift-n": "workspace::ActivateNextPane",
+      "ctrl-shift-p": "workspace::ActivatePreviousPane",
       "cmd-k shift-h": ["workspace::SwapPaneInDirection", "Left"],
       "cmd-k shift-j": ["workspace::SwapPaneInDirection", "Down"],
       "cmd-k shift-k": ["workspace::SwapPaneInDirection", "Up"],
@@ -30,9 +32,13 @@
       "alt-h": "pane::ActivatePrevItem",
       "alt-l": "pane::ActivateNextItem",
       "alt-shift-h": "pane::SwapItemLeft",
-      "alt-shift-l": "pane::SwapItemRight",
-
-      "ctrl-h": "vim::HelixNormalAfter"
+      "alt-shift-l": "pane::SwapItemRight"
+    }
+  },
+  {
+    "context": "Terminal",
+    "bindings": {
+      "cmd-shift-k": "terminal_panel::ToggleFocus"
     }
   },
   {
@@ -48,8 +54,10 @@
     // Helix mode!!
     "context": "vim_mode == helix_normal",
     "bindings": {
-      "escape": "vim::NormalBefore",
+      // "escape": "vim::NormalBefore",
+      // With i and a, index is off by one for some reason.
       "i": ["workspace::SendKeystrokes", "escape i"],
+      "a": ["workspace::SendKeystrokes", "escape h a"],
 
       // Editor basics
       "/": "vim::Search",
@@ -62,6 +70,12 @@
       "g y": "editor::GoToTypeDefinition",
       "g shift-i": "editor::GoToImplementation",
       "shift-j": "vim::JoinLines",
+
+      // Folds
+      "z a": "editor::ToggleFold",
+      "z shift-a": "editor::ToggleFoldRecursive",
+      "z shift-m": "editor::FoldAll",
+      "z shift-r": "editor::UnfoldAll",
 
       // Modal editing basics
       "c": "vim::Substitute",
@@ -83,8 +97,8 @@
       "U": "vim::Redo",
       "p": "vim::Paste",
       "shift-p": ["vim::Paste", { "before": true }],
-      // "y": "vim::VisualYank",
-      "y": ["workspace::SendKeystrokes", "y escape ctrl-h"],
+      "y": "vim::VisualYank",
+      // "y": ["workspace::SendKeystrokes", "y escape ctrl-h"],
       "o": "vim::InsertLineBelow",
       "shift-o": "vim::InsertLineAbove",
       ">": "vim::Indent",
@@ -140,10 +154,6 @@
       "ctrl-u": "vim::ScrollUp",
       "ctrl-e": "vim::LineDown",
       "ctrl-y": "vim::LineUp",
-
-      // Kitty-like movements between panes.
-      "ctrl-shift-l": "workspace::ActivateNextPane",
-      "ctrl-shift-h": "workspace::ActivatePreviousPane",
 
       // Window mode.
       "ctrl-w v": "pane::SplitRight",

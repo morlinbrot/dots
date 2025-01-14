@@ -20,9 +20,11 @@
   "buffer_font_family": "IosevkaTerm Nerd Font Mono",
   // "buffer_font_family": "VictorMono Nerd Font",
   "vim_mode": true,
-  "show_inline_completions": true,
-  "show_copilot_suggestions": true,
   "relative_line_numbers": true,
+  "show_inline_completions": true,
+  "features": {
+    "inline_completion_provider": "copilot"
+  },
   "seed_search_query_from_cursor": "selection",
   "project_panel": {
     "dock": "right"
@@ -75,6 +77,9 @@
           "arguments": ["--stdin-filepath", "{buffer_path}"]
         }
       }
+    },
+    "SQL": {
+      "format_on_save": "off"
     }
   },
   "lsp": {
