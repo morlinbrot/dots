@@ -1,0 +1,25 @@
+{
+  "$schema": "https://raw.githubusercontent.com/jetify-com/devbox/0.13.7/.schema/devbox.schema.json",
+  "packages": [
+    "bat@latest",
+    "cargo-expand@latest",
+    "cargo-feature@latest",
+    "cargo-nextest@latest",
+    "cargo-watch@latest",
+    "exa@latest",
+    "ripgrep@latest",
+    "sqlx-cli@latest",
+    "wasm-pack@latest",
+    "zoxide@latest"
+  ],
+  "shell": {
+    "init_hook": [
+      "echo 'Welcome to devbox!' > /dev/null"
+    ],
+    "scripts": {
+      "test": [
+        "echo \"Error: no test specified\" && exit 1"
+      ]
+    }
+  }
+}

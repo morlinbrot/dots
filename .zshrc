@@ -1,6 +1,9 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
+# Include Devbox's global env as the first thing.
+eval "$(devbox global shellenv)"
+
 # Include `.zfunc` directory for autocompletions.
 fpath+=~/.zfunc
 
