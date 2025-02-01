@@ -10,3 +10,4 @@ postgresql
 sccache
 -- cask visual-studio-code
 wezterm
+xh
