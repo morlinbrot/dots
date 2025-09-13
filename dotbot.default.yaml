@@ -11,7 +11,7 @@
 
 - link:
     ~/.cargo/config.toml: cargo.config.toml
-    ~/.config/bat/config: bat.conf
+    ~/.config/bat: bat
     ~/.config/ghostty/config: ghostty/config
     ~/.config/helix/config.toml: helix/config.toml
     ~/.config/helix/languages.toml: helix/languages.toml
