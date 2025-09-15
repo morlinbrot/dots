@@ -4,8 +4,9 @@ local config = wezterm.config_builder()
 
 config.color_scheme = "Catppuccin Mocha"
 
-config.font = wezterm.font("IosevkaTerm NF")
-config.font_size = 16
+-- config.font = wezterm.font("IosevkaTerm NF")
+config.font = wezterm.font("JetBrainsMono Nerd Font")
+config.font_size = 15
 
 config.default_cursor_style = "BlinkingBar"
 config.use_fancy_tab_bar = false
@@ -33,10 +34,27 @@ config.keys = {
   -- Scrollback
   { key = 'k', mods = 'CTRL|SHIFT', action = act.ScrollByLine(-1) },
   { key = 'j', mods = 'CTRL|SHIFT', action = act.ScrollByLine(1) },
+  -- Set up following https://wezterm.org/shell-integration.html but currently not working...
   { key = 'k', mods = 'ALT|CTRL|SHIFT', action = act.ScrollToPrompt(-1) },
   { key = 'j', mods = 'ALT|CTRL|SHIFT', action = act.ScrollToPrompt(1) },
 }
+-- endregion: Keybindings
 
+-- region: Mouse bindings
+config.mouse_bindings = {
+    {
+    event = { Down = { streak = 3, button = 'Left' } },
+    action = wezterm.action.SelectTextAtMouseCursor 'SemanticZone',
+    mods = 'NONE',
+  },
+}
+-- endregion: Mouse bindings
+
+-- region: modal.wezterm Vim-style copy mode
+-- local modal = wezterm.plugin.require("https://github.com/MLFlexer/modal.wezterm")
+-- modal.apply_to_config(config)
+-- modal.set_default_keys(config)
+-- endregion: modal.wezterm Vim-style copy mode
 
 -- region: Startup script
 local mux = wezterm.mux
@@ -74,5 +92,6 @@ wezterm.on("gui-startup", function(cmd)
   prx_pane:send_text "xla\n"
 
 end)
+-- endregion: Startup script
 
 return config
