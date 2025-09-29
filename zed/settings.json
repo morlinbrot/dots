@@ -7,23 +7,24 @@
 // custom settings, run the `open default settings` command
 // from the command palette or from `Zed` application menu.
 {
-  "assistant": {
+  // "vim_mode": true,
+  "helix_mode": true,
+  "agent": {
+    "always_allow_tool_actions": true,
+    "default_profile": "write",
     "default_model": {
-      "provider": "zed.dev",
-      "model": "claude-3-5-sonnet-latest"
-    },
-    "version": "2"
+      "provider": "anthropic",
+      "model": "claude-opus-4-latest"
+    }
   },
   "theme": "Catppuccin Mocha",
   "buffer_font_size": 16,
   "buffer_font_weight": 500,
   "buffer_font_family": "IosevkaTerm Nerd Font Mono",
-  // "buffer_font_family": "VictorMono Nerd Font",
-  "vim_mode": true,
   "relative_line_numbers": true,
-  "show_inline_completions": true,
+  "show_edit_predictions": true,
   "features": {
-    "inline_completion_provider": "copilot"
+    "edit_prediction_provider": "copilot"
   },
   "seed_search_query_from_cursor": "selection",
   "project_panel": {
@@ -58,7 +59,7 @@
     },
     "TypeScript": {
       "code_actions_on_format": {
-        "source.organizeImports": true
+        // "source.organizeImports": true
       },
       "format_on_save": {
         "external": {
@@ -69,7 +70,7 @@
     },
     "TSX": {
       "code_actions_on_format": {
-        "source.organizeImports": true
+        // "source.organizeImports": true
       },
       "format_on_save": {
         "external": {

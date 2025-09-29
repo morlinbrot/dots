@@ -23,13 +23,13 @@
       "cmd-k l": "pane::SplitRight",
       "ctrl-shift-n": "workspace::ActivateNextPane",
       "ctrl-shift-p": "workspace::ActivatePreviousPane",
-      "cmd-k shift-h": ["workspace::SwapPaneInDirection", "Left"],
-      "cmd-k shift-j": ["workspace::SwapPaneInDirection", "Down"],
-      "cmd-k shift-k": ["workspace::SwapPaneInDirection", "Up"],
-      "cmd-k shift-l": ["workspace::SwapPaneInDirection", "Right"],
+      "cmd-k shift-h": "workspace::SwapPaneLeft",
+      "cmd-k shift-j": "workspace::SwapPaneDown",
+      "cmd-k shift-k": "workspace::SwapPaneUp",
+      "cmd-k shift-l": "workspace::SwapPaneRight",
 
       // Tabs
-      "alt-h": "pane::ActivatePrevItem",
+      "alt-h": "pane::ActivatePreviousItem",
       "alt-l": "pane::ActivateNextItem",
       "alt-shift-h": "pane::SwapItemLeft",
       "alt-shift-l": "pane::SwapItemRight"
@@ -62,7 +62,7 @@
       // Editor basics
       "/": "vim::Search",
       "n": "vim::MoveToNextMatch",
-      "N": "vim::MoveToPrevMatch",
+      "N": "vim::MoveToPreviousMatch",
       "ctrl-o": "pane::GoBack",
       "ctrl-i": "pane::GoForward",
       "g d": "editor::GoToDefinition",
@@ -85,10 +85,16 @@
       "z t": "editor::ScrollCursorTop",
       "z z": "editor::ScrollCursorCenter",
       "z b": "editor::ScrollCursorBottom",
-      "f": ["vim::PushOperator", { "FindForward": { "before": false } }],
-      "t": ["vim::PushOperator", { "FindForward": { "before": true } }],
-      "shift-f": ["vim::PushOperator", { "FindBackward": { "after": false } }],
-      "shift-t": ["vim::PushOperator", { "FindBackward": { "after": true } }],
+      "f": ["vim::PushFindForward", { "before": false, "multiline": false }],
+      "t": ["vim::PushFindForward", { "before": true, "multiline": false }],
+      "shift-f": [
+        "vim::PushFindBackward",
+        { "after": false, "multiline": false }
+      ],
+      "shift-t": [
+        "vim::PushFindBackward",
+        { "after": true, "multiline": false }
+      ],
       "shift-r": "vim::Paste",
       "ctrl-k": ["workspace::SendKeystrokes", "ctrl-k shift-a"],
 
@@ -158,10 +164,10 @@
       // Window mode.
       "ctrl-w v": "pane::SplitRight",
       "ctrl-w s": "pane::SplitDown",
-      "ctrl-w left": ["workspace::ActivatePaneInDirection", "Left"],
-      "ctrl-w right": ["workspace::ActivatePaneInDirection", "Right"],
-      "ctrl-w up": ["workspace::ActivatePaneInDirection", "Up"],
-      "ctrl-w down": ["workspace::ActivatePaneInDirection", "Down"],
+      "ctrl-w left": "workspace::ActivatePaneLeft",
+      "ctrl-w right": "workspace::ActivatePaneRight",
+      "ctrl-w up": "workspace::ActivatePaneUp",
+      "ctrl-w down": "workspace::ActivatePaneDown",
 
       // Personal preferences
       "alt-k": "editor::MoveLineUp",
