@@ -2,15 +2,15 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Include Devbox's global env as the first thing.
-eval "$(devbox global shellenv)"
+# eval "$(devbox global shellenv)"
 
 # Include `.zfunc` directory for autocompletions.
 fpath+=~/.zfunc
 
-# Path to your oh-my-zsh installation.
-export ZSH=$HOME/.oh-my-zsh
-
-ZSH_THEME="avit"
+# Not needed with antidote + use-omz: $ZSH is managed by use-omz, and the
+# prompt comes from oh-my-posh, so no OMZ theme should be loaded.
+# export ZSH=$HOME/.oh-my-zsh
+# ZSH_THEME="avit"
 
 # Uncomment the following line to use hyphen-insensitive completion. Case
 # sensitive completion must be off. _ and - will be interchangeable.
@@ -18,23 +18,31 @@ HYPHEN_INSENSITIVE="true"
 
 export HISTCONTROL=ignoreboth
 
+# Antidote plugin manager
+# Currently exploring as better perf alternative to oh-my-zsh (omz slows down new shell startup from .12 to .56 ms)
+zsh_plugins=${ZDOTDIR:-$HOME}/.zsh_plugins
+if [[ ! ${zsh_plugins}.zsh -nt ${zsh_plugins}.txt ]]; then
+  source /opt/homebrew/opt/antidote/share/antidote/antidote.zsh
+  antidote bundle <${zsh_plugins}.txt >|${zsh_plugins}.zsh
+fi
+source ${zsh_plugins}.zsh
+
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(
-  dirhistory
-  git
-  jsontools
-  z
-  zsh-autosuggestions
-  zsh-syntax-highlighting
-)
+# plugins=(
+#   dirhistory
+#   git
+#   jsontools
+#   z
+#   zsh-autosuggestions
+# )
 
 # Include oh-my-zsh config.
-source $ZSH/oh-my-zsh.sh
+# source $ZSH/oh-my-zsh.sh
 
-# Initialize oh-my-posh prompt.
-eval "$(oh-my-posh init zsh --config ~/.config/oh-my-posh/default.omp.toml)"
+# # Initialize oh-my-posh prompt.
+_evalcache oh-my-posh init zsh --config ~/.config/oh-my-posh/default.omp.toml
 
 # ++++ # ++++ #
 #  ALIASES
@@ -124,6 +132,7 @@ alias gstu='git stash --include-untracked'
 
 alias gs='git status'
 
+alias gsup='git submodule update'
 alias gsw='git switch'
 alias gswc='git switch --create'
 
@@ -152,6 +161,7 @@ alias j='just'
 alias jb='just build'
 alias jc='just check'
 alias jd='just dev'
+alias ji='just install'
 alias jf='just format'
 alias jl='just lint'
 alias jr='just run'
@@ -202,6 +212,9 @@ alias mn='moon'
 alias db='devbox'
 alias dbs='devbox services'
 
+# Mise
+alias menv='eval "$(mise env -s zsh)"'
+
 # Default editor
 export EDITOR="/opt/homebrew/bin/hx"
 
@@ -209,6 +222,8 @@ export EDITOR="/opt/homebrew/bin/hx"
 export SSH_KEY_PATH="~/.ssh/rsa_id"
 
 # FZF
+_evalcache fzf --zsh
+
 # Use ripgrep for :Files
 # export FZF_DEFAULT_COMMAND='rg --files --hidden --follow -g "!**/.git/*" -g "!**/node_modules/*" -g "!**/target/*" -g "!dotbot/*" -g "!**/.terraform/*"'
 
@@ -228,8 +243,6 @@ _fzf_compgen_dir() {
     fd --type=d --hidden --exclude .git . "$1"
 }
 
-eval "$(fzf --zsh)"
-
 # ++++  ++++ #
 #  PATH
 # ++++  ++++ #
@@ -241,11 +254,21 @@ export PATH="$HOME/.local/bin:$PATH"
 # Add homebrew-installed llvm to the path.
 export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
 
-# NVM
+# MISE. TODO: Consider replacing nvm with mise for node version handling.
+# Using --shims to shave off startup time. Mise will not auto-load [env] sections when cd'ing into a dir. Use `menv` to load [env]s.
+_evalcache mise activate zsh --shims
+
+# NVM (kept after mise so nvm's node beats mise's node shims on PATH)
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
-# Global npm packages (as per the current active nvm node version)
-export PATH="(npm config get prefix --location=global):$PATH"
+# Lazy load NVM on first use to avoid paying its huge startup time penalty
+nvm() { unset -f nvm; [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"; nvm "$@"; }
+# Put the default node version's bin (node, npm, and global npm packages) on
+# PATH without loading nvm or npm: resolve the default alias with a glob.
+if [[ -r $NVM_DIR/alias/default ]]; then
+  _nvm_bins=($NVM_DIR/versions/node/$(<$NVM_DIR/alias/default)*/bin(Nn))
+  (( $#_nvm_bins )) && export PATH="${_nvm_bins[-1]}:$PATH"
+  unset _nvm_bins
+fi
 
 # GO
 export GOPATH="$HOME/.go"
@@ -283,3 +306,21 @@ export PATH="$PATH:$HOME/.dotnet/tools"
 
 export ANDROID_HOME="$HOME/Library/Android/sdk"
 export PATH="$PATH:$ANDROID_HOME/tools/:$ANDROID_HOME/tools/bin:$ANDROID_HOME/platform-tools/"
+# pnpm
+export PNPM_HOME="/Users/oxoliro/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
+
+
+
+# Helper to time shell startup
+timezsh () {
+  shell=${1-$SHELL}
+  for i in $(seq 1 10); do
+    /usr/bin/time $shell -i -c exit
+  done
+}
+

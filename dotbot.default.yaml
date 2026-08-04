@@ -26,6 +26,7 @@
     ~/.config/zed/keymap.json: zed/keymap.json
     ~/.dprint.json: dprint.json
     ~/.zshrc: .zshrc
+    ~/.zsh_plugins.txt: .zsh_plugins.txt
 
 - create:
     - ~/prx

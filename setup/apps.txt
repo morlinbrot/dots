@@ -1,3 +1,4 @@
+antidote
 curl
 git
 libclang-dev
