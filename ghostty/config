@@ -1,23 +1,82 @@
 font-size = 17
 working-directory = /Users/zisulin/dots
 
-theme = catppuccin-mocha
+theme = Catppuccin Mocha
 font-family = IosevkaTerm Nerd Font Mono
 
-macos-icon = custom-style
-macos-icon-frame = plastic
-#macos-icon-ghost-color = ea80fc
-#macos-icon-screen-color = e040fb,311b92
-macos-icon-ghost-color = 4a148c
-macos-icon-screen-color = 000000,4a148c
+# macos-icon = custom-style
+# macos-icon-frame = plastic
+# #macos-icon-ghost-color = ea80fc
+# #macos-icon-screen-color = e040fb,311b92
+# macos-icon-ghost-color = 4a148c
+# macos-icon-screen-color = 000000,4a148c
 
 # keybind = global:cmd+shift+t=toggle_quick_terminal
 
-keybind = ctrl+shift+h=goto_split:left
-keybind = ctrl+shift+l=goto_split:right
-keybind = ctrl+shift+k=goto_split:top
-keybind = ctrl+shift+j=goto_split:bottom
+# Split essentials
+keybind = ctrl+shift+enter=new_split:right
+keybind = ctrl+shift+'=new_split:down
+keybind = ctrl+shift+n=goto_split:next
+keybind = ctrl+shift+p=goto_split:previous
 keybind = ctrl+shift+f=toggle_split_zoom
 
-keybind = cmd+ctrl+shift+l=next_tab
-keybind = cmd+ctrl+shift+h=previous_tab
+keybind = super+ctrl+shift+l=resize_split:right,10
+keybind = super+ctrl+shift+h=resize_split:left,10
+keybind = super+ctrl+shift+k=resize_split:up,10
+keybind = super+ctrl+shift+j=resize_split:down,10
+keybind = super+ctrl+shift+==equalize_splits
+
+# Screen/scrollback manipulation
+keybind = ctrl+shift+u=scroll_page_fractional:-0.5
+keybind = ctrl+shift+d=scroll_page_fractional:0.5
+keybind = ctrl+shift+k=jump_to_prompt:-1
+keybind = ctrl+shift+j=jump_to_prompt:1
+
+# keybind = ctrl+shift+h=goto_split:left
+# keybind = ctrl+shift+l=goto_split:right
+
+# keybind = cmd+ctrl+shift+l=next_tab
+# keybind = cmd+ctrl+shift+h=previous_tab
+
+
+# Entry point
+keybind = alt+v=activate_key_table:vim
+
+# Key table definition
+keybind = vim/
+
+# Line movement
+keybind = vim/j=scroll_page_lines:1
+keybind = vim/k=scroll_page_lines:-1
+
+# Page movement
+keybind = vim/ctrl+d=scroll_page_down
+keybind = vim/ctrl+u=scroll_page_up
+keybind = vim/ctrl+f=scroll_page_down
+keybind = vim/ctrl+b=scroll_page_up
+keybind = vim/shift+j=scroll_page_down
+keybind = vim/shift+k=scroll_page_up
+
+# Jump to top/bottom
+keybind = vim/g>g=scroll_to_top
+keybind = vim/shift+g=scroll_to_bottom
+
+# Search (if you want vim-style search entry)
+keybind = vim/slash=start_search
+keybind = vim/n=navigate_search:next
+
+# Copy mode / selection
+# Note we're missing a lot of actions here to make this more full featured.
+keybind = vim/v=copy_to_clipboard
+keybind = vim/y=copy_to_clipboard
+
+# Command Palette
+keybind = vim/shift+semicolon=toggle_command_palette
+
+# Exit
+keybind = vim/escape=deactivate_key_table
+keybind = vim/q=deactivate_key_table
+keybind = vim/i=deactivate_key_table
+
+# Catch unbound keys
+keybind = vim/catch_all=ignore
