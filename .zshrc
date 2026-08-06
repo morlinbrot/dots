@@ -124,14 +124,12 @@ alias grsh='git reset --hard'
 alias grm='git rm'
 alias grmc='git rm --cached'
 
+alias gs='git status'
 alias gst='git stash'
 alias gsta='git stash apply'
 alias gstl='git stash list'
 alias gstp='git stash pop'
 alias gstu='git stash --include-untracked'
-
-alias gs='git status'
-
 alias gsup='git submodule update'
 alias gsw='git switch'
 alias gswc='git switch --create'
@@ -171,9 +169,16 @@ alias jt='just test'
 alias jw='just watch'
 alias jdc='just dc'
 alias jdk='just dk'
+alias jwr='just watch-run'
+alias jwt='just watch-test'
 
 alias d='deno'
 alias dt='deno task'
+alias dtd='deno task dev'
+alias dtb='deno task build'
+alias dts='deno task serve'
+alias dtp='deno task preview'
+alias dtt='deno task test'
 
 alias notes='~/notes/notes.sh'
 
@@ -198,7 +203,10 @@ alias pm='podman'
 alias pc='podman compose'
 
 # Kubernetes
-alias kc='kubectl'
+alias k='kubectl'
+alias kg='kubectl get'
+alias kci='kubectl cluster-info'
+alias kpf='kubectl port-forward'
 
 # Minikube
 alias mk='minikube'
@@ -213,6 +221,9 @@ alias db='devbox'
 alias dbs='devbox services'
 
 # Mise
+alias m='mise'
+alias mr='mise run'
+alias mt='mise tasks'
 alias menv='eval "$(mise env -s zsh)"'
 
 # Default editor
