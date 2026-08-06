@@ -1,17 +1,27 @@
 font-size = 17
-working-directory = /Users/zisulin/dots
+working-directory = ~/dots
 
 theme = Catppuccin Mocha
 font-family = IosevkaTerm Nerd Font Mono
 
-# macos-icon = custom-style
-# macos-icon-frame = plastic
-# #macos-icon-ghost-color = ea80fc
-# #macos-icon-screen-color = e040fb,311b92
-# macos-icon-ghost-color = 4a148c
-# macos-icon-screen-color = 000000,4a148c
+cursor-style = bar
 
-# keybind = global:cmd+shift+t=toggle_quick_terminal
+macos-icon = holographic
+
+# Not using macos-option-as-alt to preserve being able to type special characters like ü means having to define explict key combos for common alt key combos.
+# macos-option-as-alt = true
+# Word movement/deletion
+keybind = alt+backspace=text:\x1b\x7f
+keybind = alt+b=esc:b
+keybind = alt+f=esc:f
+keybind = alt+d=esc:d
+# Insert last arg of previous command (shell) / repeat last find (helix)
+keybind = alt+.=esc:.
+# Tab switching in Helix
+keybind = alt+h=esc:h
+keybind = alt+l=esc:l
+
+keybind = global:ctrl+shift+t=toggle_quick_terminal
 
 # Split essentials
 keybind = ctrl+shift+enter=new_split:right
@@ -37,46 +47,3 @@ keybind = ctrl+shift+j=jump_to_prompt:1
 
 # keybind = cmd+ctrl+shift+l=next_tab
 # keybind = cmd+ctrl+shift+h=previous_tab
-
-
-# Entry point
-keybind = alt+v=activate_key_table:vim
-
-# Key table definition
-keybind = vim/
-
-# Line movement
-keybind = vim/j=scroll_page_lines:1
-keybind = vim/k=scroll_page_lines:-1
-
-# Page movement
-keybind = vim/ctrl+d=scroll_page_down
-keybind = vim/ctrl+u=scroll_page_up
-keybind = vim/ctrl+f=scroll_page_down
-keybind = vim/ctrl+b=scroll_page_up
-keybind = vim/shift+j=scroll_page_down
-keybind = vim/shift+k=scroll_page_up
-
-# Jump to top/bottom
-keybind = vim/g>g=scroll_to_top
-keybind = vim/shift+g=scroll_to_bottom
-
-# Search (if you want vim-style search entry)
-keybind = vim/slash=start_search
-keybind = vim/n=navigate_search:next
-
-# Copy mode / selection
-# Note we're missing a lot of actions here to make this more full featured.
-keybind = vim/v=copy_to_clipboard
-keybind = vim/y=copy_to_clipboard
-
-# Command Palette
-keybind = vim/shift+semicolon=toggle_command_palette
-
-# Exit
-keybind = vim/escape=deactivate_key_table
-keybind = vim/q=deactivate_key_table
-keybind = vim/i=deactivate_key_table
-
-# Catch unbound keys
-keybind = vim/catch_all=ignore
