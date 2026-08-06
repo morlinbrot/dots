@@ -8,6 +8,9 @@ cursor-style = bar
 
 macos-icon = holographic
 
+# Highlight outline around the currently focused pane.
+custom-shader = ~/dots/ghostty/focus-pane.glsl
+
 # Not using macos-option-as-alt to preserve being able to type special characters like ü means having to define explict key combos for common alt key combos.
 # macos-option-as-alt = true
 # Word movement/deletion
