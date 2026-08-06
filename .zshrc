@@ -1,22 +1,17 @@
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
-
-# Include Devbox's global env as the first thing.
-# eval "$(devbox global shellenv)"
-
 # Include `.zfunc` directory for autocompletions.
 fpath+=~/.zfunc
 
-# Not needed with antidote + use-omz: $ZSH is managed by use-omz, and the
-# prompt comes from oh-my-posh, so no OMZ theme should be loaded.
-# export ZSH=$HOME/.oh-my-zsh
-# ZSH_THEME="avit"
-
-# Uncomment the following line to use hyphen-insensitive completion. Case
-# sensitive completion must be off. _ and - will be interchangeable.
 HYPHEN_INSENSITIVE="true"
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=244"
 
-export HISTCONTROL=ignoreboth
+setopt HIST_IGNORE_ALL_DUPS
+unsetopt AUTO_CD
+
+# Default editor
+export EDITOR="/opt/homebrew/bin/hx"
+
+# SSH
+export SSH_KEY_PATH="~/.ssh/rsa_id"
 
 # Antidote plugin manager
 # Currently exploring as better perf alternative to oh-my-zsh (omz slows down new shell startup from .12 to .56 ms)
@@ -27,32 +22,16 @@ if [[ ! ${zsh_plugins}.zsh -nt ${zsh_plugins}.txt ]]; then
 fi
 source ${zsh_plugins}.zsh
 
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# plugins=(
-#   dirhistory
-#   git
-#   jsontools
-#   z
-#   zsh-autosuggestions
-# )
-
-# Include oh-my-zsh config.
-# source $ZSH/oh-my-zsh.sh
-
-# # Initialize oh-my-posh prompt.
+# Initialize oh-my-posh prompt.
 _evalcache oh-my-posh init zsh --config ~/.config/oh-my-posh/default.omp.toml
 
 # ++++ # ++++ #
 #  ALIASES
 # ++++ # ++++ #
-# For a full list of active aliases, run `alias`.
 alias prx='cd ~/prx'
 alias py='python3'
 alias npmg='npm list -g --depth=0'
 
-# Git aliases.
 alias ga='git add'
 alias gaa='git add --all'
 alias gap='git add --patch'
@@ -134,11 +113,9 @@ alias gsup='git submodule update'
 alias gsw='git switch'
 alias gswc='git switch --create'
 
-# Handy exa shorts.
 alias xla='exa -la'
 alias xlt='exa -lTL2'
 
-# Rust!
 alias c='cargo'
 alias cb='cargo build'
 alias cch='cargo check' # `cc` interferes with the linker of the same name
@@ -147,14 +124,15 @@ alias ct='cargo test'
 alias cnt='cargo nextest run'
 alias cw='cargo watch'
 
+alias tauri='cargo tauri'
+alias ct='cargo tauri'
+
 # What kind of pleb would write out 'nvim' all the time!?
 alias nv='nvim'
 alias v='nvim'
 
-# terraform
 alias tf='terraform'
 
-# Just
 alias j='just'
 alias jb='just build'
 alias jc='just check'
@@ -182,12 +160,10 @@ alias dtt='deno task test'
 
 alias notes='~/notes/notes.sh'
 
-# Python
 alias py='python3'
 alias uvr='uv run'
 alias uvt='uv run test'
 
-# Docker Compose
 alias dk='docker'
 alias dkp='docker ps'
 alias dka='docker ps -a'
@@ -198,45 +174,28 @@ alias dca='docker compose ps -a'
 alias dcu='docker compose up -d'
 alias dcd='docker compose down'
 
-# Podman
 alias pm='podman'
 alias pc='podman compose'
 
-# Kubernetes
 alias k='kubectl'
 alias kg='kubectl get'
 alias kci='kubectl cluster-info'
 alias kpf='kubectl port-forward'
 
-# Minikube
 alias mk='minikube'
-# Tauri
-alias tauri='cargo tauri'
-alias ct='cargo tauri'
 
-# Moon monorepo management
 alias mn='moon'
 
 alias db='devbox'
 alias dbs='devbox services'
 
-# Mise
 alias m='mise'
 alias mr='mise run'
 alias mt='mise tasks'
 alias menv='eval "$(mise env -s zsh)"'
 
-# Default editor
-export EDITOR="/opt/homebrew/bin/hx"
-
-#  SSH
-export SSH_KEY_PATH="~/.ssh/rsa_id"
-
 # FZF
 _evalcache fzf --zsh
-
-# Use ripgrep for :Files
-# export FZF_DEFAULT_COMMAND='rg --files --hidden --follow -g "!**/.git/*" -g "!**/node_modules/*" -g "!**/target/*" -g "!dotbot/*" -g "!**/.terraform/*"'
 
 # Use fd instead of find for fzf.
 export FZF_DEFAULT_COMMAND="fd --type file --hidden --follow --strip-cwd-prefix --exclude .git"
@@ -265,6 +224,10 @@ export PATH="$HOME/.local/bin:$PATH"
 # Add homebrew-installed llvm to the path.
 export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
 
+# GO
+export GOPATH="$HOME/.go"
+export PATH="$GOPATH/bin:$PATH"
+
 # MISE. TODO: Consider replacing nvm with mise for node version handling.
 # Using --shims to shave off startup time. Mise will not auto-load [env] sections when cd'ing into a dir. Use `menv` to load [env]s.
 _evalcache mise activate zsh --shims
@@ -281,51 +244,25 @@ if [[ -r $NVM_DIR/alias/default ]]; then
   unset _nvm_bins
 fi
 
-# GO
-export GOPATH="$HOME/.go"
-export PATH="$GOPATH/bin:$PATH"
+# PNPM
+export PNPM_HOME="$HOME/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
 
-# ++++  ++++ #
-#  RANDOMS
-# ++++  ++++ #
-unsetopt AUTO_CD
-
-# Source ghc and friends (Haskell)
-if [ -d "~/.ghcup/env" ]; then
-    . ~/.ghcup/env
-fi
-
-# auto-suggestions
-ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=244"
-
-# KITTY
-scroll-and-clear-screen() {
-    printf '\n%.0s' {1..$LINES}
-    zle clear-screen
-}
-zle -N scroll-and-clear-screen
-bindkey '^l' scroll-and-clear-screen
-
-# BUN
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
-# completions
-[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 
 # .NET CORE SDK tools
 export PATH="$PATH:$HOME/.dotnet/tools"
 
 export ANDROID_HOME="$HOME/Library/Android/sdk"
 export PATH="$PATH:$ANDROID_HOME/tools/:$ANDROID_HOME/tools/bin:$ANDROID_HOME/platform-tools/"
-# pnpm
-export PNPM_HOME="/Users/oxoliro/Library/pnpm"
-case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
-esac
-# pnpm end
 
+# DENO
+. "$HOME/.deno/env"
 
+# KUBECTL completions
+source <(kubectl completion zsh)
 
 # Helper to time shell startup
 timezsh () {
