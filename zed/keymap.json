@@ -1,13 +1,33 @@
 [
   {
-    "context": "Editor || Terminal",
+    "context": "GitPanel && Editor",
+    "bindings": {
+      "space": "git::ToggleStaged"
+    }
+  },
+  {
+    "context": "GitPanel && ChangesList",
+    "bindings": {
+      "space": "git::ToggleStaged",
+      "alt-j": "git_panel::FocusEditor"
+    }
+  },
+  {
+    "context": "GitPanel && CommitEditor",
+    "bindings": {
+      "alt-k": "git_panel::FocusChanges"
+    }
+  },
+  {
+    "context": "Editor || Terminal || Workspace",
     "bindings": {
       // Go directly to helix mode.
-      "ctrl-h": "vim::HelixNormalAfter",
+      // "ctrl-h": "vim::HelixNormalAfter",
       // Replace esc with ctrl-j and make sure to always go back to helix mode after.
       "ctrl-j": ["workspace::SendKeystrokes", "escape ctrl-h"],
       "ctrl-c": "editor::ToggleComments",
 
+      "cmd-l": "workspace::ToggleLeftDock",
       "cmd-shift-o": "projects::OpenRecent",
       "cmd-shift-j": "terminal_panel::ToggleFocus",
       "cmd-shift-e": "project_panel::ToggleFocus",
@@ -218,7 +238,34 @@
 
       // Window mode.
       "ctrl-w v": "pane::SplitRight",
-      "ctrl-w s": "pane::SplitDown"
+      "ctrl-w s": "pane::SplitDown",
+
+      "d b": "editor::ToggleBreakpoint",
+      "d s": "debugger::Start",
+      // "d r": "debugger::Restart",
+      "d r": "debugger::Rerun",
+      "d c": "debugger::Continue",
+      "d t": "debugger::Stop",
+      "d i": "debugger::StepInto",
+      "d o": "debugger::StepOut",
+      "d n": "debugger::StepOver"
+      // "space shift-g h": "debugger::Pause",
+      // "space shift-g ctrl-l": "editor::EditLogBreakpoint",
+    }
+  },
+  {
+    // Enable debugger keybinds also when in the debugger panel itself
+    "context": "DebugPanel",
+    "bindings": {
+      "d b": "editor::ToggleBreakpoint",
+      "d s": "debugger::Start",
+      // "d r": "debugger::Restart",
+      "d r": "debugger::Rerun",
+      "d c": "debugger::Continue",
+      "d t": "debugger::Stop",
+      "d i": "debugger::StepInto",
+      "d o": "debugger::StepOut",
+      "d n": "debugger::StepOver"
     }
   },
   {
@@ -252,7 +299,7 @@
     // Both visual modes.
     "context": "Editor && vim_mode == visual || vim_mode == visual_line && !VimWaiting && !menu",
     "bindings": {
-      "escape": "vim::HelixNormalAfter",
+      // "escape": "vim::HelixNormalAfter",
 
       "c": "vim::Substitute", // Enable what we disabled earlier.
 
@@ -268,7 +315,7 @@
     // Insert mode.
     "context": "Editor && vim_mode == insert && !VimWaiting",
     "bindings": {
-      "escape": "vim::HelixNormalAfter",
+      // "escape": "vim::HelixNormalAfter",
 
       "ctrl-d": "vim::DeleteRight",
       "ctrl-h": "vim::DeleteLeft",
@@ -279,6 +326,28 @@
     "context": "Editor && vim_operator == g && !VimWaiting && !menu",
     "bindings": {
       // "x": "editor::AddSelectionBelow"
+    }
+  },
+  {
+    "context": "Pane",
+    "unbind": {
+      "alt-cmd-t": [
+        "pane::CloseOtherItems",
+        {
+          "close_pinned": false
+        }
+      ]
+    }
+  },
+  {
+    "bindings": {
+      "alt-cmd-t": "agent::NewThread"
+    }
+  },
+  {
+    "context": "AgentPanel && acp_thread",
+    "unbind": {
+      "alt-cmd-t": "agent::NewThread"
     }
   }
 ]
