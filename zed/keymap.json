@@ -19,19 +19,21 @@
     }
   },
   {
-    "context": "Editor || Terminal || Workspace",
+    "context": "AgentPanel || Editor || Terminal || Workspace",
     "bindings": {
       // Go directly to helix mode.
       // "ctrl-h": "vim::HelixNormalAfter",
       // Replace esc with ctrl-j and make sure to always go back to helix mode after.
       "ctrl-j": ["workspace::SendKeystrokes", "escape ctrl-h"],
       "ctrl-c": "editor::ToggleComments",
-
-      "cmd-l": "workspace::ToggleLeftDock",
       "cmd-shift-o": "projects::OpenRecent",
+
+      // Pane management
+      "cmd-l": "workspace::ToggleLeftDock",
+      "cmd-r": "workspace::ToggleRightDock",
       "cmd-shift-j": "terminal_panel::ToggleFocus",
-      "cmd-shift-e": "project_panel::ToggleFocus",
       "cmd-shift-l": "project_panel::ToggleFocus",
+      "cmd-shift-e": "workspace::CloseAllDocks",
 
       "ctrl-shift-f": "workspace::ToggleZoom",
 
@@ -48,12 +50,16 @@
       "cmd-k shift-k": "workspace::SwapPaneUp",
       "cmd-k shift-l": "workspace::SwapPaneRight",
 
+      // Move tabs to different pane
+      "cmd-alt-l": ["workspace::MoveItemToPaneInDirection", { "direction": "right" }],
+      "cmd-alt-h": ["workspace::MoveItemToPaneInDirection", { "direction": "left" }],
+
       // Tabs
       "alt-h": "pane::ActivatePreviousItem",
       "alt-l": "pane::ActivateNextItem",
       "alt-shift-h": "pane::SwapItemLeft",
-      "alt-shift-l": "pane::SwapItemRight"
-    }
+      "alt-shift-l": "pane::SwapItemRight",
+    },
   },
   {
     "context": "Terminal",
@@ -65,10 +71,9 @@
     "context": "ProjectPanel",
     "bindings": {
       "cmd-shift-j": "terminal_panel::ToggleFocus",
-      "cmd-shift-e": "project_panel::ToggleFocus",
       "cmd-shift-l": "project_panel::ToggleFocus",
-      "cmd-shift-h": "project_panel::ToggleFocus"
-    }
+      "cmd-shift-h": "project_panel::ToggleFocus",
+    },
   },
   {
     // Helix mode!!
@@ -319,8 +324,10 @@
 
       "ctrl-d": "vim::DeleteRight",
       "ctrl-h": "vim::DeleteLeft",
-      "ctrl-r": "editor::Paste"
-    }
+      "ctrl-r": "editor::Paste",
+
+      "ctrl-o": ["workspace::SendKeystrokes", "cmd-enter"],
+    },
   },
   {
     "context": "Editor && vim_operator == g && !VimWaiting && !menu",
@@ -348,6 +355,18 @@
     "context": "AgentPanel && acp_thread",
     "unbind": {
       "alt-cmd-t": "agent::NewThread"
+    }
+  },
+  {
+    "context": "SettingsWindow",
+    "unbind": {
+      "cmd-shift-e": "settings_editor::ToggleFocusNav"
+    }
+  },
+  {
+    "context": "!AcpThread > Editor && mode == full",
+    "unbind": {
+      "cmd-shift-e": "pane::RevealInProjectPanel"
     }
   }
 ]
