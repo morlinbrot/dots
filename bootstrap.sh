@@ -69,7 +69,14 @@ brew bundle --file="$brewfile"
 step "Linking config files"
 "$DOTS/install"
 
-# 6. zsh as login shell
+# 6. Rex's terminfo entry, plus an ssh guard so hosts without it get xterm-256color
+#    (Ghostty handles this itself via shell-integration-features in ghostty/config).
+if command -v rex >/dev/null; then
+  step "Setting up Rex terminfo"
+  rex terminfo setup
+fi
+
+# 7. zsh as login shell
 if [[ "$(basename "${SHELL:-}")" != zsh ]]; then
   step "Making zsh the default shell"
   zsh_path="$(grep -m1 '/zsh$' /etc/shells)"

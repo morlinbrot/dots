@@ -5,6 +5,8 @@ theme = Catppuccin Mocha
 font-family = IosevkaTerm Nerd Font Mono
 macos-icon = holographic
 cursor-style = bar
+# Over SSH, install Ghostty's terminfo entry on the remote host (or fall back to xterm-256color).
+shell-integration-features = ssh-terminfo
 
 # Highlight outline around the currently focused pane.
 custom-shader = ~/dots/ghostty/shaders/focus-pane.glsl
