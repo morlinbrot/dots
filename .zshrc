@@ -1,5 +1,8 @@
-# Include `.zfunc` directory for autocompletions.
+# Homebrew and PATH setup live in .zprofile.
+
+# Include `.zfunc` and Homebrew's completions (must come before plugins run compinit).
 fpath+=~/.zfunc
+[[ -n $HOMEBREW_PREFIX ]] && fpath+=$HOMEBREW_PREFIX/share/zsh/site-functions
 
 HYPHEN_INSENSITIVE="true"
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=244"
@@ -7,28 +10,44 @@ ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=244"
 setopt HIST_IGNORE_ALL_DUPS
 unsetopt AUTO_CD
 
-# Default editor
-export EDITOR="/opt/homebrew/bin/hx"
+# Default editor: helix if available, else nvim.
+if (( $+commands[hx] )); then
+  export EDITOR="hx"
+else
+  export EDITOR="nvim"
+fi
+
+export MITOS_RUNTIME=~/prx/mitos/runtime
 
 # SSH
 export SSH_KEY_PATH="~/.ssh/rsa_id"
 
-# Antidote plugin manager
-# Currently exploring as better perf alternative to oh-my-zsh (omz slows down new shell startup from .12 to .56 ms)
+# Antidote plugin manager (brew install antidote)
 zsh_plugins=${ZDOTDIR:-$HOME}/.zsh_plugins
-if [[ ! ${zsh_plugins}.zsh -nt ${zsh_plugins}.txt ]]; then
-  source /opt/homebrew/opt/antidote/share/antidote/antidote.zsh
-  antidote bundle <${zsh_plugins}.txt >|${zsh_plugins}.zsh
+_antidote=$HOMEBREW_PREFIX/opt/antidote/share/antidote/antidote.zsh
+if [[ -n $HOMEBREW_PREFIX && -r $_antidote && -r ${zsh_plugins}.txt ]]; then
+  if [[ ! ${zsh_plugins}.zsh -nt ${zsh_plugins}.txt ]]; then
+    source $_antidote
+    antidote bundle <${zsh_plugins}.txt >|${zsh_plugins}.zsh
+  fi
+  source ${zsh_plugins}.zsh
+else
+  # No plugins: at least get basic completion.
+  autoload -Uz compinit && compinit
 fi
-source ${zsh_plugins}.zsh
+unset _antidote
+
+# Run `eval "$(cmd)"`, cached via the evalcache plugin when it's loaded.
+_init() { if (( $+functions[_evalcache] )); then _evalcache "$@"; else eval "$("$@")"; fi }
 
 # Initialize oh-my-posh prompt.
-_evalcache oh-my-posh init zsh --config ~/.config/oh-my-posh/default.omp.toml
+(( $+commands[oh-my-posh] )) && _init oh-my-posh init zsh --config ~/.config/oh-my-posh/default.omp.toml
 
 # ++++ # ++++ #
 #  ALIASES
 # ++++ # ++++ #
 alias prx='cd ~/prx'
+alias src='cd ~/src'
 alias py='python3'
 alias npmg='npm list -g --depth=0'
 
@@ -113,8 +132,8 @@ alias gsup='git submodule update'
 alias gsw='git switch'
 alias gswc='git switch --create'
 
-alias xla='exa -la'
-alias xlt='exa -lTL2'
+alias xla='eza -la'
+alias xlt='eza -lTL2'
 
 alias c='cargo'
 alias cb='cargo build'
@@ -125,11 +144,12 @@ alias cnt='cargo nextest run'
 alias cw='cargo watch'
 
 alias tauri='cargo tauri'
-alias ct='cargo tauri'
 
 # What kind of pleb would write out 'nvim' all the time!?
 alias nv='nvim'
 alias v='nvim'
+# Keep different nvim configs in parallel
+alias lv='NVIM_APPNAME="nvim-lazyvim" nvim'
 
 alias tf='terraform'
 
@@ -195,12 +215,15 @@ alias mt='mise tasks'
 alias menv='eval "$(mise env -s zsh)"'
 
 # FZF
-_evalcache fzf --zsh
+(( $+commands[fzf] )) && _init fzf --zsh
+
+# ATUIN: shell history search. Comes after fzf so it takes over Ctrl+R.
+(( $+commands[atuin] )) && _init atuin init zsh
 
 # Use fd instead of find for fzf.
 export FZF_DEFAULT_COMMAND="fd --type file --hidden --follow --strip-cwd-prefix --exclude .git"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-export FZF_ALT_C_COMMAND="fd --type=d --hidden --stript-cwd-prefix --exclude .git"
+export FZF_ALT_C_COMMAND="fd --type=d --hidden --strip-cwd-prefix --exclude .git"
 export FZF_DEFAULT_OPTS="--bind=space:toggle,ctrl-l:select,ctrl-h:deselect,ctrl-x:deselect-all"
 
 # Use fd for path completions candidates.
@@ -222,7 +245,7 @@ export PATH="/opt:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 
 # Add homebrew-installed llvm to the path.
-export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
+[[ -d $HOMEBREW_PREFIX/opt/llvm/bin ]] && export PATH="$HOMEBREW_PREFIX/opt/llvm/bin:$PATH"
 
 # GO
 export GOPATH="$HOME/.go"
@@ -230,7 +253,7 @@ export PATH="$GOPATH/bin:$PATH"
 
 # MISE. TODO: Consider replacing nvm with mise for node version handling.
 # Using --shims to shave off startup time. Mise will not auto-load [env] sections when cd'ing into a dir. Use `menv` to load [env]s.
-_evalcache mise activate zsh --shims
+(( $+commands[mise] )) && _init mise activate zsh
 
 # NVM (kept after mise so nvm's node beats mise's node shims on PATH)
 export NVM_DIR="$HOME/.nvm"
@@ -245,7 +268,11 @@ if [[ -r $NVM_DIR/alias/default ]]; then
 fi
 
 # PNPM
-export PNPM_HOME="$HOME/Library/pnpm"
+if [[ $OSTYPE == darwin* ]]; then
+  export PNPM_HOME="$HOME/Library/pnpm"
+else
+  export PNPM_HOME="$HOME/.local/share/pnpm"
+fi
 case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;
   *) export PATH="$PNPM_HOME:$PATH" ;;
@@ -255,14 +282,16 @@ esac
 # .NET CORE SDK tools
 export PATH="$PATH:$HOME/.dotnet/tools"
 
-export ANDROID_HOME="$HOME/Library/Android/sdk"
-export PATH="$PATH:$ANDROID_HOME/tools/:$ANDROID_HOME/tools/bin:$ANDROID_HOME/platform-tools/"
-
-# DENO
-. "$HOME/.deno/env"
+# ANDROID (macOS only)
+if [[ $OSTYPE == darwin* ]]; then
+  export JAVA_HOME="/Applications/Android Studio.app/Contents/jbr/Contents/Home"
+  export ANDROID_HOME="$HOME/Library/Android/sdk"
+  export NDK_HOME="$ANDROID_HOME/ndk/27.1.12297006"
+  export PATH="$PATH:$ANDROID_HOME/tools/:$ANDROID_HOME/tools/bin:$ANDROID_HOME/platform-tools/:$ANDROID_HOME/emulator"
+fi
 
 # KUBECTL completions
-source <(kubectl completion zsh)
+(( $+commands[kubectl] )) && source <(kubectl completion zsh)
 
 # Helper to time shell startup
 timezsh () {
@@ -272,3 +301,16 @@ timezsh () {
   done
 }
 
+# REX: the first terminal of a fresh Rex (the only terminal in any session)
+# starts in ~/prx. Every other terminal keeps the directory it opened in.
+if [[ -n "$REX_SESSION" && -n "$REX_BIN_DIR" && "$PWD" == "$HOME" && -d ~/prx ]]; then
+  if (( $("$REX_BIN_DIR/rex" block ls -A -q --autostart=false --timeout 2s 2>/dev/null | wc -l) == 1 )); then
+    cd ~/prx
+  fi
+fi
+
+# Source a ~/.zshrc.local file, if it exists.
+# Comes last so it can override anything specified before here.
+if [[ -r ~/.zshrc.local ]]; then
+  source ~/.zshrc.local
+fi

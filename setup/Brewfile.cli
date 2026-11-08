@@ -1,0 +1,45 @@
+# Command-line essentials for any box, macOS or Linux (including remote ones).
+# Install with `./bootstrap.sh cli`, or directly: brew bundle --file=setup/Brewfile.cli
+#
+# Rust: if this file lists `rustup`, bootstrap.sh also sets up the stable toolchain
+# (plus clippy, rustfmt and rust-analyzer) before installing `cargo` entries.
+# Remove the rustup line to skip Rust on a box entirely.
+
+# Shell
+brew "antidote"                           # zsh plugin manager
+brew "oh-my-posh"                         # prompt
+brew "fzf"
+brew "fd"
+brew "ripgrep"
+brew "bat"
+brew "eza"
+brew "jq"
+brew "htop"
+
+# Git
+brew "gh"
+brew "jj"
+brew "lazygit"
+
+# Editors
+brew "helix"
+brew "neovim"
+brew "tree-sitter-cli"                    # nvim-treesitter compiles parsers with it
+
+# Dev tooling
+brew "just"
+brew "mise"                               # language runtimes (node, python, ...)
+
+# Rust
+brew "rustup"
+brew "sccache"                            # caches Rust builds; .zprofile turns it on when installed
+brew "bacon"                              # background checker; successor to cargo-watch
+brew "cargo-expand"
+brew "cargo-nextest"
+brew "sqlx-cli"
+brew "wasm-pack"
+
+# Not packaged by Homebrew, so installed with `cargo install --locked`.
+cargo "cargo-feature"
+cargo "cargo-seek"
+

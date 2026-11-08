@@ -1,0 +1,37 @@
+# Full laptop setup (macOS): everything in Brewfile.cli, plus the tools below.
+# Install with `./bootstrap.sh` (or `./bootstrap.sh full`).
+#
+# Kept deliberately small. Things installed ad hoc don't need to be listed here.
+
+cli = File.join(__dir__, "Brewfile.cli")
+instance_eval(File.read(cli), cli)
+
+tap "derailed/k9s", trusted: true
+tap "hashicorp/tap", trusted: true
+tap "libsql/sqld", trusted: true          # turso depends on its sqld
+tap "metalbear-co/mirrord", trusted: true
+tap "tursodatabase/tap", trusted: true
+
+# ++++ CLI tools
+brew "nushell"
+brew "xh"                                 # friendly HTTP client
+brew "zoxide"
+brew "watchexec"                          # run commands when files change
+
+# ++++ Languages and databases
+brew "deno"
+brew "postgresql@18"
+brew "prettierd"                          # prettier as a daemon, for fast formatting
+brew "lua-language-server"                # used by Neovim and Helix
+
+# ++++ Infra
+brew "kubernetes-cli"                     # kubectl, for the k* aliases
+brew "hashicorp/tap/terraform"
+brew "derailed/k9s/k9s"
+brew "metalbear-co/mirrord/mirrord"       # run local processes in a Kubernetes cluster context
+brew "tursodatabase/tap/turso"
+
+# ++++ Apps
+cask "orbstack"                           # docker and Linux VMs; .zprofile loads its shell integration
+cask "ghostty"
+cask "font-iosevka-term-nerd-font"        # ghostty/config uses it; the prompt needs its icons

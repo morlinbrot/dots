@@ -16,16 +16,19 @@
     ~/.config/helix/config.toml: helix/config.toml
     ~/.config/helix/languages.toml: helix/languages.toml
     ~/.config/helix/themes/githubsy.toml: helix/themes/githubsy.toml
-    ~/.config/kitty: kitty
-    ~/.config/kitty/current-theme.conf: kitty/themes/tokyo-night.conf
+    ~/.config/mitos/config.toml: mitos/config.toml
+    ~/.config/mitos/languages.toml: mitos/languages.toml
+    ~/.config/mitos/themes/githubsy.toml: mitos/themes/githubsy.toml
     ~/.config/nvim: nvim
     ~/.config/oh-my-posh: oh-my-posh
+    ~/.config/rex/init.lua: rex/init.lua
     ~/.config/rustfmt/rustfmt.toml: rustfmt.toml
     ~/.config/wezterm: wezterm
     ~/.config/zed/settings.json: zed/settings.json
     ~/.config/zed/keymap.json: zed/keymap.json
-    ~/.dprint.json: dprint.json
+    ~/.zprofile: .zprofile
     ~/.zshrc: .zshrc
+    ~/.zshrc.local: .zshrc.local
     ~/.zsh_plugins.txt: .zsh_plugins.txt
 
 - create:

@@ -1,2 +1,5 @@
-[build]
-rustc-wrapper = "sccache"
+# Linked to ~/.cargo/config.toml by dotbot.
+#
+# sccache is turned on in .zprofile (RUSTC_WRAPPER) only when it's installed,
+# rather than here: `rustc-wrapper` in this file makes cargo fail wherever
+# sccache isn't on PATH, such as on a fresh box or inside Homebrew.

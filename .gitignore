@@ -5,3 +5,5 @@
 /kitty/current-theme.conf
 
 **/.DS_Store
+
+.zshrc.local
