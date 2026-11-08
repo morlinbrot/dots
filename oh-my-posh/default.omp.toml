@@ -45,6 +45,15 @@ final_space = true
   alignment = 'left'
   newline = true
 
+  # user@host, shown on SSH and on any machine not marked local. Rex sessions over Tailscale carry no SSH env vars,
+  # so local machines opt out by exporting OMP_LOCAL=1 (in the gitignored ~/.zshrc.local).
+  [[blocks.segments]]
+    template = '{{ if or .SSHSession (not .Env.OMP_LOCAL) }}{{ .UserName }}@{{ .HostName }} {{ end }}'
+    foreground = 'p:overlay2'
+    background = 'transparent'
+    type = 'session'
+    style = 'plain'
+
   [[blocks.segments]]
     template = '<b>{{ .Path }}</b>'
     foreground = 'blue'
